@@ -19,10 +19,11 @@ router.post('/tools', requireAuth, dataController.createTool);
 
 // Rute POST (Input relasional menyambungkan modul dengan material/tool/asset)
 router.post('/module-assets', requireAuth, dataController.addModuleAsset);
+router.post('/material-assets', requireAuth, dataController.addMaterialAsset);
 router.post('/module-materials', requireAuth, dataController.addModuleMaterial);
 router.post('/module-tools', requireAuth, dataController.addModuleTool);
 
-// Rute PUT (Update data)
+// Rute PUT (Update data yang sudah ada beserta sinkronisasi file)
 router.put('/modules/:id', requireAuth, dataController.updateModule);
 router.put('/materials/:id', requireAuth, dataController.updateMaterial);
 router.put('/tools/:id', requireAuth, dataController.updateTool);
