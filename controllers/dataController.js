@@ -5,7 +5,10 @@ const supabase = require('../config/supabase');
 // ==========================================
 
 exports.getModules = async (req, res) => {
-    const { data, error } = await supabase
+    // Query param: ?all=true dari admin untuk lihat semua, publik hanya dapat yang Aktif
+    const showAll = req.query.all === 'true';
+
+    let query = supabase
         .from('modules')
         .select(`
             *,
@@ -18,7 +21,13 @@ exports.getModules = async (req, res) => {
                tool:tools(*)
             )
         `);
-        
+    
+    // Filter: jika tidak minta semua, hanya tampilkan yang Aktif
+    if (!showAll) {
+        query = query.eq('status', 'Aktif');
+    }
+
+    const { data, error } = await query;
     if (error) return res.status(500).json({ error: error.message });
     res.json(data);
 };
@@ -52,7 +61,7 @@ exports.getTools = async (req, res) => {
 };
 
 exports.getMaterials = async (req, res) => {
-    const { data, error } = await supabase.from('materials').select('*');
+    const { data, error } = await supabase.from('materials').select('*, assets:material_assets(*)');
     if (error) return res.status(500).json({ error: error.message });
     res.json(data);
 };
@@ -81,13 +90,280 @@ exports.createTool = async (req, res) => {
 };
 
 // ==========================================
-// RUTE POST (MENGHUBUNGKAN RELATIONSHIP TBL)
+// RUTE PUT (UPDATE DATA)
+// ==========================================
+
+exports.updateModule = async (req, res) => {
+    const { id } = req.params;
+    const { data, error } = await supabase.from('modules').update(req.body).eq('id', id).select();
+    if (error) return res.status(400).json({ error: error.message });
+    res.json({ message: 'Module berhasil diperbarui', data: data[0] });
+};
+
+exports.updateMaterial = async (req, res) => {
+    const { id } = req.params;
+    const { data, error } = await supabase.from('materials').update(req.body).eq('id', id).select();
+    if (error) return res.status(400).json({ error: error.message });
+    res.json({ message: 'Material berhasil diperbarui', data: data[0] });
+};
+
+exports.updateTool = async (req, res) => {
+    const { id } = req.params;
+    const { data, error } = await supabase.from('tools').update(req.body).eq('id', id).select();
+    if (error) return res.status(400).json({ error: error.message });
+    res.json({ message: 'Peralatan berhasil diperbarui', data: data[0] });
+};
+
+// ==========================================
+// RUTE DELETE (HAPUS PERMANEN)
+// ==========================================
+
+exports.deleteModule = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        // 1. Cari file .glb yang terkait di tabel module_assets
+        const { data: assets } = await supabase
+            .from('module_assets')
+            .select('file')
+            .eq('module_id', id);
+
+        // 2. Jika ada file, hapus dari Supabase Storage
+        if (assets && assets.length > 0) {
+            const filePathsToDelete = assets
+                .map(a => {
+                    const url = a.file;
+                    const parts = url.split('/assets-3d/');
+                    return parts.length > 1 ? decodeURIComponent(parts[1]) : null;
+                })
+                .filter(Boolean); // buang yang null
+
+            if (filePathsToDelete.length > 0) {
+                await supabase.storage
+                    .from('assets-3d')
+                    .remove(filePathsToDelete);
+            }
+        }
+
+        // 3. Hapus record dari database (CASCADE akan otomatis hapus module_assets)
+        const { error: dbError } = await supabase.from('modules').delete().eq('id', id);
+        if (dbError) return res.status(400).json({ error: dbError.message });
+
+        res.json({ message: 'Module & file 3D berhasil dihapus permanen dari database dan storage' });
+
+    } catch (err) {
+        res.status(500).json({ error: 'Gagal menghapus module', details: err.message });
+    }
+};
+
+exports.deleteMaterial = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const { data: assets } = await supabase.from('material_assets').select('file').eq('material_id', id);
+        if (assets && assets.length > 0) {
+            const filePathsToDelete = assets.map(a => {
+                const url = a.file;
+                const parts = url.split('/assets-3d/');
+                return parts.length > 1 ? decodeURIComponent(parts[1]) : null;
+            }).filter(Boolean);
+
+            if (filePathsToDelete.length > 0) {
+                await supabase.storage.from('assets-3d').remove(filePathsToDelete);
+            }
+        }
+        const { error } = await supabase.from('materials').delete().eq('id', id);
+        if (error) return res.status(400).json({ error: error.message });
+        res.json({ message: 'Material berhasil dihapus permanen' });
+    } catch (err) {
+        res.status(500).json({ error: 'Gagal menghapus material', details: err.message });
+    }
+};
+
+exports.deleteTool = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const { data: tool } = await supabase.from('tools').select('file3d').eq('id', id).single();
+        if (tool && tool.file3d) {
+            const parts = tool.file3d.split('/assets-3d/');
+            if (parts.length > 1) {
+                const path = decodeURIComponent(parts[1]);
+                await supabase.storage.from('assets-3d').remove([path]);
+            }
+        }
+        const { error } = await supabase.from('tools').delete().eq('id', id);
+        if (error) return res.status(400).json({ error: error.message });
+        res.json({ message: 'Peralatan berhasil dihapus permanen' });
+    } catch (err) {
+        res.status(500).json({ error: 'Gagal menghapus peralatan', details: err.message });
+    }
+};
+
+// ==========================================
+// RUTE UPDATE (PUT) - Sinkronisasi Edit Data
+// ==========================================
+
+exports.updateModule = async (req, res) => {
+    const { id } = req.params;
+    // Data module tanpa assets
+    const { assets, ...moduleData } = req.body;
+
+    try {
+        // 1. Update data modul
+        const { error: errMod } = await supabase.from('modules').update(moduleData).eq('id', id);
+        if (errMod) throw errMod;
+
+        // 2. Ambil semua assets lama dari db
+        const { data: oldAssets } = await supabase.from('module_assets').select('*').eq('module_id', id);
+        
+        // 3. Sinkronisasi assets
+        if (assets && Array.isArray(assets)) {
+            // Hapus yang lama tetapi tidak ada di array baru
+            const newAssetIds = assets.map(a => a.id).filter(Boolean);
+            const assetsToDelete = oldAssets.filter(oa => !newAssetIds.includes(oa.id));
+
+            if (assetsToDelete.length > 0) {
+                // Delete s3
+                const filePathsToDelete = assetsToDelete
+                    .map(a => {
+                        const parts = a.file.split('/assets-3d/');
+                        return parts.length > 1 ? decodeURIComponent(parts[1]) : null;
+                    })
+                    .filter(Boolean);
+                
+                if (filePathsToDelete.length > 0) {
+                    await supabase.storage.from('assets-3d').remove(filePathsToDelete);
+                }
+
+                // Delete db
+                await supabase.from('module_assets').delete().in('id', assetsToDelete.map(a => a.id));
+            }
+
+            // Insert / Update yang dikirim dari klien
+            for (let a of assets) {
+                const existing = oldAssets.find(oa => oa.id === a.id);
+                if (existing) {
+                    // Update jika nama beda atau jika file berubah
+                    if (existing.name !== a.name || existing.file !== a.file) {
+                        // Jika file berubah, kita juga perlu hapus file lama di S3
+                        if (existing.file !== a.file && existing.file !== '-') {
+                            const p = existing.file.split('/assets-3d/');
+                            if (p.length > 1) await supabase.storage.from('assets-3d').remove([decodeURIComponent(p[1])]);
+                        }
+                        await supabase.from('module_assets').update({ name: a.name, file: a.file }).eq('id', a.id);
+                    }
+                } else {
+                    // Insert baru
+                    await supabase.from('module_assets').insert([{
+                        id: a.id,
+                        module_id: id,
+                        name: a.name,
+                        file: a.file
+                    }]);
+                }
+            }
+        }
+
+        res.json({ message: 'Module berhasil diperbarui' });
+    } catch (err) {
+        res.status(500).json({ error: 'Gagal update module', details: err.message });
+    }
+};
+
+exports.updateMaterial = async (req, res) => {
+    const { id } = req.params;
+    const { assets, ...materialData } = req.body;
+
+    try {
+        const { error: errMat } = await supabase.from('materials').update(materialData).eq('id', id);
+        if (errMat) throw errMat;
+
+        const { data: oldAssets } = await supabase.from('material_assets').select('*').eq('material_id', id);
+        
+        if (assets && Array.isArray(assets)) {
+            const newAssetIds = assets.map(a => a.id).filter(Boolean);
+            const assetsToDelete = oldAssets.filter(oa => !newAssetIds.includes(oa.id));
+
+            if (assetsToDelete.length > 0) {
+                const filePathsToDelete = assetsToDelete
+                    .map(a => {
+                        const parts = a.file.split('/assets-3d/');
+                        return parts.length > 1 ? decodeURIComponent(parts[1]) : null;
+                    })
+                    .filter(Boolean);
+                
+                if (filePathsToDelete.length > 0) {
+                    await supabase.storage.from('assets-3d').remove(filePathsToDelete);
+                }
+
+                await supabase.from('material_assets').delete().in('id', assetsToDelete.map(a => a.id));
+            }
+
+            for (let a of assets) {
+                const existing = oldAssets.find(oa => oa.id === a.id);
+                if (existing) {
+                    if (existing.name !== a.name || existing.file !== a.file) {
+                        if (existing.file !== a.file && existing.file !== '-') {
+                            const p = existing.file.split('/assets-3d/');
+                            if (p.length > 1) await supabase.storage.from('assets-3d').remove([decodeURIComponent(p[1])]);
+                        }
+                        await supabase.from('material_assets').update({ name: a.name, file: a.file }).eq('id', a.id);
+                    }
+                } else {
+                    await supabase.from('material_assets').insert([{
+                        id: a.id,
+                        material_id: id,
+                        name: a.name,
+                        file: a.file
+                    }]);
+                }
+            }
+        }
+
+        res.json({ message: 'Material berhasil diperbarui' });
+    } catch (err) {
+        res.status(500).json({ error: 'Gagal update material', details: err.message });
+    }
+};
+
+exports.updateTool = async (req, res) => {
+    const { id } = req.params;
+    const bodyArgs = req.body;
+
+    try {
+        // Ambil data file lama untuk komparasi jika berubah
+        const { data: oldTool } = await supabase.from('tools').select('file3d').eq('id', id).single();
+        
+        // Hapus fle lama di storage jika file3d terganti oleh payload yang berbeda (asumsi URL baru, beda URL)
+        if (oldTool && oldTool.file3d && bodyArgs.file3d && oldTool.file3d !== bodyArgs.file3d) {
+            const parts = oldTool.file3d.split('/assets-3d/');
+            if (parts.length > 1) {
+                await supabase.storage.from('assets-3d').remove([decodeURIComponent(parts[1])]);
+            }
+        }
+
+        const { error } = await supabase.from('tools').update(bodyArgs).eq('id', id);
+        if (error) throw error;
+        
+        res.json({ message: 'Peralatan berhasil diperbarui' });
+    } catch (err) {
+        res.status(500).json({ error: 'Gagal update peralatan', details: err.message });
+    }
+};
+
+// ==========================================
+// RUTE UPLOAD FILE
 // ==========================================
 
 exports.addModuleAsset = async (req, res) => {
     const { data, error } = await supabase.from('module_assets').insert([req.body]).select();
     if (error) return res.status(400).json({ error: error.message });
     res.json({ message: 'File Asset 3D berhasil dipasangkan ke module', data: data[0] });
+};
+
+exports.addMaterialAsset = async (req, res) => {
+    const { data, error } = await supabase.from('material_assets').insert([req.body]).select();
+    if (error) return res.status(400).json({ error: error.message });
+    res.json({ message: 'File Asset 3D berhasil dipasangkan ke material', data: data[0] });
 };
 
 exports.addModuleMaterial = async (req, res) => {
