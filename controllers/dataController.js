@@ -118,40 +118,49 @@ exports.updateTool = async (req, res) => {
 // RUTE DELETE (HAPUS PERMANEN)
 // ==========================================
 
+// ==========================================
+// HELPER: Ekstrak path file dari public URL Supabase Storage
+// ==========================================
+function extractStoragePath(publicUrl) {
+    if (!publicUrl || publicUrl === '-') return null;
+    // Supabase public URL format:
+    // https://<project>.supabase.co/storage/v1/object/public/<bucket>/<path>
+    const marker = '/object/public/assets-3d/';
+    const idx = publicUrl.indexOf(marker);
+    if (idx === -1) return null;
+    return decodeURIComponent(publicUrl.substring(idx + marker.length));
+}
+
 exports.deleteModule = async (req, res) => {
     const { id } = req.params;
 
     try {
-        // 1. Cari file .glb yang terkait di tabel module_assets
-        const { data: assets } = await supabase
+        // 1. Ambil semua assets dari tabel module_assets
+        const { data: assets, error: assetErr } = await supabase
             .from('module_assets')
             .select('file')
             .eq('module_id', id);
 
-        // 2. Jika ada file, hapus dari Supabase Storage
-        if (assets && assets.length > 0) {
-            const filePathsToDelete = assets
-                .map(a => {
-                    const url = a.file;
-                    const parts = url.split('/assets-3d/');
-                    return parts.length > 1 ? decodeURIComponent(parts[1]) : null;
-                })
-                .filter(Boolean); // buang yang null
+        if (assetErr) console.error('[deleteModule] Gagal query assets:', assetErr.message);
 
-            if (filePathsToDelete.length > 0) {
-                await supabase.storage
-                    .from('assets-3d')
-                    .remove(filePathsToDelete);
+        // 2. Hapus file dari Supabase Storage
+        if (assets && assets.length > 0) {
+            const paths = assets.map(a => extractStoragePath(a.file)).filter(Boolean);
+            if (paths.length > 0) {
+                const { error: storageErr } = await supabase.storage.from('assets-3d').remove(paths);
+                if (storageErr) console.error('[deleteModule] Storage delete error:', storageErr.message);
+                else console.log(`[deleteModule] Berhasil hapus ${paths.length} file dari storage`);
             }
         }
 
-        // 3. Hapus record dari database (CASCADE akan otomatis hapus module_assets)
+        // 3. Hapus dari database (CASCADE hapus module_assets otomatis)
         const { error: dbError } = await supabase.from('modules').delete().eq('id', id);
         if (dbError) return res.status(400).json({ error: dbError.message });
 
-        res.json({ message: 'Module & file 3D berhasil dihapus permanen dari database dan storage' });
+        res.json({ message: 'Module & file 3D berhasil dihapus permanen' });
 
     } catch (err) {
+        console.error('[deleteModule] Error:', err);
         res.status(500).json({ error: 'Gagal menghapus module', details: err.message });
     }
 };
@@ -159,22 +168,31 @@ exports.deleteModule = async (req, res) => {
 exports.deleteMaterial = async (req, res) => {
     const { id } = req.params;
     try {
-        const { data: assets } = await supabase.from('material_assets').select('file').eq('material_id', id);
-        if (assets && assets.length > 0) {
-            const filePathsToDelete = assets.map(a => {
-                const url = a.file;
-                const parts = url.split('/assets-3d/');
-                return parts.length > 1 ? decodeURIComponent(parts[1]) : null;
-            }).filter(Boolean);
+        // 1. Ambil semua assets dari tabel material_assets
+        const { data: assets, error: assetErr } = await supabase
+            .from('material_assets')
+            .select('file')
+            .eq('material_id', id);
 
-            if (filePathsToDelete.length > 0) {
-                await supabase.storage.from('assets-3d').remove(filePathsToDelete);
+        if (assetErr) console.error('[deleteMaterial] Gagal query assets:', assetErr.message);
+
+        // 2. Hapus file dari Supabase Storage
+        if (assets && assets.length > 0) {
+            const paths = assets.map(a => extractStoragePath(a.file)).filter(Boolean);
+            if (paths.length > 0) {
+                const { error: storageErr } = await supabase.storage.from('assets-3d').remove(paths);
+                if (storageErr) console.error('[deleteMaterial] Storage delete error:', storageErr.message);
+                else console.log(`[deleteMaterial] Berhasil hapus ${paths.length} file dari storage`);
             }
         }
+
+        // 3. Hapus dari database (CASCADE hapus material_assets otomatis)
         const { error } = await supabase.from('materials').delete().eq('id', id);
         if (error) return res.status(400).json({ error: error.message });
-        res.json({ message: 'Material berhasil dihapus permanen' });
+
+        res.json({ message: 'Material & file 3D berhasil dihapus permanen' });
     } catch (err) {
+        console.error('[deleteMaterial] Error:', err);
         res.status(500).json({ error: 'Gagal menghapus material', details: err.message });
     }
 };
@@ -184,16 +202,17 @@ exports.deleteTool = async (req, res) => {
     try {
         const { data: tool } = await supabase.from('tools').select('file3d').eq('id', id).single();
         if (tool && tool.file3d) {
-            const parts = tool.file3d.split('/assets-3d/');
-            if (parts.length > 1) {
-                const path = decodeURIComponent(parts[1]);
-                await supabase.storage.from('assets-3d').remove([path]);
+            const path = extractStoragePath(tool.file3d);
+            if (path) {
+                const { error: storageErr } = await supabase.storage.from('assets-3d').remove([path]);
+                if (storageErr) console.error('[deleteTool] Storage delete error:', storageErr.message);
             }
         }
         const { error } = await supabase.from('tools').delete().eq('id', id);
         if (error) return res.status(400).json({ error: error.message });
-        res.json({ message: 'Peralatan berhasil dihapus permanen' });
+        res.json({ message: 'Peralatan & file 3D berhasil dihapus permanen' });
     } catch (err) {
+        console.error('[deleteTool] Error:', err);
         res.status(500).json({ error: 'Gagal menghapus peralatan', details: err.message });
     }
 };
@@ -224,10 +243,7 @@ exports.updateModule = async (req, res) => {
             if (assetsToDelete.length > 0) {
                 // Delete s3
                 const filePathsToDelete = assetsToDelete
-                    .map(a => {
-                        const parts = a.file.split('/assets-3d/');
-                        return parts.length > 1 ? decodeURIComponent(parts[1]) : null;
-                    })
+                    .map(a => extractStoragePath(a.file))
                     .filter(Boolean);
                 
                 if (filePathsToDelete.length > 0) {
@@ -246,8 +262,8 @@ exports.updateModule = async (req, res) => {
                     if (existing.name !== a.name || existing.file !== a.file) {
                         // Jika file berubah, kita juga perlu hapus file lama di S3
                         if (existing.file !== a.file && existing.file !== '-') {
-                            const p = existing.file.split('/assets-3d/');
-                            if (p.length > 1) await supabase.storage.from('assets-3d').remove([decodeURIComponent(p[1])]);
+                            const p = extractStoragePath(existing.file);
+                            if (p) await supabase.storage.from('assets-3d').remove([p]);
                         }
                         await supabase.from('module_assets').update({ name: a.name, file: a.file }).eq('id', a.id);
                     }
@@ -285,10 +301,7 @@ exports.updateMaterial = async (req, res) => {
 
             if (assetsToDelete.length > 0) {
                 const filePathsToDelete = assetsToDelete
-                    .map(a => {
-                        const parts = a.file.split('/assets-3d/');
-                        return parts.length > 1 ? decodeURIComponent(parts[1]) : null;
-                    })
+                    .map(a => extractStoragePath(a.file))
                     .filter(Boolean);
                 
                 if (filePathsToDelete.length > 0) {
@@ -303,8 +316,8 @@ exports.updateMaterial = async (req, res) => {
                 if (existing) {
                     if (existing.name !== a.name || existing.file !== a.file) {
                         if (existing.file !== a.file && existing.file !== '-') {
-                            const p = existing.file.split('/assets-3d/');
-                            if (p.length > 1) await supabase.storage.from('assets-3d').remove([decodeURIComponent(p[1])]);
+                            const p = extractStoragePath(existing.file);
+                            if (p) await supabase.storage.from('assets-3d').remove([p]);
                         }
                         await supabase.from('material_assets').update({ name: a.name, file: a.file }).eq('id', a.id);
                     }
@@ -335,9 +348,9 @@ exports.updateTool = async (req, res) => {
         
         // Hapus fle lama di storage jika file3d terganti oleh payload yang berbeda (asumsi URL baru, beda URL)
         if (oldTool && oldTool.file3d && bodyArgs.file3d && oldTool.file3d !== bodyArgs.file3d) {
-            const parts = oldTool.file3d.split('/assets-3d/');
-            if (parts.length > 1) {
-                await supabase.storage.from('assets-3d').remove([decodeURIComponent(parts[1])]);
+            const p = extractStoragePath(oldTool.file3d);
+            if (p) {
+                await supabase.storage.from('assets-3d').remove([p]);
             }
         }
 
