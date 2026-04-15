@@ -71,9 +71,29 @@ exports.getMaterials = async (req, res) => {
 // ==========================================
 
 exports.createModule = async (req, res) => {
-    // req.body expects: { id, title, description, image, ... }
-    const { data, error } = await supabase.from('modules').insert([req.body]).select();
+    // Pisahkan field array agar tidak error karena kolom tidak ada di tabel modules
+    const { assets, materials, tools, ...moduleData } = req.body;
+    
+    // Beri perlindungan ID manual di frontend jika kosong
+    if(!moduleData.id) moduleData.id = crypto.randomUUID ? crypto.randomUUID() : 'module-'+Date.now();
+
+    const { data, error } = await supabase.from('modules').insert([moduleData]).select();
     if (error) return res.status(400).json({ error: error.message });
+    
+    const moduleId = data[0].id;
+
+    // Masukkan data relasi materi
+    if (materials && Array.isArray(materials) && materials.length > 0) {
+        const matPayload = materials.map(m => ({ module_id: moduleId, material_id: m.material_id, quantity: m.quantity || 1 }));
+        await supabase.from('module_materials').insert(matPayload);
+    }
+    
+    // Masukkan data relasi alat
+    if (tools && Array.isArray(tools) && tools.length > 0) {
+        const toolPayload = tools.map(t => ({ module_id: moduleId, tool_id: t.tool_id }));
+        await supabase.from('module_tools').insert(toolPayload);
+    }
+
     res.json({ message: 'Module berhasil dibuat', data: data[0] });
 };
 
@@ -223,8 +243,8 @@ exports.deleteTool = async (req, res) => {
 
 exports.updateModule = async (req, res) => {
     const { id } = req.params;
-    // Data module tanpa assets
-    const { assets, ...moduleData } = req.body;
+    // Data module tanpa array relasi
+    const { assets, materials, tools, ...moduleData } = req.body;
 
     try {
         // 1. Update data modul
@@ -276,6 +296,24 @@ exports.updateModule = async (req, res) => {
                         file: a.file
                     }]);
                 }
+            }
+        }
+
+        // 4. Sinkronisasi materials (Hapus dan Tulis Ulang)
+        if (materials && Array.isArray(materials)) {
+            await supabase.from('module_materials').delete().eq('module_id', id);
+            if (materials.length > 0) {
+                const matPayload = materials.map(m => ({ module_id: id, material_id: m.material_id, quantity: m.quantity || 1 }));
+                await supabase.from('module_materials').insert(matPayload);
+            }
+        }
+
+        // 5. Sinkronisasi tools (Hapus dan Tulis Ulang)
+        if (tools && Array.isArray(tools)) {
+            await supabase.from('module_tools').delete().eq('module_id', id);
+            if (tools.length > 0) {
+                const toolPayload = tools.map(t => ({ module_id: id, tool_id: t.tool_id }));
+                await supabase.from('module_tools').insert(toolPayload);
             }
         }
 
