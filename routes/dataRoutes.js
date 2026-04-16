@@ -36,4 +36,7 @@ router.delete('/tools/:id', requireAuth, dataController.deleteTool);
 // Rute POST (Pengunggahan File Fisik via Multer)
 router.post('/upload-file', requireAuth, upload.single('file'), dataController.uploadFile);
 
+// Rute POST (Pengunggahan Khusus Gambar secara Terpisah agar tidak merusak 3D API)
+router.post('/upload-image', requireAuth, upload.single('file'), dataController.uploadImage);
+
 module.exports = router;

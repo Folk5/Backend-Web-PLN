@@ -470,3 +470,45 @@ exports.uploadFile = async (req, res) => {
         res.status(500).json({ error: 'Kesalahan server pada proses upload', details: err.message });
     }
 };
+
+exports.uploadImage = async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ error: 'Tidak ada file gambar terdeteksi dalam payload.' });
+        }
+
+        const allowedMimes = ['image/jpeg', 'image/png', 'image/webp'];
+        if (!allowedMimes.includes(req.file.mimetype)) {
+            return res.status(400).json({ error: 'Format file tidak didukung. Harap gunakan format gambar (JPG, PNG, WEBP).' });
+        }
+
+        const fileExt = req.file.originalname.split('.').pop();
+        const fileName = `${Date.now()}_${Math.round(Math.random() * 1e5)}.${fileExt}`;
+
+        // Mengirim buffer ke keranjang (bucket) bernama 'images'
+        const { data, error } = await supabase.storage
+            .from('images')
+            .upload(fileName, req.file.buffer, {
+                contentType: req.file.mimetype,
+                upsert: false
+            });
+
+        if (error) {
+            return res.status(500).json({ error: 'Gagal mengunggah foto ke satelit Supabase (images bucket).', details: error.message });
+        }
+
+        // Ambil link publik dari bucket 'images'
+        const { data: publicUrlData } = supabase.storage
+            .from('images')
+            .getPublicUrl(fileName);
+
+        res.json({ 
+            message: 'Gambar berhasil mendarat di Supabase!',
+            fileName: fileName,
+            publicUrl: publicUrlData.publicUrl 
+        });
+
+    } catch (err) {
+        res.status(500).json({ error: 'Kesalahan server pada proses upload gambar', details: err.message });
+    }
+};
