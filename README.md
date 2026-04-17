@@ -43,11 +43,14 @@ Repositori ini adalah bagian dari project magang di PLN Pusdiklat, berisi layana
 
 3. **Inisialisasi Database (Supabase)**
    - Masuk ke [Dashboard Supabase](https://app.supabase.com/).
-   - Pilih proyek Anda dan buka menu **SQL Editor** di sidebar kiri.
+   - Buat proyek baru dan buka menu **SQL Editor** di sidebar kiri.
    - Klik **New Query** -> **Blank Query**.
    - Buka file `supabase_schema.sql` di repositori ini, salin seluruh isinya.
    - Tempel ke dalam SQL Editor Supabase dan klik **Run**.
    - Pastikan tabel-tabel berhasil dibuat.
+
+> [!NOTE]
+> File `supabase_schema.sql` sudah mencakup kondisi database terbaru (termasuk semua file di folder `migrations`). Anda **tidak perlu** menjalankan file di folder `migrations` secara manual jika sudah menggunakan file dump ini.
 
 ---
 
@@ -56,6 +59,7 @@ Repositori ini adalah bagian dari project magang di PLN Pusdiklat, berisi layana
 Karena sistem ini menggunakan Supabase Auth, Anda perlu mendaftarkan admin pertama kali secara manual melalui API (bisa menggunakan **Postman**, **Insomnia**, atau **Thunder Client**).
 
 ### Registrasi Admin (POST)
+
 - **URL**: `http://localhost:4000/api/auth/register`
 - **Method**: `POST`
 - **Headers**: `Content-Type: application/json`
