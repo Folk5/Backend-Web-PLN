@@ -27,8 +27,6 @@ Repositori ini adalah bagian dari project magang di PLN Pusdiklat, berisi layana
 
 ---
 
-## 📤 Instruksi Persiapan (NAS Upload)
-
 1. **Install Dependensi**
 
    ```bash
@@ -43,8 +41,34 @@ Repositori ini adalah bagian dari project magang di PLN Pusdiklat, berisi layana
    cp .env.example .env
    ```
 
-3. **Inisialisasi Database**
-   Eksekusi script SQL di `supabase_schema.sql` pada dashboard database Supabase Anda untuk menyiapkan tabel.
+3. **Inisialisasi Database (Supabase)**
+   - Masuk ke [Dashboard Supabase](https://app.supabase.com/).
+   - Pilih proyek Anda dan buka menu **SQL Editor** di sidebar kiri.
+   - Klik **New Query** -> **Blank Query**.
+   - Buka file `supabase_schema.sql` di repositori ini, salin seluruh isinya.
+   - Tempel ke dalam SQL Editor Supabase dan klik **Run**.
+   - Pastikan tabel-tabel berhasil dibuat.
+
+---
+
+## 🔑 Membuat Akun Admin Baru
+
+Karena sistem ini menggunakan Supabase Auth, Anda perlu mendaftarkan admin pertama kali secara manual melalui API (bisa menggunakan **Postman**, **Insomnia**, atau **Thunder Client**).
+
+### Registrasi Admin (POST)
+- **URL**: `http://localhost:4000/api/auth/register`
+- **Method**: `POST`
+- **Headers**: `Content-Type: application/json`
+- **Body (JSON)**:
+  ```json
+  {
+    "email": "admin@example.com",
+    "password": "password_rahasia_anda"
+  }
+  ```
+
+> [!TIP]
+> Setelah berhasil mendaftar, Anda bisa langsung menggunakan email & password tersebut untuk login di halaman `/login` aplikasi Web.
 
 ---
 
@@ -105,11 +129,13 @@ Repositori ini adalah bagian dari project magang di PLN Pusdiklat, berisi layana
 Lakukan langkah ini di dalam folder `Backend-Intern-PLN`:
 
 1.  **Instalasi Dependensi (Wajib saat pertama kali):**
+
     ```bash
     npm install
     ```
 
 2.  **Menjalankan Server (Mode Produksi):**
+
     ```bash
     npm start
     ```
