@@ -53,7 +53,8 @@ Repositori ini adalah bagian dari project magang di PLN Pusdiklat, berisi layana
 > File `supabase_schema.sql` sudah mencakup kondisi database terbaru (termasuk semua file di folder `migrations`). Anda **tidak perlu** menjalankan file di folder `migrations` secara manual jika sudah menggunakan file dump ini.
 
 4. **Konfigurasi file `.env`**
-   - Di dashboard Supabase, buka menu **Project Settings** (ikon gerigi) -> **API**.
+   - URL Database : Di dashboard Supabase, buka menu **Integration** (ikon cube) -> **Data API** disini seharusnya URL database berada.
+   - anon public dan service role : Pada database ini, buka menu **Project Setting** (ikon gerigi di kiri bawah) -> **API Keys** -> **Legacy anon, service_role API keys** -> **anon public** key dan **service_role** key.
    - Ambil nilai berikut dan tempel ke file `.env` Anda:
      - `Project URL` -> Isi ke `SUPABASE_URL`
      - `anon public` key -> Isi ke `SUPABASE_ANON_KEY`
@@ -63,7 +64,7 @@ Repositori ini adalah bagian dari project magang di PLN Pusdiklat, berisi layana
 
 ## 🔑 Membuat Akun Admin Baru
 
-Karena sistem ini menggunakan Supabase Auth, Anda perlu mendaftarkan admin pertama kali secara manual melalui API (bisa menggunakan **Postman**, **Insomnia**, atau **Thunder Client**).
+Karena sistem ini menggunakan Supabase Auth, Anda perlu mendaftarkan admin pertama kali secara manual melalui API (bisa menggunakan **Postman**, **Insomnia**, atau **Thunder Client**) atau di dashboard SUpabase langsung.
 
 ### Registrasi Admin (POST)
 
