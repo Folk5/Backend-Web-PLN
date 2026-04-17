@@ -494,6 +494,7 @@ exports.uploadImage = async (req, res) => {
             });
 
         if (error) {
+            console.error('[Upload Image Error] Supabase storage upload failed:', error);
             return res.status(500).json({ error: 'Gagal mengunggah foto ke satelit Supabase (images bucket).', details: error.message });
         }
 
@@ -509,6 +510,7 @@ exports.uploadImage = async (req, res) => {
         });
 
     } catch (err) {
+        console.error('[Upload Image Catch] Kesalahan internal node:', err);
         res.status(500).json({ error: 'Kesalahan server pada proses upload gambar', details: err.message });
     }
 };
