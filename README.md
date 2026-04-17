@@ -64,7 +64,7 @@ Repositori ini adalah bagian dari project magang di PLN Pusdiklat, berisi layana
 
 ## 🔑 Membuat Akun Admin Baru
 
-Karena sistem ini menggunakan Supabase Auth, Anda perlu mendaftarkan admin pertama kali secara manual melalui API (bisa menggunakan **Postman**, **Insomnia**, atau **Thunder Client**) atau di dashboard SUpabase langsung.
+Karena sistem ini menggunakan Supabase Auth, Anda perlu mendaftarkan admin pertama kali secara manual melalui API (bisa menggunakan **Postman**, **Insomnia**, atau **Thunder Client**) atau di dashboard Supabase langsung.
 
 ### Registrasi Admin (POST)
 
