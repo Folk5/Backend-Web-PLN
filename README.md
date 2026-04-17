@@ -52,6 +52,13 @@ Repositori ini adalah bagian dari project magang di PLN Pusdiklat, berisi layana
 > [!NOTE]
 > File `supabase_schema.sql` sudah mencakup kondisi database terbaru (termasuk semua file di folder `migrations`). Anda **tidak perlu** menjalankan file di folder `migrations` secara manual jika sudah menggunakan file dump ini.
 
+4. **Konfigurasi file `.env`**
+   - Di dashboard Supabase, buka menu **Project Settings** (ikon gerigi) -> **API**.
+   - Ambil nilai berikut dan tempel ke file `.env` Anda:
+     - `Project URL` -> Isi ke `SUPABASE_URL`
+     - `anon public` key -> Isi ke `SUPABASE_ANON_KEY`
+     - `service_role` key -> Isi ke `SUPABASE_SERVICE_KEY`
+
 ---
 
 ## 🔑 Membuat Akun Admin Baru
