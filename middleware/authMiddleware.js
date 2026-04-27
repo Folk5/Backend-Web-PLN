@@ -1,33 +1,43 @@
 const supabase = require('../config/supabase');
 
-// Helper: cek apakah error adalah error jaringan sementara yang bisa di-retry
 function isNetworkError(err) {
+    if (!err) return false;
     const msg = (err.message || '').toLowerCase();
-    const code = err.cause?.code || '';
+    const code = err.cause?.code || err.code || '';
     return (
         msg.includes('fetch failed') ||
         msg.includes('network') ||
+        msg.includes('timeout') ||
         code === 'ECONNRESET' ||
         code === 'ECONNREFUSED' ||
-        code === 'ETIMEDOUT'
+        code === 'ETIMEDOUT' ||
+        code === 'UND_ERR_CONNECT_TIMEOUT'
     );
 }
 
 // Helper: verifikasi token dengan retry otomatis jika terjadi error jaringan
 async function verifyTokenWithRetry(token, maxRetries = 2) {
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
+        let caughtErr = null;
         try {
             const { data: { user }, error } = await supabase.auth.getUser(token);
-            return { user, error };
+            if (error) {
+                if (isNetworkError(error)) caughtErr = error;
+                else return { user, error };
+            } else {
+                return { user, error };
+            }
         } catch (err) {
-            if (isNetworkError(err) && attempt < maxRetries) {
+            caughtErr = err;
+        }
+
+        if (caughtErr) {
+            if (isNetworkError(caughtErr) && attempt < maxRetries) {
                 console.warn(`[authMiddleware] Koneksi Supabase gagal (attempt ${attempt}/${maxRetries}), mencoba lagi...`);
-                // Tunggu sebentar sebelum retry (200ms)
-                await new Promise(resolve => setTimeout(resolve, 200));
+                await new Promise(resolve => setTimeout(resolve, 500)); // Tambah delay ke 500ms
                 continue;
             }
-            // Lempar error jika bukan network error atau sudah habis retry
-            throw err;
+            throw caughtErr;
         }
     }
 }

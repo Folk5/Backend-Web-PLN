@@ -35,8 +35,6 @@ async function deleteFromStorage(bucket, url) {
     const { error } = await supabase.storage.from(bucket).remove([path]);
     if (error) {
         console.error(`[Storage] Gagal hapus dari '${bucket}': ${path} →`, error.message);
-    } else {
-        console.log(`[Storage] Berhasil hapus dari '${bucket}': ${path}`);
     }
 }
 
