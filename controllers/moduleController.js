@@ -184,7 +184,6 @@ exports.deleteModule = async (req, res) => {
             if (paths.length > 0) {
                 const { error: storageErr } = await supabase.storage.from('assets-3d').remove(paths);
                 if (storageErr) console.error('[deleteModule] Storage 3D error:', storageErr.message);
-                else console.log(`[deleteModule] Hapus ${paths.length} file 3D`);
             }
         }
 
