@@ -26,8 +26,18 @@ const corsOptions = {
     credentials: true,
 };
 
-// Middleware
-app.use(cors(corsOptions));
+// Wrap cors agar error origin ditolak dengan 403, bukan 500
+const corsMiddleware = cors(corsOptions);
+app.use((req, res, next) => {
+    corsMiddleware(req, res, (err) => {
+        if (err) {
+            const origin = req.headers.origin || 'unknown';
+            console.warn(`[CORS] Akses ditolak dari origin: ${origin} → ${req.method} ${req.path}`);
+            return res.status(403).json({ error: 'Akses ditolak: origin tidak diizinkan.' });
+        }
+        next();
+    });
+});
 app.use(express.json());
 
 // Route Configuration
