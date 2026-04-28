@@ -3,6 +3,7 @@ const router     = express.Router();
 const requireAuth = require('../middleware/authMiddleware');
 const multer     = require('multer');
 const upload     = multer({ storage: multer.memoryStorage() });
+const { uploadLimiter } = require('../middleware/rateLimiter');
 
 // ── Import Controllers ─────────────────────────────────────
 const moduleController   = require('../controllers/moduleController');
@@ -39,8 +40,8 @@ router.delete('/materials/:id', requireAuth, materialController.deleteMaterial);
 router.delete('/tools/:id',     requireAuth, toolController.deleteTool);
 
 // ── Upload File ke Storage ─────────────────────────────────
-router.post('/upload-file',  requireAuth, upload.single('file'), uploadController.uploadFile);
-router.post('/upload-image', requireAuth, upload.single('file'), uploadController.uploadImage);
+router.post('/upload-file',  requireAuth, uploadLimiter, upload.single('file'), uploadController.uploadFile);
+router.post('/upload-image', requireAuth, uploadLimiter, upload.single('file'), uploadController.uploadImage);
 
 module.exports = router;
 
