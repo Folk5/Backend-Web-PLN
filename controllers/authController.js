@@ -42,9 +42,25 @@ exports.login = async (req, res) => {
 };
 
 exports.logout = async (req, res) => {
-    const { error } = await supabase.auth.signOut();
-    if (error) return res.status(500).json({ error: error.message });
-    res.json({ message: 'Logout berhasil' });
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Token tidak ditemukan.' });
+    }
+
+    const token = authHeader.split(' ')[1];
+
+    // Verifikasi token valid sebelum dicabut
+    const { data: { user }, error: userError } = await supabase.auth.getUser(token);
+    if (userError || !user) {
+        return res.status(401).json({ error: 'Token tidak valid atau sudah kedaluwarsa.' });
+    }
+
+    // Cabut sesi dengan melewatkan JWT token langsung (bukan userId)
+    const { error } = await supabase.auth.admin.signOut(token);
+    if (error) return res.status(500).json({ error: 'Gagal melakukan logout.', details: error.message });
+
+    console.log(`[Auth] Logout berhasil: ${user.email}`);
+    res.json({ message: 'Logout berhasil. Sesi telah dicabut.' });
 };
 
 exports.verify = async (req, res) => {
