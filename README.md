@@ -1,0 +1,172 @@
+# 📦 [HANDOVER] Backend API - PLN Pusdiklat Internship
+
+Repositori ini adalah bagian dari project magang di PLN Pusdiklat, berisi layanan API untuk pengelolaan data modul pembelajaran, konstruksi, material, dan alat K3.
+
+---
+
+> [!CAUTION]
+> **STATUS: UNDER DEVELOPMENT**
+> Project ini masih dalam tahap pengembangan aktif dan **belum merupakan versi final**. Beberapa fitur mungkin belum stabil atau masih memerlukan peningkatan.
+
+---
+
+## 🚀 Fitur Utama
+
+- **Authentication**: Integrasi Google Supabase Auth untuk verifikasi admin.
+- **Data Management**: CRUD untuk modul konstruksi, material jaringan, dan alat kerja.
+- **File Upload**: Handler untuk unggahan file gambar dan model 3D menggunakan Multer.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Runtime**: Node.js
+- **Framework**: Express.js
+- **Database & Auth**: Supabase
+- **Middleware**: CORS, Body Parser, Multer.
+
+---
+
+1. **Install Dependensi**
+
+   ```bash
+   npm install
+   ```
+
+2. **Konfigurasi Environment**
+   - Salin file `.env.example` menjadi `.env`.
+   - Isi variabel dengan kredensial Supabase kantor/internal yang aktif.
+
+   ```bash
+   cp .env.example .env
+   ```
+
+3. **Inisialisasi Database (Supabase)**
+   - Masuk ke [Dashboard Supabase](https://app.supabase.com/).
+   - Buat proyek baru dan buka menu **SQL Editor** di sidebar kiri.
+   - Klik **New Query** -> **Blank Query**.
+   - Buka file `supabase_schema.sql` di repositori ini, salin seluruh isinya.
+   - Tempel ke dalam SQL Editor Supabase dan klik **Run**.
+   - Pastikan tabel-tabel berhasil dibuat.
+
+> [!NOTE]
+> File `supabase_schema.sql` sudah mencakup kondisi database terbaru (termasuk semua file di folder `migrations`). Anda **tidak perlu** menjalankan file di folder `migrations` secara manual jika sudah menggunakan file dump ini.
+
+4. **Konfigurasi file `.env`**
+   - URL Database : Di dashboard Supabase, buka menu **Integration** (ikon cube) -> **Data API** disini seharusnya URL database berada.
+   - anon public dan service role : Pada database ini, buka menu **Project Setting** (ikon gerigi di kiri bawah) -> **API Keys** -> **Legacy anon, service_role API keys** -> **anon public** key dan **service_role** key.
+   - Ambil nilai berikut dan tempel ke file `.env` Anda:
+     - `Project URL` -> Isi ke `SUPABASE_URL`
+     - `anon public` key -> Isi ke `SUPABASE_ANON_KEY`
+     - `service_role` key -> Isi ke `SUPABASE_SERVICE_KEY`
+
+---
+
+## 🔑 Membuat Akun Admin Baru
+
+Karena sistem ini menggunakan Supabase Auth, Anda perlu mendaftarkan admin pertama kali secara manual melalui API (bisa menggunakan **Postman**, **Insomnia**, atau **Thunder Client**) atau di dashboard Supabase langsung.
+
+### Registrasi Admin (POST)
+
+- **URL**: `http://localhost:4000/api/auth/register`
+- **Method**: `POST`
+- **Headers**: `Content-Type: application/json`
+- **Body (JSON)**:
+  ```json
+  {
+    "email": "admin@example.com",
+    "password": "password_rahasia_anda"
+  }
+  ```
+
+> [!TIP]
+> Setelah berhasil mendaftar, Anda bisa langsung menggunakan email & password tersebut untuk login di halaman `/login` aplikasi Web.
+
+---
+
+## 🚦 Endpoint API
+
+### 🔐 Authentication (`/api/auth`)
+
+| Method   | Endpoint    | Deskripsi                         |
+| :------- | :---------- | :-------------------------------- |
+| **POST** | `/register` | Registrasi admin baru             |
+| **POST** | `/login`    | Login admin (mengembalikan token) |
+| **GET**  | `/logout`   | Logout admin                      |
+| **GET**  | `/verify`   | Verifikasi validitas token        |
+
+### 📂 Data Modules (`/api/modules`)
+
+| Method     | Endpoint       | Deskripsi                        | Auth |
+| :--------- | :------------- | :------------------------------- | :--- |
+| **GET**    | `/modules`     | Ambil semua daftar modul         | No   |
+| **GET**    | `/modules/:id` | Ambil detail satu modul spesifik | No   |
+| **POST**   | `/modules`     | Buat modul baru                  | Yes  |
+| **PUT**    | `/modules/:id` | Update data modul                | Yes  |
+| **DELETE** | `/modules/:id` | Hapus modul permanen             | Yes  |
+
+### 🛠️ Tools & Materials (`/api`)
+
+| Method     | Endpoint         | Deskripsi                    | Auth |
+| :--------- | :--------------- | :--------------------------- | :--- |
+| **GET**    | `/tools`         | List semua alat kerja & K3   | No   |
+| **GET**    | `/materials`     | List semua material jaringan | No   |
+| **POST**   | `/tools`         | Tambah alat baru             | Yes  |
+| **POST**   | `/materials`     | Tambah material baru         | Yes  |
+| **PUT**    | `/tools/:id`     | Update data alat             | Yes  |
+| **PUT**    | `/materials/:id` | Update data material         | Yes  |
+| **DELETE** | `/tools/:id`     | Hapus alat                   | Yes  |
+| **DELETE** | `/materials/:id` | Hapus material               | Yes  |
+
+### 🔗 Assets & Relations (`/api`)
+
+| Method   | Endpoint            | Deskripsi                       | Auth |
+| :------- | :------------------ | :------------------------------ | :--- |
+| **POST** | `/module-assets`    | Tambah aset file ke modul       | Yes  |
+| **POST** | `/material-assets`  | Tambah aset file ke material    | Yes  |
+| **POST** | `/module-materials` | Hubungkan modul dengan material | Yes  |
+| **POST** | `/module-tools`     | Hubungkan modul dengan alat     | Yes  |
+
+### 📤 File Uploads (`/api`)
+
+| Method   | Endpoint        | Deskripsi                   | Auth |
+| :------- | :-------------- | :-------------------------- | :--- |
+| **POST** | `/upload-file`  | Unggah file umum (GLB, dll) | Yes  |
+| **POST** | `/upload-image` | Unggah gambar (JPG, PNG)    | Yes  |
+
+---
+
+## 💻 Cara Menjalankan
+
+Lakukan langkah ini di dalam folder `Backend-Intern-PLN`:
+
+1.  **Instalasi Dependensi (Wajib saat pertama kali):**
+
+    ```bash
+    npm install
+    ```
+
+2.  **Menjalankan Server (Mode Produksi):**
+
+    ```bash
+    npm start
+    ```
+
+3.  **Menjalankan Mode Pengembangan (Auto-restart):**
+    ```bash
+    npm run dev
+    ```
+
+---
+
+## 📂 Struktur Folder
+
+- `config/`: Konfigurasi Supabase Client.
+- `controllers/`: Logika bisnis (Modules, Materials, Tools).
+- `routes/`: Definisi routing API.
+- `middleware/`: Proteksi rute (Auth) dan storage file.
+- `migrations/`: Script SQL untuk skema database.
+
+---
+
+Developed for **PLN Pusdiklat**.
