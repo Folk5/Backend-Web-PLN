@@ -2,7 +2,12 @@ const express    = require('express');
 const router     = express.Router();
 const requireAuth = require('../middleware/authMiddleware');
 const multer     = require('multer');
-const upload     = multer({ storage: multer.memoryStorage() });
+
+// Batas ukuran di level multer (50MB) mencegah file besar masuk ke memori sebelum divalidasi controller
+const upload = multer({
+    storage: multer.memoryStorage(),
+    limits: { fileSize: 50 * 1024 * 1024 },
+});
 
 // ── Import Controllers ─────────────────────────────────────
 const moduleController   = require('../controllers/moduleController');
