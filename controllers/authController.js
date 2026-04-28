@@ -1,7 +1,7 @@
 const supabase = require('../config/supabase');
 
 exports.register = async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password } = req.body || {};
     
     if (!email || !password) {
         return res.status(400).json({ error: 'Email dan password harus diisi' });
@@ -21,7 +21,7 @@ exports.register = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password } = req.body || {};
     
     if (!email || !password) {
         return res.status(400).json({ error: 'Email dan password harus diisi' });

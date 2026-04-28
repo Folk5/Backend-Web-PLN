@@ -1,4 +1,4 @@
-# 📦 [HANDOVER] Backend API - PLN Pusdiklat Internship
+# Backend API - PLN Pusdiklat Internship
 
 Repositori ini adalah bagian dari project magang di PLN Pusdiklat, berisi layanan API untuk pengelolaan data modul pembelajaran, konstruksi, material, dan alat K3.
 
