@@ -1,6 +1,7 @@
 require('dotenv').config({ override: true });
 const express = require('express');
 const cors = require('cors');
+const { apiLimiter } = require('./middleware/rateLimiter');
 
 // Import routes
 const authRoutes = require('./routes/authRoutes');
@@ -39,6 +40,7 @@ app.use((req, res, next) => {
     });
 });
 app.use(express.json());
+app.use('/api', apiLimiter);
 
 // Route Configuration
 // Semua auth request akan diarahkan ke /api/auth/...
