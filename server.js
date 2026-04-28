@@ -9,8 +9,25 @@ const dataRoutes = require('./routes/dataRoutes');
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+// Daftar origin yang diizinkan dibaca dari .env, fallback ke localhost dev
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:3000')
+    .split(',')
+    .map(o => o.trim());
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        // Izinkan request tanpa origin (curl, Postman, server-to-server)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) return callback(null, true);
+        callback(new Error(`CORS: Origin '${origin}' tidak diizinkan.`));
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Route Configuration
