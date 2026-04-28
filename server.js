@@ -9,8 +9,35 @@ const dataRoutes = require('./routes/dataRoutes');
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// Middleware
-app.use(cors());
+// Daftar origin yang diizinkan dibaca dari .env, fallback ke localhost dev
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:3000')
+    .split(',')
+    .map(o => o.trim());
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        // Izinkan request tanpa origin (curl, Postman, server-to-server)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) return callback(null, true);
+        callback(new Error(`CORS: Origin '${origin}' tidak diizinkan.`));
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+};
+
+// Wrap cors agar error origin ditolak dengan 403, bukan 500
+const corsMiddleware = cors(corsOptions);
+app.use((req, res, next) => {
+    corsMiddleware(req, res, (err) => {
+        if (err) {
+            const origin = req.headers.origin || 'unknown';
+            console.warn(`[CORS] Akses ditolak dari origin: ${origin} → ${req.method} ${req.path}`);
+            return res.status(403).json({ error: 'Akses ditolak: origin tidak diizinkan.' });
+        }
+        next();
+    });
+});
 app.use(express.json());
 
 // Route Configuration
