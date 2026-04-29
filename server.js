@@ -1,10 +1,14 @@
 require('dotenv').config({ override: true });
 const express = require('express');
 const cors = require('cors');
+const { apiLimiter } = require('./middleware/rateLimiter');
 
 // Import routes
-const authRoutes = require('./routes/authRoutes');
-const dataRoutes = require('./routes/dataRoutes');
+const authRoutes     = require('./routes/authRoutes');
+const moduleRoutes   = require('./routes/module.routes');
+const materialRoutes = require('./routes/material.routes');
+const toolRoutes     = require('./routes/tool.routes');
+const uploadRoutes   = require('./routes/upload.routes');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -39,13 +43,17 @@ app.use((req, res, next) => {
     });
 });
 app.use(express.json());
+app.use('/api', apiLimiter);
 
 // Route Configuration
 // Semua auth request akan diarahkan ke /api/auth/...
 app.use('/api/auth', authRoutes);
 
 // Permintaan data diarahkan ke /api/...
-app.use('/api', dataRoutes);
+app.use('/api', moduleRoutes);
+app.use('/api', materialRoutes);
+app.use('/api', toolRoutes);
+app.use('/api', uploadRoutes);
 
 // Health check — agar tidak 404 ketika buka di browser
 app.get('/', (req, res) => {
