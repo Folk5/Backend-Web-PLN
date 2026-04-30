@@ -60,6 +60,11 @@ exports.getModuleById = async (req, res) => {
 // ── POST ───────────────────────────────────────────────────
 
 exports.createModule = async (req, res) => {
+    // Validasi input
+    if (!req.body.title || req.body.title.toString().trim() === '') {
+        return res.status(400).json({ error: 'Judul modul konstruksi wajib diisi' });
+    }
+
     const { assets, materials, tools, ...moduleData } = req.body;
 
     if (!moduleData.id) {
@@ -92,6 +97,11 @@ exports.createModule = async (req, res) => {
 // ── PUT ────────────────────────────────────────────────────
 
 exports.updateModule = async (req, res) => {
+    // Validasi input
+    if (!req.body.title || req.body.title.toString().trim() === '') {
+        return res.status(400).json({ error: 'Judul modul konstruksi wajib diisi' });
+    }
+
     const { id } = req.params;
     const { assets, materials, tools, ...moduleData } = req.body;
 
