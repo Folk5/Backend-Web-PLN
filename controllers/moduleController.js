@@ -11,6 +11,7 @@ const { extractStoragePath, deleteFromStorage } = require('./helpers/storage');
 exports.getModules = async (req, res) => {
     // Query param: ?all=true dari admin untuk lihat semua, publik hanya dapat yang Aktif
     const showAll = req.query.all === 'true';
+    const sort = req.query.sort || 'newest';
 
     let query = supabase
         .from('modules')
@@ -28,6 +29,14 @@ exports.getModules = async (req, res) => {
 
     if (!showAll) {
         query = query.eq('status', 'Aktif');
+    }
+
+    if (sort === 'name_asc') {
+        query = query.order('title', { ascending: true });
+    } else if (sort === 'name_desc') {
+        query = query.order('title', { ascending: false });
+    } else {
+        query = query.order('created_at', { ascending: false });
     }
 
     const { data, error } = await query;
