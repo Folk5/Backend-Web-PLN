@@ -19,8 +19,13 @@ exports.getMaterials = async (req, res) => {
 // ── POST ───────────────────────────────────────────────────
 
 exports.createMaterial = async (req, res) => {
-    const { data, error } = await supabase.from('materials').insert([req.body]).select();
+    const materialData = { ...req.body };
+    if (!materialData.id) {
+        materialData.id = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : require('crypto').randomUUID();
+    }
+    const { data, error } = await supabase.from('materials').insert([materialData]).select();
     if (error) return res.status(400).json({ error: error.message });
+    console.log(`[INFO] Material Baru Ditambahkan: ${data[0].name} (ID: ${data[0].id})`);
     res.json({ message: 'Material berhasil ditambahkan', data: data[0] });
 };
 

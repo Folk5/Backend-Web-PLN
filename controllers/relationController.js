@@ -10,13 +10,21 @@
 const supabase = require('../config/supabase');
 
 exports.addModuleAsset = async (req, res) => {
-    const { data, error } = await supabase.from('module_assets').insert([req.body]).select();
+    const assetData = { ...req.body };
+    if (!assetData.id) {
+        assetData.id = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : require('crypto').randomUUID();
+    }
+    const { data, error } = await supabase.from('module_assets').insert([assetData]).select();
     if (error) return res.status(400).json({ error: error.message });
     res.json({ message: 'File Asset 3D berhasil dipasangkan ke module', data: data[0] });
 };
 
 exports.addMaterialAsset = async (req, res) => {
-    const { data, error } = await supabase.from('material_assets').insert([req.body]).select();
+    const assetData = { ...req.body };
+    if (!assetData.id) {
+        assetData.id = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : require('crypto').randomUUID();
+    }
+    const { data, error } = await supabase.from('material_assets').insert([assetData]).select();
     if (error) return res.status(400).json({ error: error.message });
     res.json({ message: 'File Asset 3D berhasil dipasangkan ke material', data: data[0] });
 };
