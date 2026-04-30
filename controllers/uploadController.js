@@ -53,6 +53,7 @@ exports.uploadFile = async (req, res) => {
             });
 
         if (error) {
+            console.error('[uploadFile] Supabase storage error:', error.message, error);
             return res.status(500).json({
                 error: 'Gagal mengunggah file ke Supabase Storage (assets-3d).',
                 details: error.message

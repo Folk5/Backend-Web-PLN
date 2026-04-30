@@ -32,7 +32,12 @@ exports.getModules = async (req, res) => {
 
     const { data, error } = await query;
     if (error) return res.status(500).json({ error: error.message });
-    res.json(data);
+    const result = data.map(m => ({
+        ...m,
+        materialCount: m.materials ? m.materials.length : 0,
+        equipmentCount: m.tools ? m.tools.length : 0,
+    }));
+    res.json(result);
 };
 
 exports.getModuleById = async (req, res) => {
@@ -54,7 +59,12 @@ exports.getModuleById = async (req, res) => {
         .single();
 
     if (error) return res.status(500).json({ error: error.message });
-    res.json(data);
+    const result = {
+        ...data,
+        materialCount: data.materials ? data.materials.length : 0,
+        equipmentCount: data.tools ? data.tools.length : 0,
+    };
+    res.json(result);
 };
 
 // ── POST ───────────────────────────────────────────────────
