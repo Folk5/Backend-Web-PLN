@@ -17,8 +17,13 @@ exports.getTools = async (req, res) => {
 // ── POST ───────────────────────────────────────────────────
 
 exports.createTool = async (req, res) => {
-    const { data, error } = await supabase.from('tools').insert([req.body]).select();
+    const toolData = { ...req.body };
+    if (!toolData.id) {
+        toolData.id = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : require('crypto').randomUUID();
+    }
+    const { data, error } = await supabase.from('tools').insert([toolData]).select();
     if (error) return res.status(400).json({ error: error.message });
+    console.log(`[INFO] Peralatan Baru Ditambahkan: ${data[0].name} (ID: ${data[0].id})`);
     res.json({ message: 'Peralatan/Tool berhasil ditambahkan', data: data[0] });
 };
 

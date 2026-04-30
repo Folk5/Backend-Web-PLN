@@ -85,6 +85,7 @@ exports.createModule = async (req, res) => {
         await supabase.from('module_tools').insert(toolPayload);
     }
 
+    console.log(`[INFO] Modul Konstruksi Baru Ditambahkan: ${data[0].title} (ID: ${data[0].id})`);
     res.json({ message: 'Module berhasil dibuat', data: data[0] });
 };
 
