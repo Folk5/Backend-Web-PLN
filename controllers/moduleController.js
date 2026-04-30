@@ -12,6 +12,7 @@ exports.getModules = async (req, res) => {
     // Query param: ?all=true dari admin untuk lihat semua, publik hanya dapat yang Aktif
     const showAll = req.query.all === 'true';
     const sort = req.query.sort || 'newest';
+    const search = req.query.search;
 
     let query = supabase
         .from('modules')
@@ -29,6 +30,10 @@ exports.getModules = async (req, res) => {
 
     if (!showAll) {
         query = query.eq('status', 'Aktif');
+    }
+
+    if (search) {
+        query = query.ilike('title', `%${search}%`);
     }
 
     if (sort === 'name_asc') {
