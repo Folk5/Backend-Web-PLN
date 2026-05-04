@@ -1,6 +1,8 @@
 require('dotenv').config({ override: true });
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
 const { apiLimiter } = require('./middleware/rateLimiter');
 
 // Import routes
@@ -43,6 +45,8 @@ app.use((req, res, next) => {
     });
 });
 app.use(express.json());
+app.use(helmet());
+app.use(morgan('dev'));
 app.use('/api', apiLimiter);
 
 // Route Configuration
