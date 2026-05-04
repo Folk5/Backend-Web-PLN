@@ -9,16 +9,20 @@ const { deleteFromStorage } = require('./helpers/storage');
 // ── GET ────────────────────────────────────────────────────
 
 exports.getTools = async (req, res) => {
-    const search = req.query.search;
-    let query = supabase.from('tools').select('*');
+    try {
+        const search = req.query.search;
+        let query = supabase.from('tools').select('*');
 
-    if (search) {
-        query = query.ilike('name', `%${search}%`);
+        if (search) {
+            query = query.ilike('name', `%${search}%`);
+        }
+
+        const { data, error } = await query;
+        if (error) return res.status(500).json({ error: error.message });
+        res.json(data);
+    } catch (err) {
+        res.status(500).json({ error: 'Gagal mengambil data peralatan', details: err.message });
     }
-
-    const { data, error } = await query;
-    if (error) return res.status(500).json({ error: error.message });
-    res.json(data);
 };
 
 // ── POST ───────────────────────────────────────────────────
