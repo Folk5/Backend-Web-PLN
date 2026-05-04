@@ -121,6 +121,7 @@ exports.createModule = async (req, res) => {
 exports.updateModule = async (req, res) => {
     const { id } = req.params;
     const { assets, materials, tools, ...moduleData } = req.body;
+    const { randomUUID } = require('crypto');
 
     try {
         // 0. Hapus gambar lama jika image diubah/dihapus
@@ -163,8 +164,10 @@ exports.updateModule = async (req, res) => {
                         await supabase.from('module_assets').update({ name: a.name, file: a.file }).eq('id', a.id);
                     }
                 } else {
+                    // Varian baru dari edit modal — generate UUID jika tidak ada id
+                    const newId = a.id || randomUUID();
                     await supabase.from('module_assets').insert([{
-                        id: a.id, module_id: id, name: a.name, file: a.file
+                        id: newId, module_id: id, name: a.name, file: a.file || '-'
                     }]);
                 }
             }

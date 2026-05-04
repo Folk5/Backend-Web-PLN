@@ -20,6 +20,21 @@ exports.getMaterials = async (req, res) => {
     }
 };
 
+exports.getMaterialById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { data, error } = await supabase
+            .from('materials')
+            .select('*, assets:material_assets(*)')
+            .eq('id', id)
+            .single();
+        if (error) return res.status(404).json({ error: error.message });
+        res.json(data);
+    } catch (err) {
+        res.status(500).json({ error: 'Gagal mengambil data material', details: err.message });
+    }
+};
+
 // ── POST ───────────────────────────────────────────────────
 
 exports.createMaterial = async (req, res) => {
@@ -38,6 +53,7 @@ exports.createMaterial = async (req, res) => {
 exports.updateMaterial = async (req, res) => {
     const { id } = req.params;
     const { assets, ...materialData } = req.body;
+    const { randomUUID } = require('crypto');
 
     try {
         // 0. Hapus gambar lama jika image diubah/dihapus
@@ -80,8 +96,10 @@ exports.updateMaterial = async (req, res) => {
                         await supabase.from('material_assets').update({ name: a.name, file: a.file }).eq('id', a.id);
                     }
                 } else {
+                    // Varian baru dari edit modal — generate UUID jika tidak ada id
+                    const newId = a.id || randomUUID();
                     await supabase.from('material_assets').insert([{
-                        id: a.id, material_id: id, name: a.name, file: a.file
+                        id: newId, material_id: id, name: a.name, file: a.file || '-'
                     }]);
                 }
             }
