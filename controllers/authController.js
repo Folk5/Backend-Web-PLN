@@ -4,10 +4,6 @@ const { isNetworkError, verifyTokenWithRetry } = require('../utils/supabaseAuth'
 exports.register = async (req, res) => {
     const { email, password } = req.body || {};
 
-    if (!email || !password) {
-        return res.status(400).json({ error: 'Email dan password harus diisi' });
-    }
-
     try {
         const { data, error } = await supabase.auth.signUp({ email, password });
         if (error) return res.status(400).json({ error: error.message });
@@ -27,10 +23,6 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
     const { email, password } = req.body || {};
-
-    if (!email || !password) {
-        return res.status(400).json({ error: 'Email dan password harus diisi' });
-    }
 
     try {
         const { data, error } = await supabase.auth.signInWithPassword({ email, password });

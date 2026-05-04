@@ -1,12 +1,14 @@
-const router          = require('express').Router();
-const requireAuth     = require('../middleware/authMiddleware');
+const router             = require('express').Router();
+const requireAuth        = require('../middleware/authMiddleware');
+const validateRequest    = require('../middleware/validateRequest');
+const materialValidator  = require('../middleware/validators/materialValidator');
 const materialController = require('../controllers/materialController');
 const relationController = require('../controllers/relationController');
 
 // Materials CRUD
 router.get('/materials',       materialController.getMaterials);
-router.post('/materials',      requireAuth, materialController.createMaterial);
-router.put('/materials/:id',   requireAuth, materialController.updateMaterial);
+router.post('/materials',      requireAuth, materialValidator.create, validateRequest, materialController.createMaterial);
+router.put('/materials/:id',   requireAuth, materialValidator.update, validateRequest, materialController.updateMaterial);
 router.delete('/materials/:id', requireAuth, materialController.deleteMaterial);
 
 // Relasi material

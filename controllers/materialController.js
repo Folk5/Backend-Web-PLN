@@ -19,14 +19,6 @@ exports.getMaterials = async (req, res) => {
 // ── POST ───────────────────────────────────────────────────
 
 exports.createMaterial = async (req, res) => {
-    // Validasi input
-    if (!req.body.name || req.body.name.toString().trim() === '') {
-        return res.status(400).json({ error: 'Nama dan kode material wajib diisi' });
-    }
-    if (!req.body.code || req.body.code.toString().trim() === '') {
-        return res.status(400).json({ error: 'Nama dan kode material wajib diisi' });
-    }
-
     const materialData = { ...req.body };
     if (!materialData.id) {
         materialData.id = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : require('crypto').randomUUID();
@@ -40,14 +32,6 @@ exports.createMaterial = async (req, res) => {
 // ── PUT ────────────────────────────────────────────────────
 
 exports.updateMaterial = async (req, res) => {
-    // Validasi input
-    if (!req.body.name || req.body.name.toString().trim() === '') {
-        return res.status(400).json({ error: 'Nama dan kode material wajib diisi' });
-    }
-    if (!req.body.code || req.body.code.toString().trim() === '') {
-        return res.status(400).json({ error: 'Nama dan kode material wajib diisi' });
-    }
-
     const { id } = req.params;
     const { assets, ...materialData } = req.body;
 
