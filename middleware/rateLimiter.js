@@ -9,6 +9,15 @@ const authLimiter = rateLimit({
     legacyHeaders: false,
 });
 
+// Khusus endpoint /login — batas lebih ketat untuk mencegah brute-force credential
+const loginLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 menit
+    max: 5,
+    message: { error: 'Terlalu banyak percobaan login. Akun sementara diblokir, coba lagi dalam 15 menit.' },
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+
 // Untuk upload file — cegah abuse storage
 const uploadLimiter = rateLimit({
     windowMs: 60 * 60 * 1000, // 1 jam
@@ -27,4 +36,4 @@ const apiLimiter = rateLimit({
     legacyHeaders: false,
 });
 
-module.exports = { authLimiter, uploadLimiter, apiLimiter };
+module.exports = { authLimiter, loginLimiter, uploadLimiter, apiLimiter };
