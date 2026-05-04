@@ -6,10 +6,11 @@ const materialController = require('../controllers/materialController');
 const relationController = require('../controllers/relationController');
 
 // Materials CRUD
-router.get('/materials',       materialController.getMaterials);
-router.post('/materials',      requireAuth, materialValidator.create, validateRequest, materialController.createMaterial);
-router.put('/materials/:id',   requireAuth, materialValidator.update, validateRequest, materialController.updateMaterial);
-router.delete('/materials/:id', requireAuth, materialController.deleteMaterial);
+router.get('/materials',          materialController.getMaterials);
+router.get('/materials/:id',      materialController.getMaterialById);
+router.post('/materials',         requireAuth, materialValidator.create, validateRequest, materialController.createMaterial);
+router.put('/materials/:id',      requireAuth, materialValidator.update, validateRequest, materialController.updateMaterial);
+router.delete('/materials/:id',   requireAuth, materialController.deleteMaterial);
 
 // Relasi material
 router.post('/material-assets', requireAuth, relationController.addMaterialAsset);
