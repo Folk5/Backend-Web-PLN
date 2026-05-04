@@ -19,13 +19,8 @@ exports.getModules = async (req, res) => {
         .select(`
             *,
             assets:module_assets(*),
-            materials:module_materials(
-               quantity,
-               material:materials(*)
-            ),
-            tools:module_tools(
-               tool:tools(*)
-            )
+            materials:module_materials(count),
+            tools:module_tools(count)
         `);
 
     if (!showAll) {
@@ -48,8 +43,8 @@ exports.getModules = async (req, res) => {
     if (error) return res.status(500).json({ error: error.message });
     const result = data.map(m => ({
         ...m,
-        materialCount: m.materials ? m.materials.length : 0,
-        equipmentCount: m.tools ? m.tools.length : 0,
+        materialCount: m.materials?.[0]?.count ?? 0,
+        equipmentCount: m.tools?.[0]?.count ?? 0,
     }));
     res.json(result);
 };
