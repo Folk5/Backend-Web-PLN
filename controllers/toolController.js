@@ -24,11 +24,6 @@ exports.getTools = async (req, res) => {
 // ── POST ───────────────────────────────────────────────────
 
 exports.createTool = async (req, res) => {
-    // Validasi input
-    if (!req.body.name || req.body.name.toString().trim() === '') {
-        return res.status(400).json({ error: 'Nama peralatan wajib diisi' });
-    }
-
     const toolData = { ...req.body };
     if (!toolData.id) {
         toolData.id = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : require('crypto').randomUUID();
@@ -42,11 +37,6 @@ exports.createTool = async (req, res) => {
 // ── PUT ────────────────────────────────────────────────────
 
 exports.updateTool = async (req, res) => {
-    // Validasi input
-    if (!req.body.name || req.body.name.toString().trim() === '') {
-        return res.status(400).json({ error: 'Nama peralatan wajib diisi' });
-    }
-
     const { id } = req.params;
     const bodyArgs = req.body;
 
