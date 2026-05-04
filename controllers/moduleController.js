@@ -104,12 +104,20 @@ exports.createModule = async (req, res) => {
             material_id: m.material_id,
             quantity: m.quantity || 1
         }));
-        await supabase.from('module_materials').insert(matPayload);
+        const { error: matError } = await supabase.from('module_materials').insert(matPayload);
+        if (matError) {
+            await supabase.from('modules').delete().eq('id', moduleId);
+            return res.status(400).json({ error: 'Gagal menyimpan relasi materials', details: matError.message });
+        }
     }
 
     if (tools && Array.isArray(tools) && tools.length > 0) {
         const toolPayload = tools.map(t => ({ module_id: moduleId, tool_id: t.tool_id }));
-        await supabase.from('module_tools').insert(toolPayload);
+        const { error: toolError } = await supabase.from('module_tools').insert(toolPayload);
+        if (toolError) {
+            await supabase.from('modules').delete().eq('id', moduleId);
+            return res.status(400).json({ error: 'Gagal menyimpan relasi tools', details: toolError.message });
+        }
     }
 
     console.log(`[INFO] Modul Konstruksi Baru Ditambahkan: ${data[0].title} (ID: ${data[0].id})`);
