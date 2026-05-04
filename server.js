@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const os = require('os');
 const { apiLimiter } = require('./middleware/rateLimiter');
+const errorHandler  = require('./middleware/errorHandler');
 
 // Import routes
 const authRoutes     = require('./routes/authRoutes');
@@ -96,6 +97,9 @@ app.get('/', (req, res) => {
 app.use((req, res) => {
     res.status(404).json({ error: 'Endpoint URL not found' });
 });
+
+// ── Centralized Error Handler ─────────────────────────────────────────────────
+app.use(errorHandler);
 
 // ── Start Server ──────────────────────────────────────────────────────────────
 
