@@ -9,11 +9,15 @@ const { extractStoragePath, deleteFromStorage } = require('./helpers/storage');
 // ── GET ────────────────────────────────────────────────────
 
 exports.getMaterials = async (req, res) => {
-    const { data, error } = await supabase
-        .from('materials')
-        .select('*, assets:material_assets(*)');
-    if (error) return res.status(500).json({ error: error.message });
-    res.json(data);
+    try {
+        const { data, error } = await supabase
+            .from('materials')
+            .select('*, assets:material_assets(*)');
+        if (error) return res.status(500).json({ error: error.message });
+        res.json(data);
+    } catch (err) {
+        res.status(500).json({ error: 'Gagal mengambil data material', details: err.message });
+    }
 };
 
 // ── POST ───────────────────────────────────────────────────

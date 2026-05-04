@@ -9,71 +9,79 @@ const { extractStoragePath, deleteFromStorage } = require('./helpers/storage');
 // ── GET ────────────────────────────────────────────────────
 
 exports.getModules = async (req, res) => {
-    // Query param: ?all=true dari admin untuk lihat semua, publik hanya dapat yang Aktif
-    const showAll = req.query.all === 'true';
-    const sort = req.query.sort || 'newest';
-    const search = req.query.search;
+    try {
+        // Query param: ?all=true dari admin untuk lihat semua, publik hanya dapat yang Aktif
+        const showAll = req.query.all === 'true';
+        const sort = req.query.sort || 'newest';
+        const search = req.query.search;
 
-    let query = supabase
-        .from('modules')
-        .select(`
-            *,
-            assets:module_assets(*),
-            materials:module_materials(count),
-            tools:module_tools(count)
-        `);
+        let query = supabase
+            .from('modules')
+            .select(`
+                *,
+                assets:module_assets(*),
+                materials:module_materials(count),
+                tools:module_tools(count)
+            `);
 
-    if (!showAll) {
-        query = query.eq('status', 'Aktif');
+        if (!showAll) {
+            query = query.eq('status', 'Aktif');
+        }
+
+        if (search) {
+            query = query.ilike('title', `%${search}%`);
+        }
+
+        if (sort === 'name_asc') {
+            query = query.order('title', { ascending: true });
+        } else if (sort === 'name_desc') {
+            query = query.order('title', { ascending: false });
+        } else {
+            query = query.order('created_at', { ascending: false });
+        }
+
+        const { data, error } = await query;
+        if (error) return res.status(500).json({ error: error.message });
+        const result = data.map(m => ({
+            ...m,
+            materialCount: m.materials?.[0]?.count ?? 0,
+            equipmentCount: m.tools?.[0]?.count ?? 0,
+        }));
+        res.json(result);
+    } catch (err) {
+        res.status(500).json({ error: 'Gagal mengambil data modul', details: err.message });
     }
-
-    if (search) {
-        query = query.ilike('title', `%${search}%`);
-    }
-
-    if (sort === 'name_asc') {
-        query = query.order('title', { ascending: true });
-    } else if (sort === 'name_desc') {
-        query = query.order('title', { ascending: false });
-    } else {
-        query = query.order('created_at', { ascending: false });
-    }
-
-    const { data, error } = await query;
-    if (error) return res.status(500).json({ error: error.message });
-    const result = data.map(m => ({
-        ...m,
-        materialCount: m.materials?.[0]?.count ?? 0,
-        equipmentCount: m.tools?.[0]?.count ?? 0,
-    }));
-    res.json(result);
 };
 
 exports.getModuleById = async (req, res) => {
-    const { id } = req.params;
-    const { data, error } = await supabase
-        .from('modules')
-        .select(`
-            *,
-            assets:module_assets(*),
-            materials:module_materials(
-               quantity,
-               material:materials(*)
-            ),
-            tools:module_tools(
-               tool:tools(*)
-            )
-        `)
-        .eq('id', id)
-        .single();
+    try {
+        const { id } = req.params;
+        const { data, error } = await supabase
+            .from('modules')
+            .select(`
+                *,
+                assets:module_assets(*),
+                materials:module_materials(
+                   quantity,
+                   material:materials(*)
+                ),
+                tools:module_tools(
+                   tool:tools(*)
+                )
+            `)
+            .eq('id', id)
+            .single();
 
-    if (error) return res.status(500).json({ error: error.message });
-    const result = {
-        ...data,
-        materialCount: data.materials ? data.materials.length : 0,
-        equipmentCount: data.tools ? data.tools.length : 0,
-    };
-    res.json(result);
+        if (error) return res.status(500).json({ error: error.message });
+        const result = {
+            ...data,
+            materialCount: data.materials ? data.materials.length : 0,
+            equipmentCount: data.tools ? data.tools.length : 0,
+        };
+        res.json(result);
+    } catch (err) {
+        res.status(500).json({ error: 'Gagal mengambil data modul', details: err.message });
+    }
 };
 
 // ── POST ───────────────────────────────────────────────────
