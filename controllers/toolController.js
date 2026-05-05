@@ -30,7 +30,8 @@ exports.getTools = async (req, res) => {
 exports.createTool = async (req, res) => {
     const toolData = { ...req.body };
     if (!toolData.id) {
-        toolData.id = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : require('crypto').randomUUID();
+        const { randomUUID } = require('crypto');
+        toolData.id = randomUUID();
     }
     const { data, error } = await supabase.from('tools').insert([toolData]).select();
     if (error) return res.status(400).json({ error: error.message });
