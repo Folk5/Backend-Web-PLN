@@ -40,7 +40,8 @@ exports.getMaterialById = async (req, res) => {
 exports.createMaterial = async (req, res) => {
     const materialData = { ...req.body };
     if (!materialData.id) {
-        materialData.id = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : require('crypto').randomUUID();
+        const { randomUUID } = require('crypto');
+        materialData.id = randomUUID();
     }
     const { data, error } = await supabase.from('materials').insert([materialData]).select();
     if (error) return res.status(400).json({ error: error.message });

@@ -90,7 +90,8 @@ exports.createModule = async (req, res) => {
     const { assets, materials, tools, ...moduleData } = req.body;
 
     if (!moduleData.id) {
-        moduleData.id = crypto.randomUUID ? crypto.randomUUID() : 'module-' + Date.now();
+        const { randomUUID } = require('crypto');
+        moduleData.id = randomUUID();
     }
 
     const { data, error } = await supabase.from('modules').insert([moduleData]).select();
