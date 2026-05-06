@@ -79,11 +79,11 @@ exports.login = async (req, res) => {
 
         user.status = 'Online';
 
-        // Buat JWT
+        // Buat JWT (Masa berlaku diperpendek menjadi 2 jam untuk keamanan)
         const token = jwt.sign(
             { id: user.id, email: user.email, name: user.name, unit: user.unit, status: user.status },
             SECRET,
-            { expiresIn: '24h' }
+            { expiresIn: '2h' }
         );
 
         // Hapus password_hash dari response
@@ -109,16 +109,23 @@ exports.logout = async (req, res) => {
     const token = authHeader.split(' ')[1];
 
     try {
-        const decoded = jwt.verify(token, SECRET);
+        let decoded;
+        try {
+            decoded = jwt.verify(token, SECRET);
+        } catch (e) {
+            // Jika token expired, kita coba decode saja tanpa verifikasi signature/waktu
+            // agar tetap bisa merubah status menjadi Offline
+            decoded = jwt.decode(token);
+        }
         
-        // Update status menjadi Offline
-        await supabase
-            .from('users')
-            .update({ status: 'Offline' })
-            .eq('id', decoded.id);
-            
+        if (decoded && decoded.id) {
+            await supabase
+                .from('users')
+                .update({ status: 'Offline' })
+                .eq('id', decoded.id);
+        }
     } catch (err) {
-        // Token mungkin sudah invalid, abaikan saja
+        console.error('Logout error:', err.message);
     }
 
     res.json({ message: 'Logout berhasil. Sesi klien telah dicabut.' });
