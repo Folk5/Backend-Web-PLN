@@ -12,6 +12,7 @@ const moduleRoutes   = require('./routes/module.routes');
 const materialRoutes = require('./routes/material.routes');
 const toolRoutes     = require('./routes/tool.routes');
 const uploadRoutes   = require('./routes/upload.routes');
+const userRoutes     = require('./routes/user.routes');
 
 const app = express();
 
@@ -66,6 +67,7 @@ app.use('/api', moduleRoutes);
 app.use('/api', materialRoutes);
 app.use('/api', toolRoutes);
 app.use('/api', uploadRoutes);
+app.use('/api/users', userRoutes);
 
 app.get('/', (req, res) => {
     res.json({
