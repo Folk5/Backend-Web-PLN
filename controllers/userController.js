@@ -111,3 +111,82 @@ exports.deleteUser = async (req, res) => {
         return res.status(500).json({ error: 'Terjadi kesalahan sistem.' });
     }
 };
+
+// Ubah Password (Untuk user yang sedang login)
+exports.changePassword = async (req, res) => {
+    const { oldPassword, newPassword } = req.body;
+    const userId = req.user.id; // didapat dari requireAuth middleware
+
+    if (!oldPassword || !newPassword) {
+        return res.status(400).json({ error: 'Password lama dan password baru wajib diisi.' });
+    }
+
+    try {
+        // 1. Ambil data user beserta password_hash saat ini
+        const { data: user, error: fetchError } = await supabase
+            .from('users')
+            .select('password_hash')
+            .eq('id', userId)
+            .single();
+
+        if (fetchError || !user) {
+            return res.status(404).json({ error: 'Pengguna tidak ditemukan.' });
+        }
+
+        // 2. Verifikasi password lama
+        const match = await bcrypt.compare(oldPassword, user.password_hash);
+        if (!match) {
+            return res.status(400).json({ error: 'Password lama tidak cocok.' });
+        }
+
+        // 3. Hash password baru
+        const saltRounds = 10;
+        const newPasswordHash = await bcrypt.hash(newPassword, saltRounds);
+
+        // 4. Update database
+        const { error: updateError } = await supabase
+            .from('users')
+            .update({ password_hash: newPasswordHash })
+            .eq('id', userId);
+
+        if (updateError) {
+            return res.status(400).json({ error: updateError.message });
+        }
+
+        res.json({ message: 'Password berhasil diubah!' });
+    } catch (err) {
+        console.error('[userController] changePassword: error tidak terduga:', err.message);
+        return res.status(500).json({ error: 'Terjadi kesalahan sistem.' });
+    }
+};
+
+// Ubah Profil Sendiri
+exports.updateProfile = async (req, res) => {
+    const { name, email, unit } = req.body;
+    const userId = req.user.id;
+
+    if (!name || !email) {
+        return res.status(400).json({ error: 'Nama dan email wajib diisi.' });
+    }
+
+    try {
+        const { data, error } = await supabase
+            .from('users')
+            .update({ name, email, unit: unit || '-' })
+            .eq('id', userId)
+            .select('id, email, name, unit, status')
+            .single();
+
+        if (error) {
+            return res.status(400).json({ error: error.message });
+        }
+
+        // Opsional: Buat token baru jika payload penting berubah (spt email/nama)
+        // Kita abaikan dulu jika tidak perlu merefresh token untuk simplisitas.
+        
+        res.json({ message: 'Profil berhasil diperbarui', user: data });
+    } catch (err) {
+        console.error('[userController] updateProfile:', err.message);
+        return res.status(500).json({ error: 'Terjadi kesalahan sistem.' });
+    }
+};

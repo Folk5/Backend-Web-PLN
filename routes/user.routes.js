@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
+const requireAuth = require('../middleware/authMiddleware');
 
-// TODO: Tambahkan middleware requireAuth/requireAdmin jika perlu,
-// Saat ini kita menggunakan open endpoint atau bisa ditambahkan nanti.
+// Change password endpoint (harus login)
+router.put('/change-password', requireAuth, userController.changePassword);
+
+// Update profile endpoint (harus login)
+router.put('/profile', requireAuth, userController.updateProfile);
 
 router.get('/', userController.getAllUsers);
 router.post('/', userController.createUser);
