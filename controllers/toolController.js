@@ -11,7 +11,7 @@ const { deleteFromStorage } = require('./helpers/storage');
 exports.getTools = async (req, res) => {
     try {
         const search = req.query.search;
-        let query = supabase.from('tools').select('*');
+        let query = supabase.from('tools').select('*, category:categories(id, name, value)');
 
         if (search) {
             query = query.ilike('name', `%${search}%`);

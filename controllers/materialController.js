@@ -12,7 +12,7 @@ exports.getMaterials = async (req, res) => {
     try {
         const { data, error } = await supabase
             .from('materials')
-            .select('*, assets:material_assets(*)');
+            .select('*, assets:material_assets(*), category:categories(id, name, value)');
         if (error) return res.status(500).json({ error: error.message });
         res.json(data);
     } catch (err) {
@@ -25,7 +25,7 @@ exports.getMaterialById = async (req, res) => {
         const { id } = req.params;
         const { data, error } = await supabase
             .from('materials')
-            .select('*, assets:material_assets(*)')
+            .select('*, assets:material_assets(*), category:categories(id, name, value)')
             .eq('id', id)
             .single();
         if (error) return res.status(404).json({ error: error.message });
