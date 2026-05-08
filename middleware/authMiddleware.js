@@ -1,4 +1,4 @@
-const { isNetworkError, verifyTokenWithRetry } = require('../utils/supabaseAuth');
+const jwt = require('jsonwebtoken');
 
 const requireAuth = async (req, res, next) => {
     try {
@@ -11,25 +11,22 @@ const requireAuth = async (req, res, next) => {
 
         const token = authHeader.split(' ')[1];
         
-        // Verifikasi token ke Supabase, dengan retry jika ada gangguan jaringan sementara
-        const { user, error } = await verifyTokenWithRetry(token);
+        // Verifikasi token dengan JWT_SECRET
+        const secret = process.env.JWT_SECRET || 'supersecretjwtkey_pln_2026_pusdiklat';
         
-        if (error || !user) {
-            return res.status(401).json({ error: 'Sesi anda tidak valid atau sudah kadaluwarsa.' });
-        }
-
-        // Menyimpan objek identitas user di dalam memori request
-        req.user = user;
-        
-        // Lanjutkan perjalanan ke eksekusi Controller
-        next();
+        jwt.verify(token, secret, (err, decoded) => {
+            if (err) {
+                return res.status(401).json({ error: 'Sesi anda tidak valid atau sudah kadaluwarsa.' });
+            }
+            
+            // Menyimpan objek identitas user di dalam memori request
+            req.user = decoded; // decoded biasanya berisi id, email, role, dll.
+            
+            // Lanjutkan perjalanan ke eksekusi Controller
+            next();
+        });
         
     } catch (err) {
-        // Jika tetap gagal setelah retry (misal: Supabase sedang down)
-        if (isNetworkError(err)) {
-            console.error('[authMiddleware] Koneksi ke Supabase terputus setelah semua retry:', err.cause?.code || err.message);
-            return res.status(503).json({ error: 'Layanan autentikasi sementara tidak dapat dijangkau. Coba lagi.' });
-        }
         console.error('[authMiddleware] Error tidak terduga:', err.message);
         return res.status(500).json({ error: 'Terjadi kesalahan sistem saat memverifikasi autentikasi.' });
     }

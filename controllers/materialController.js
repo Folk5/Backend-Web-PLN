@@ -9,27 +9,39 @@ const { extractStoragePath, deleteFromStorage } = require('./helpers/storage');
 // ── GET ────────────────────────────────────────────────────
 
 exports.getMaterials = async (req, res) => {
-    const { data, error } = await supabase
-        .from('materials')
-        .select('*, assets:material_assets(*)');
-    if (error) return res.status(500).json({ error: error.message });
-    res.json(data);
+    try {
+        const { data, error } = await supabase
+            .from('materials')
+            .select('*, assets:material_assets(*), category:categories(id, name, value)');
+        if (error) return res.status(500).json({ error: error.message });
+        res.json(data);
+    } catch (err) {
+        res.status(500).json({ error: 'Gagal mengambil data material', details: err.message });
+    }
+};
+
+exports.getMaterialById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { data, error } = await supabase
+            .from('materials')
+            .select('*, assets:material_assets(*), category:categories(id, name, value)')
+            .eq('id', id)
+            .single();
+        if (error) return res.status(404).json({ error: error.message });
+        res.json(data);
+    } catch (err) {
+        res.status(500).json({ error: 'Gagal mengambil data material', details: err.message });
+    }
 };
 
 // ── POST ───────────────────────────────────────────────────
 
 exports.createMaterial = async (req, res) => {
-    // Validasi input
-    if (!req.body.name || req.body.name.toString().trim() === '') {
-        return res.status(400).json({ error: 'Nama dan kode material wajib diisi' });
-    }
-    if (!req.body.code || req.body.code.toString().trim() === '') {
-        return res.status(400).json({ error: 'Nama dan kode material wajib diisi' });
-    }
-
     const materialData = { ...req.body };
     if (!materialData.id) {
-        materialData.id = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : require('crypto').randomUUID();
+        const { randomUUID } = require('crypto');
+        materialData.id = randomUUID();
     }
     const { data, error } = await supabase.from('materials').insert([materialData]).select();
     if (error) return res.status(400).json({ error: error.message });
@@ -40,16 +52,9 @@ exports.createMaterial = async (req, res) => {
 // ── PUT ────────────────────────────────────────────────────
 
 exports.updateMaterial = async (req, res) => {
-    // Validasi input
-    if (!req.body.name || req.body.name.toString().trim() === '') {
-        return res.status(400).json({ error: 'Nama dan kode material wajib diisi' });
-    }
-    if (!req.body.code || req.body.code.toString().trim() === '') {
-        return res.status(400).json({ error: 'Nama dan kode material wajib diisi' });
-    }
-
     const { id } = req.params;
     const { assets, ...materialData } = req.body;
+    const { randomUUID } = require('crypto');
 
     try {
         // 0. Hapus gambar lama jika image diubah/dihapus
@@ -92,8 +97,10 @@ exports.updateMaterial = async (req, res) => {
                         await supabase.from('material_assets').update({ name: a.name, file: a.file }).eq('id', a.id);
                     }
                 } else {
+                    // Varian baru dari edit modal — generate UUID jika tidak ada id
+                    const newId = a.id || randomUUID();
                     await supabase.from('material_assets').insert([{
-                        id: a.id, material_id: id, name: a.name, file: a.file
+                        id: newId, material_id: id, name: a.name, file: a.file || '-'
                     }]);
                 }
             }
