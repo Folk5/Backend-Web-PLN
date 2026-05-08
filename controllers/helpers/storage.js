@@ -14,12 +14,12 @@ const supabase = require('../../config/supabase');
  * @returns {string|null}
  */
 function extractStoragePath(publicUrl, bucket) {
-    if (!publicUrl || publicUrl === '-') return null;
-    // Format: https://<project>.supabase.co/storage/v1/object/public/<bucket>/<path>
-    const marker = `/object/public/${bucket}/`;
-    const idx = publicUrl.indexOf(marker);
-    if (idx === -1) return null;
-    return decodeURIComponent(publicUrl.substring(idx + marker.length));
+  if (!publicUrl || publicUrl === '-') return null;
+  // Format: https://<project>.supabase.co/storage/v1/object/public/<bucket>/<path>
+  const marker = `/object/public/${bucket}/`;
+  const idx = publicUrl.indexOf(marker);
+  if (idx === -1) return null;
+  return decodeURIComponent(publicUrl.substring(idx + marker.length));
 }
 
 /**
@@ -29,13 +29,13 @@ function extractStoragePath(publicUrl, bucket) {
  * @param {string} url    - Public URL file yang akan dihapus
  */
 async function deleteFromStorage(bucket, url) {
-    if (!url || url === '-') return;
-    const path = extractStoragePath(url, bucket);
-    if (!path) return;
-    const { error } = await supabase.storage.from(bucket).remove([path]);
-    if (error) {
-        console.error(`[Storage] Gagal hapus dari '${bucket}': ${path} →`, error.message);
-    }
+  if (!url || url === '-') return;
+  const path = extractStoragePath(url, bucket);
+  if (!path) return;
+  const { error } = await supabase.storage.from(bucket).remove([path]);
+  if (error) {
+    console.error(`[Storage] Gagal hapus dari '${bucket}': ${path} →`, error.message);
+  }
 }
 
 module.exports = { extractStoragePath, deleteFromStorage };
