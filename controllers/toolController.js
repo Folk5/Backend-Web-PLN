@@ -9,29 +9,29 @@ const { deleteFromStorage } = require('./helpers/storage');
 // ── GET ────────────────────────────────────────────────────
 
 exports.getTools = async (req, res) => {
-    const search = req.query.search;
-    let query = supabase.from('tools').select('*');
+    try {
+        const search = req.query.search;
+        let query = supabase.from('tools').select('*, category:categories(id, name, value)');
 
-    if (search) {
-        query = query.ilike('name', `%${search}%`);
+        if (search) {
+            query = query.ilike('name', `%${search}%`);
+        }
+
+        const { data, error } = await query;
+        if (error) return res.status(500).json({ error: error.message });
+        res.json(data);
+    } catch (err) {
+        res.status(500).json({ error: 'Gagal mengambil data peralatan', details: err.message });
     }
-
-    const { data, error } = await query;
-    if (error) return res.status(500).json({ error: error.message });
-    res.json(data);
 };
 
 // ── POST ───────────────────────────────────────────────────
 
 exports.createTool = async (req, res) => {
-    // Validasi input
-    if (!req.body.name || req.body.name.toString().trim() === '') {
-        return res.status(400).json({ error: 'Nama peralatan wajib diisi' });
-    }
-
     const toolData = { ...req.body };
     if (!toolData.id) {
-        toolData.id = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : require('crypto').randomUUID();
+        const { randomUUID } = require('crypto');
+        toolData.id = randomUUID();
     }
     const { data, error } = await supabase.from('tools').insert([toolData]).select();
     if (error) return res.status(400).json({ error: error.message });
@@ -42,11 +42,6 @@ exports.createTool = async (req, res) => {
 // ── PUT ────────────────────────────────────────────────────
 
 exports.updateTool = async (req, res) => {
-    // Validasi input
-    if (!req.body.name || req.body.name.toString().trim() === '') {
-        return res.status(400).json({ error: 'Nama peralatan wajib diisi' });
-    }
-
     const { id } = req.params;
     const bodyArgs = req.body;
 

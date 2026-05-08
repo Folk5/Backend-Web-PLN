@@ -9,90 +9,89 @@ const { extractStoragePath, deleteFromStorage } = require('./helpers/storage');
 // ── GET ────────────────────────────────────────────────────
 
 exports.getModules = async (req, res) => {
-    // Query param: ?all=true dari admin untuk lihat semua, publik hanya dapat yang Aktif
-    const showAll = req.query.all === 'true';
-    const sort = req.query.sort || 'newest';
-    const search = req.query.search;
+    try {
+        // Query param: ?all=true dari admin untuk lihat semua, publik hanya dapat yang Aktif
+        const showAll = req.query.all === 'true';
+        const sort = req.query.sort || 'newest';
+        const search = req.query.search;
 
-    let query = supabase
-        .from('modules')
-        .select(`
-            *,
-            assets:module_assets(*),
-            materials:module_materials(
-               quantity,
-               material:materials(*)
-            ),
-            tools:module_tools(
-               tool:tools(*)
-            )
-        `);
+        let query = supabase
+            .from('modules')
+            .select(`
+                *,
+                assets:module_assets(*),
+                materials:module_materials(count),
+                tools:module_tools(count)
+            `);
 
-    if (!showAll) {
-        query = query.eq('status', 'Aktif');
+        if (!showAll) {
+            query = query.eq('status', 'Aktif');
+        }
+
+        if (search) {
+            query = query.ilike('title', `%${search}%`);
+        }
+
+        if (sort === 'name_asc') {
+            query = query.order('title', { ascending: true });
+        } else if (sort === 'name_desc') {
+            query = query.order('title', { ascending: false });
+        } else {
+            query = query.order('created_at', { ascending: false });
+        }
+
+        const { data, error } = await query;
+        if (error) return res.status(500).json({ error: error.message });
+        const result = data.map(m => ({
+            ...m,
+            materialCount: m.materials?.[0]?.count ?? 0,
+            equipmentCount: m.tools?.[0]?.count ?? 0,
+        }));
+        res.json(result);
+    } catch (err) {
+        res.status(500).json({ error: 'Gagal mengambil data modul', details: err.message });
     }
-
-    if (search) {
-        query = query.ilike('title', `%${search}%`);
-    }
-
-    if (sort === 'name_asc') {
-        query = query.order('title', { ascending: true });
-    } else if (sort === 'name_desc') {
-        query = query.order('title', { ascending: false });
-    } else {
-        query = query.order('created_at', { ascending: false });
-    }
-
-    const { data, error } = await query;
-    if (error) return res.status(500).json({ error: error.message });
-    const result = data.map(m => ({
-        ...m,
-        materialCount: m.materials ? m.materials.length : 0,
-        equipmentCount: m.tools ? m.tools.length : 0,
-    }));
-    res.json(result);
 };
 
 exports.getModuleById = async (req, res) => {
-    const { id } = req.params;
-    const { data, error } = await supabase
-        .from('modules')
-        .select(`
-            *,
-            assets:module_assets(*),
-            materials:module_materials(
-               quantity,
-               material:materials(*)
-            ),
-            tools:module_tools(
-               tool:tools(*)
-            )
-        `)
-        .eq('id', id)
-        .single();
+    try {
+        const { id } = req.params;
+        const { data, error } = await supabase
+            .from('modules')
+            .select(`
+                *,
+                assets:module_assets(*),
+                materials:module_materials(
+                   quantity,
+                   material:materials(*)
+                ),
+                tools:module_tools(
+                   tool:tools(*)
+                )
+            `)
+            .eq('id', id)
+            .single();
 
-    if (error) return res.status(500).json({ error: error.message });
-    const result = {
-        ...data,
-        materialCount: data.materials ? data.materials.length : 0,
-        equipmentCount: data.tools ? data.tools.length : 0,
-    };
-    res.json(result);
+        if (error) return res.status(500).json({ error: error.message });
+        const result = {
+            ...data,
+            materialCount: data.materials ? data.materials.length : 0,
+            equipmentCount: data.tools ? data.tools.length : 0,
+        };
+        res.json(result);
+    } catch (err) {
+        res.status(500).json({ error: 'Gagal mengambil data modul', details: err.message });
+    }
 };
 
 // ── POST ───────────────────────────────────────────────────
 
 exports.createModule = async (req, res) => {
-    // Validasi input
-    if (!req.body.title || req.body.title.toString().trim() === '') {
-        return res.status(400).json({ error: 'Judul modul konstruksi wajib diisi' });
-    }
-
     const { assets, materials, tools, ...moduleData } = req.body;
 
     if (!moduleData.id) {
-        moduleData.id = crypto.randomUUID ? crypto.randomUUID() : 'module-' + Date.now();
+        const { randomUUID } = require('crypto');
+        moduleData.id = randomUUID();
     }
 
     const { data, error } = await supabase.from('modules').insert([moduleData]).select();
@@ -106,12 +105,20 @@ exports.createModule = async (req, res) => {
             material_id: m.material_id,
             quantity: m.quantity || 1
         }));
-        await supabase.from('module_materials').insert(matPayload);
+        const { error: matError } = await supabase.from('module_materials').insert(matPayload);
+        if (matError) {
+            await supabase.from('modules').delete().eq('id', moduleId);
+            return res.status(400).json({ error: 'Gagal menyimpan relasi materials', details: matError.message });
+        }
     }
 
     if (tools && Array.isArray(tools) && tools.length > 0) {
         const toolPayload = tools.map(t => ({ module_id: moduleId, tool_id: t.tool_id }));
-        await supabase.from('module_tools').insert(toolPayload);
+        const { error: toolError } = await supabase.from('module_tools').insert(toolPayload);
+        if (toolError) {
+            await supabase.from('modules').delete().eq('id', moduleId);
+            return res.status(400).json({ error: 'Gagal menyimpan relasi tools', details: toolError.message });
+        }
     }
 
     console.log(`[INFO] Modul Konstruksi Baru Ditambahkan: ${data[0].title} (ID: ${data[0].id})`);
@@ -121,13 +128,9 @@ exports.createModule = async (req, res) => {
 // ── PUT ────────────────────────────────────────────────────
 
 exports.updateModule = async (req, res) => {
-    // Validasi input
-    if (!req.body.title || req.body.title.toString().trim() === '') {
-        return res.status(400).json({ error: 'Judul modul konstruksi wajib diisi' });
-    }
-
     const { id } = req.params;
     const { assets, materials, tools, ...moduleData } = req.body;
+    const { randomUUID } = require('crypto');
 
     try {
         // 0. Hapus gambar lama jika image diubah/dihapus
@@ -170,8 +173,10 @@ exports.updateModule = async (req, res) => {
                         await supabase.from('module_assets').update({ name: a.name, file: a.file }).eq('id', a.id);
                     }
                 } else {
+                    // Varian baru dari edit modal — generate UUID jika tidak ada id
+                    const newId = a.id || randomUUID();
                     await supabase.from('module_assets').insert([{
-                        id: a.id, module_id: id, name: a.name, file: a.file
+                        id: newId, module_id: id, name: a.name, file: a.file || '-'
                     }]);
                 }
             }

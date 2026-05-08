@@ -1,25 +1,46 @@
 const supabase = require('../config/supabase');
-const { isNetworkError, verifyTokenWithRetry } = require('../utils/supabaseAuth');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const SECRET = process.env.JWT_SECRET || 'supersecretjwtkey_pln_2026_pusdiklat';
 
 exports.register = async (req, res) => {
-    const { email, password } = req.body || {};
+    const { email, password, name, unit } = req.body || {};
 
-    if (!email || !password) {
-        return res.status(400).json({ error: 'Email dan password harus diisi' });
+    if (!email || !password || !name) {
+        return res.status(400).json({ error: 'Email, password, dan nama wajib diisi.' });
     }
 
     try {
-        const { data, error } = await supabase.auth.signUp({ email, password });
-        if (error) return res.status(400).json({ error: error.message });
+        // Hash password
+        const saltRounds = 10;
+        const passwordHash = await bcrypt.hash(password, saltRounds);
+
+        // Simpan ke tabel public.users
+        const { data, error } = await supabase
+            .from('users')
+            .insert([{
+                email,
+                password_hash: passwordHash,
+                name,
+                unit: unit || '-',
+                status: 'Offline'
+            }])
+            .select('id, email, name, unit, status, created_at')
+            .single();
+
+        if (error) {
+            if (error.code === '23505') { // Unique violation
+                return res.status(400).json({ error: 'Email sudah terdaftar.' });
+            }
+            return res.status(400).json({ error: error.message });
+        }
+
         res.json({
-            message: 'Registrasi berhasil. Silakan cek email Anda jika verifikasi diaktifkan.',
-            user: data.user
+            message: 'Registrasi berhasil.',
+            user: data
         });
     } catch (err) {
-        if (isNetworkError(err)) {
-            console.error('[authController] register: koneksi Supabase gagal:', err.cause?.code || err.message);
-            return res.status(503).json({ error: 'Layanan autentikasi sementara tidak dapat dijangkau. Coba lagi.' });
-        }
         console.error('[authController] register: error tidak terduga:', err.message);
         return res.status(500).json({ error: 'Terjadi kesalahan sistem.' });
     }
@@ -29,22 +50,51 @@ exports.login = async (req, res) => {
     const { email, password } = req.body || {};
 
     if (!email || !password) {
-        return res.status(400).json({ error: 'Email dan password harus diisi' });
+        return res.status(400).json({ error: 'Email dan password wajib diisi.' });
     }
 
     try {
-        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) return res.status(401).json({ error: 'Email atau password salah', details: error.message });
+        // Ambil user dari database
+        const { data: user, error } = await supabase
+            .from('users')
+            .select('*')
+            .eq('email', email)
+            .single();
+
+        if (error || !user) {
+            return res.status(401).json({ error: 'Email atau password salah.' });
+        }
+
+        // Bandingkan password
+        const match = await bcrypt.compare(password, user.password_hash);
+        if (!match) {
+            return res.status(401).json({ error: 'Email atau password salah.' });
+        }
+
+        // Set status Online di database
+        await supabase
+            .from('users')
+            .update({ status: 'Online' })
+            .eq('id', user.id);
+
+        user.status = 'Online';
+
+        // Buat JWT (Masa berlaku diperpendek menjadi 2 jam untuk keamanan)
+        const token = jwt.sign(
+            { id: user.id, email: user.email, name: user.name, unit: user.unit, status: user.status },
+            SECRET,
+            { expiresIn: '2h' }
+        );
+
+        // Hapus password_hash dari response
+        delete user.password_hash;
+
         res.json({
             message: 'Login berhasil',
-            token: data.session?.access_token,
-            user: data.user
+            token: token,
+            user: user
         });
     } catch (err) {
-        if (isNetworkError(err)) {
-            console.error('[authController] login: koneksi Supabase gagal:', err.cause?.code || err.message);
-            return res.status(503).json({ error: 'Layanan autentikasi sementara tidak dapat dijangkau. Coba lagi.' });
-        }
         console.error('[authController] login: error tidak terduga:', err.message);
         return res.status(500).json({ error: 'Terjadi kesalahan sistem.' });
     }
@@ -53,30 +103,32 @@ exports.login = async (req, res) => {
 exports.logout = async (req, res) => {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return res.status(401).json({ error: 'Token tidak ditemukan.' });
+        return res.json({ message: 'Logout berhasil. Sesi klien telah dicabut.' });
     }
 
     const token = authHeader.split(' ')[1];
 
     try {
-        const { user, error: userError } = await verifyTokenWithRetry(token);
-        if (userError || !user) {
-            return res.status(401).json({ error: 'Token tidak valid atau sudah kedaluwarsa.' });
+        let decoded;
+        try {
+            decoded = jwt.verify(token, SECRET);
+        } catch (e) {
+            // Jika token expired, kita coba decode saja tanpa verifikasi signature/waktu
+            // agar tetap bisa merubah status menjadi Offline
+            decoded = jwt.decode(token);
         }
-
-        const { error } = await supabase.auth.admin.signOut(token);
-        if (error) return res.status(500).json({ error: 'Gagal melakukan logout.', details: error.message });
-
-        console.log(`[Auth] Logout berhasil: ${user.email}`);
-        res.json({ message: 'Logout berhasil. Sesi telah dicabut.' });
+        
+        if (decoded && decoded.id) {
+            await supabase
+                .from('users')
+                .update({ status: 'Offline' })
+                .eq('id', decoded.id);
+        }
     } catch (err) {
-        if (isNetworkError(err)) {
-            console.error('[authController] logout: koneksi Supabase gagal:', err.cause?.code || err.message);
-            return res.status(503).json({ error: 'Layanan autentikasi sementara tidak dapat dijangkau. Coba lagi.' });
-        }
-        console.error('[authController] logout: error tidak terduga:', err.message);
-        return res.status(500).json({ error: 'Terjadi kesalahan sistem.' });
+        console.error('Logout error:', err.message);
     }
+
+    res.json({ message: 'Logout berhasil. Sesi klien telah dicabut.' });
 };
 
 exports.verify = async (req, res) => {
@@ -88,17 +140,9 @@ exports.verify = async (req, res) => {
     const token = authHeader.split(' ')[1];
 
     try {
-        const { user, error } = await verifyTokenWithRetry(token);
-        if (error || !user) {
-            return res.status(401).json({ error: 'Token tidak valid atau sudah kedaluwarsa' });
-        }
-        res.json({ valid: true, user: { id: user.id, email: user.email } });
+        const decoded = jwt.verify(token, SECRET);
+        res.json({ valid: true, user: decoded });
     } catch (err) {
-        if (isNetworkError(err)) {
-            console.error('[authController] verify: koneksi Supabase gagal:', err.cause?.code || err.message);
-            return res.status(503).json({ error: 'Layanan autentikasi sementara tidak dapat dijangkau. Coba lagi.' });
-        }
-        console.error('[authController] verify: error tidak terduga:', err.message);
-        return res.status(500).json({ error: 'Terjadi kesalahan sistem.' });
+        return res.status(401).json({ error: 'Token tidak valid atau sudah kedaluwarsa' });
     }
 };
