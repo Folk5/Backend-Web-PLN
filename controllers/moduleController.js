@@ -61,10 +61,17 @@ exports.getModuleById = async (req, res) => {
                 *,
                 assets:module_assets(*),
                 materials:module_materials(
+                   id,
                    quantity,
-                   material:materials(*)
+                   mesh_name,
+                   material:materials(
+                      *,
+                      assets:material_assets(*)
+                   )
                 ),
                 tools:module_tools(
+                   id,
+                   mesh_name,
                    tool:tools(*)
                 )
             `

@@ -46,3 +46,25 @@ exports.addModuleTool = async (req, res) => {
   if (error) return res.status(400).json({ error: error.message });
   res.json({ message: 'Peralatan berhasil ditautkan ke module', data: data[0] });
 };
+
+exports.updateMaterialMeshName = async (req, res) => {
+  const { id } = req.params;
+  const { mesh_name } = req.body;
+  const { error } = await supabase
+    .from('module_materials')
+    .update({ mesh_name: mesh_name || null })
+    .eq('id', id);
+  if (error) return res.status(400).json({ error: error.message });
+  res.json({ message: 'mesh_name material berhasil diperbarui' });
+};
+
+exports.updateToolMeshName = async (req, res) => {
+  const { id } = req.params;
+  const { mesh_name } = req.body;
+  const { error } = await supabase
+    .from('module_tools')
+    .update({ mesh_name: mesh_name || null })
+    .eq('id', id);
+  if (error) return res.status(400).json({ error: error.message });
+  res.json({ message: 'mesh_name tool berhasil diperbarui' });
+};
