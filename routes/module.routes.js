@@ -29,4 +29,8 @@ router.post('/module-assets', requireAuth, relationController.addModuleAsset);
 router.post('/module-materials', requireAuth, relationController.addModuleMaterial);
 router.post('/module-tools', requireAuth, relationController.addModuleTool);
 
+// Mesh mapping
+router.patch('/module-materials/:id/mesh-name', requireAuth, relationController.updateMaterialMeshName);
+router.patch('/module-tools/:id/mesh-name', requireAuth, relationController.updateToolMeshName);
+
 module.exports = router;
