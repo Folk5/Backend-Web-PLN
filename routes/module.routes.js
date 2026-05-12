@@ -4,6 +4,7 @@ const validateRequest = require('../middleware/validateRequest');
 const moduleValidator = require('../middleware/validators/moduleValidator');
 const moduleController = require('../controllers/moduleController');
 const relationController = require('../controllers/relationController');
+const meshConfigController = require('../controllers/meshConfigController');
 
 // Modules CRUD
 router.get('/modules', moduleController.getModules);
@@ -32,5 +33,12 @@ router.post('/module-tools', requireAuth, relationController.addModuleTool);
 // Mesh mapping
 router.patch('/module-materials/:id/mesh-name', requireAuth, relationController.updateMaterialMeshName);
 router.patch('/module-tools/:id/mesh-name', requireAuth, relationController.updateToolMeshName);
+
+// Mesh config (display name + visibility)
+router.get('/modules/:id/mesh-config', meshConfigController.getMeshConfig);
+router.post('/modules/:id/mesh-config', requireAuth, meshConfigController.upsertMeshConfig);
+
+// Mapped mesh names (public — dipakai viewer publik)
+router.get('/modules/:id/mapped-meshes', meshConfigController.getMappedMeshes);
 
 module.exports = router;
