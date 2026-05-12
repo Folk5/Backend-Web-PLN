@@ -3,15 +3,11 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const requireAuth = require('../middleware/authMiddleware');
 
-// Change password endpoint (harus login)
+router.get('/', requireAuth, userController.getAllUsers);
+router.post('/', requireAuth, userController.createUser);
 router.put('/change-password', requireAuth, userController.changePassword);
-
-// Update profile endpoint (harus login)
 router.put('/profile', requireAuth, userController.updateProfile);
-
-router.get('/', userController.getAllUsers);
-router.post('/', userController.createUser);
-router.put('/:id', userController.updateUser);
-router.delete('/:id', userController.deleteUser);
+router.put('/:id', requireAuth, userController.updateUser);
+router.delete('/:id', requireAuth, userController.deleteUser);
 
 module.exports = router;

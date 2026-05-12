@@ -14,7 +14,11 @@ const requireAuth = async (req, res, next) => {
     const token = authHeader.split(' ')[1];
 
     // Verifikasi token dengan JWT_SECRET
-    const secret = process.env.JWT_SECRET || 'supersecretjwtkey_pln_2026_pusdiklat';
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+      console.error('[authMiddleware] JWT_SECRET tidak dikonfigurasi di environment variables!');
+      return res.status(500).json({ error: 'Konfigurasi server tidak lengkap.' });
+    }
 
     jwt.verify(token, secret, (err, decoded) => {
       if (err) {

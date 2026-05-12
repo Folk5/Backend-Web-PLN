@@ -17,8 +17,15 @@ const rules = {
     body('password')
       .notEmpty()
       .withMessage('Password wajib diisi')
-      .isLength({ min: 6 })
-      .withMessage('Password minimal 6 karakter'),
+      .isLength({ min: 8 })
+      .withMessage('Password minimal 8 karakter')
+      .isLength({ max: 128 })
+      .withMessage('Password maksimal 128 karakter'),
+    body('name')
+      .optional()
+      .trim()
+      .isLength({ max: 100 })
+      .withMessage('Nama maksimal 100 karakter'),
   ],
 
   /** Digunakan pada POST /auth/login */
