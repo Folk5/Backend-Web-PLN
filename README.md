@@ -64,13 +64,13 @@ Salin output tersebut ke `.env`. Simpan nilai ini di tempat aman bersama tim —
 > [!NOTE]
 > Lakukan langkah ini hanya jika database Supabase belum pernah diinisialisasi.
 
-1. Buka [Dashboard Supabase](https://app.supabase.com/) → pilih project Anda.
-2. Buka menu **SQL Editor** → klik **New Query**.
-3. Buka file `migrations/supabase_schema.sql`, salin seluruh isinya, tempel ke editor, lalu klik **Run**.
-4. Setelah selesai, jalankan juga file berikut dengan cara yang sama:
-   - `migrations/add_mesh_config_table.sql`
+1. Buka [Supabase](https://app.supabase.com/) → klik **New Project**, isi nama dan password database, tunggu hingga selesai.
+2. Setelah project siap, buka menu **SQL Editor** di sidebar → klik **New Query**.
+3. Buka file `migrations/supabase_schema.sql` dari repo ini, salin seluruh isinya, tempel ke editor, lalu klik **Run**.
+4. Setelah selesai, ulangi langkah yang sama untuk file `migrations/add_mesh_config_table.sql`.
 
-File di folder `migrations/` lainnya sudah tercakup di dalam `supabase_schema.sql` dan tidak perlu dijalankan ulang.
+> [!NOTE]
+> File `supabase_schema.sql` sudah mencakup semua tabel utama. File `add_mesh_config_table.sql` perlu dijalankan terpisah karena ditambahkan setelah schema utama dibuat. File migration lainnya di folder `migrations/` tidak perlu dijalankan ulang.
 
 ### 5. Buat Akun Admin Pertama
 
