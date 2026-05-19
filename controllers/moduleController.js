@@ -266,7 +266,10 @@ exports.deleteModule = async (req, res) => {
       await deleteFromStorage('images', module.image);
     }
 
-    // Hapus dari database (CASCADE ke module_assets)
+    // Hapus mesh_config (tidak memiliki CASCADE dari modules)
+    await supabase.from('mesh_config').delete().eq('module_id', id);
+
+    // Hapus dari database (CASCADE ke module_assets, module_materials, module_tools)
     const { error: dbError } = await supabase.from('modules').delete().eq('id', id);
     if (dbError) return res.status(400).json({ error: dbError.message });
 
