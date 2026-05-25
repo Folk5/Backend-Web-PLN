@@ -66,7 +66,10 @@ exports.getModuleById = async (req, res) => {
             quantity: true,
             mesh_name: true,
             material: {
-              include: { assets: true }
+              include: { 
+                assets: true,
+                category: true
+              }
             }
           }
         },
@@ -74,7 +77,11 @@ exports.getModuleById = async (req, res) => {
           select: {
             id: true,
             mesh_name: true,
-            tool: true
+            tool: {
+              include: {
+                category: true
+              }
+            }
           }
         }
       }
