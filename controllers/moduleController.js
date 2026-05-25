@@ -14,9 +14,12 @@ exports.getModules = async (req, res) => {
     const showAll = req.query.all === 'true';
     const sort = req.query.sort || 'newest';
     const search = req.query.search;
+    const statusFilter = req.query.status;
 
     const where = {};
-    if (!showAll) {
+    if (statusFilter) {
+      where.status = statusFilter;
+    } else if (!showAll) {
       where.status = 'Aktif';
     }
     if (search) {
