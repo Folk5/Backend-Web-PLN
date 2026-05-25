@@ -7,3 +7,5 @@ Thumbs.db
 .gitignore
 .implementation_plan.md
 .supabase_schema.sql
+/generated/prisma
+public/uploads/

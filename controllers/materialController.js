@@ -3,17 +3,22 @@
  * CRUD untuk entitas Material (materials, material_assets).
  */
 
-const supabase = require('../config/supabase');
+const prisma = require('../config/db');
 const { extractStoragePath, deleteFromStorage } = require('./helpers/storage');
+const { randomUUID } = require('crypto');
 
 // ── GET ────────────────────────────────────────────────────
 
 exports.getMaterials = async (req, res) => {
   try {
-    const { data, error } = await supabase
-      .from('materials')
-      .select('*, assets:material_assets(*), category:categories(id, name, value)');
-    if (error) return res.status(500).json({ error: error.message });
+    const data = await prisma.material.findMany({
+      include: {
+        assets: true,
+        category: {
+          select: { id: true, name: true, value: true },
+        },
+      },
+    });
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: 'Gagal mengambil data material', details: err.message });
@@ -23,12 +28,16 @@ exports.getMaterials = async (req, res) => {
 exports.getMaterialById = async (req, res) => {
   try {
     const { id } = req.params;
-    const { data, error } = await supabase
-      .from('materials')
-      .select('*, assets:material_assets(*), category:categories(id, name, value)')
-      .eq('id', id)
-      .single();
-    if (error) return res.status(404).json({ error: error.message });
+    const data = await prisma.material.findUnique({
+      where: { id },
+      include: {
+        assets: true,
+        category: {
+          select: { id: true, name: true, value: true },
+        },
+      },
+    });
+    if (!data) return res.status(404).json({ error: 'Material tidak ditemukan' });
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: 'Gagal mengambil data material', details: err.message });
@@ -40,13 +49,17 @@ exports.getMaterialById = async (req, res) => {
 exports.createMaterial = async (req, res) => {
   const materialData = { ...req.body };
   if (!materialData.id) {
-    const { randomUUID } = require('crypto');
     materialData.id = randomUUID();
   }
-  const { data, error } = await supabase.from('materials').insert([materialData]).select();
-  if (error) return res.status(400).json({ error: error.message });
-  console.log(`[INFO] Material Baru Ditambahkan: ${data[0].name} (ID: ${data[0].id})`);
-  res.json({ message: 'Material berhasil ditambahkan', data: data[0] });
+  try {
+    const data = await prisma.material.create({
+      data: materialData,
+    });
+    console.log(`[INFO] Material Baru Ditambahkan: ${data.name} (ID: ${data.id})`);
+    res.json({ message: 'Material berhasil ditambahkan', data });
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
 };
 
 // ── PUT ────────────────────────────────────────────────────
@@ -54,30 +67,29 @@ exports.createMaterial = async (req, res) => {
 exports.updateMaterial = async (req, res) => {
   const { id } = req.params;
   const { assets, ...materialData } = req.body;
-  const { randomUUID } = require('crypto');
 
   try {
     // 0. Hapus gambar lama jika image diubah/dihapus
     if ('image' in materialData) {
-      const { data: oldMaterial } = await supabase
-        .from('materials')
-        .select('image')
-        .eq('id', id)
-        .single();
+      const oldMaterial = await prisma.material.findUnique({
+        where: { id },
+        select: { image: true },
+      });
       if (oldMaterial && oldMaterial.image && oldMaterial.image !== materialData.image) {
         await deleteFromStorage('images', oldMaterial.image);
       }
     }
 
     // 1. Update data material
-    const { error: errMat } = await supabase.from('materials').update(materialData).eq('id', id);
-    if (errMat) throw errMat;
+    await prisma.material.update({
+      where: { id },
+      data: materialData,
+    });
 
     // 2. Ambil assets lama
-    const { data: oldAssets } = await supabase
-      .from('material_assets')
-      .select('*')
-      .eq('material_id', id);
+    const oldAssets = await prisma.materialAsset.findMany({
+      where: { material_id: id },
+    });
 
     // 3. Sinkronisasi assets
     if (assets && Array.isArray(assets)) {
@@ -85,19 +97,12 @@ exports.updateMaterial = async (req, res) => {
       const assetsToDelete = oldAssets.filter((oa) => !newAssetIds.includes(oa.id));
 
       if (assetsToDelete.length > 0) {
-        const pathsToDelete = assetsToDelete
-          .map((a) => extractStoragePath(a.file, 'assets-3d'))
-          .filter(Boolean);
-        if (pathsToDelete.length > 0) {
-          await supabase.storage.from('assets-3d').remove(pathsToDelete);
+        for (const file of assetsToDelete.map(a => a.file).filter(Boolean)) {
+           await deleteFromStorage('assets-3d', file);
         }
-        await supabase
-          .from('material_assets')
-          .delete()
-          .in(
-            'id',
-            assetsToDelete.map((a) => a.id)
-          );
+        await prisma.materialAsset.deleteMany({
+          where: { id: { in: assetsToDelete.map((a) => a.id) } },
+        });
       }
 
       for (const a of assets) {
@@ -107,22 +112,22 @@ exports.updateMaterial = async (req, res) => {
             if (existing.file !== a.file && existing.file !== '-') {
               await deleteFromStorage('assets-3d', existing.file);
             }
-            await supabase
-              .from('material_assets')
-              .update({ name: a.name, file: a.file })
-              .eq('id', a.id);
+            await prisma.materialAsset.update({
+              where: { id: a.id },
+              data: { name: a.name, file: a.file },
+            });
           }
         } else {
           // Varian baru dari edit modal — generate UUID jika tidak ada id
           const newId = a.id || randomUUID();
-          await supabase.from('material_assets').insert([
-            {
+          await prisma.materialAsset.create({
+            data: {
               id: newId,
               material_id: id,
               name: a.name,
               file: a.file || '-',
             },
-          ]);
+          });
         }
       }
     }
@@ -138,17 +143,20 @@ exports.updateMaterial = async (req, res) => {
 exports.deleteMaterial = async (req, res) => {
   const { id } = req.params;
   try {
-    const [{ data: material }, { data: assets }] = await Promise.all([
-      supabase.from('materials').select('image').eq('id', id).single(),
-      supabase.from('material_assets').select('file').eq('material_id', id),
-    ]);
+    const material = await prisma.material.findUnique({
+      where: { id },
+      select: { image: true },
+    });
+    
+    const assets = await prisma.materialAsset.findMany({
+      where: { material_id: id },
+      select: { file: true },
+    });
 
     // Hapus file 3D
     if (assets && assets.length > 0) {
-      const paths = assets.map((a) => extractStoragePath(a.file, 'assets-3d')).filter(Boolean);
-      if (paths.length > 0) {
-        const { error: storageErr } = await supabase.storage.from('assets-3d').remove(paths);
-        if (storageErr) console.error('[deleteMaterial] Storage 3D error:', storageErr.message);
+      for (const a of assets) {
+        await deleteFromStorage('assets-3d', a.file);
       }
     }
 
@@ -157,9 +165,8 @@ exports.deleteMaterial = async (req, res) => {
       await deleteFromStorage('images', material.image);
     }
 
-    // Hapus dari database (CASCADE ke material_assets)
-    const { error } = await supabase.from('materials').delete().eq('id', id);
-    if (error) return res.status(400).json({ error: error.message });
+    // Hapus dari database (CASCADE ke material_assets akan jalan karena relasi prisma/DB onDelete: Cascade)
+    await prisma.material.delete({ where: { id } });
 
     res.json({ message: 'Material, file 3D, dan gambar berhasil dihapus permanen' });
   } catch (err) {
