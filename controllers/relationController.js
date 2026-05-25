@@ -7,64 +7,77 @@
  * - Module ↔ Tool      (module_tools)
  */
 
-const supabase = require('../config/supabase');
+const prisma = require('../config/db');
+const { randomUUID } = require('crypto');
 
 exports.addModuleAsset = async (req, res) => {
   const assetData = { ...req.body };
   if (!assetData.id) {
-    assetData.id =
-      typeof crypto !== 'undefined' && crypto.randomUUID
-        ? crypto.randomUUID()
-        : require('crypto').randomUUID();
+    assetData.id = randomUUID();
   }
-  const { data, error } = await supabase.from('module_assets').insert([assetData]).select();
-  if (error) return res.status(400).json({ error: error.message });
-  res.json({ message: 'File Asset 3D berhasil dipasangkan ke module', data: data[0] });
+  try {
+    const data = await prisma.moduleAsset.create({ data: assetData });
+    res.json({ message: 'File Asset 3D berhasil dipasangkan ke module', data });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 exports.addMaterialAsset = async (req, res) => {
   const assetData = { ...req.body };
   if (!assetData.id) {
-    assetData.id =
-      typeof crypto !== 'undefined' && crypto.randomUUID
-        ? crypto.randomUUID()
-        : require('crypto').randomUUID();
+    assetData.id = randomUUID();
   }
-  const { data, error } = await supabase.from('material_assets').insert([assetData]).select();
-  if (error) return res.status(400).json({ error: error.message });
-  res.json({ message: 'File Asset 3D berhasil dipasangkan ke material', data: data[0] });
+  try {
+    const data = await prisma.materialAsset.create({ data: assetData });
+    res.json({ message: 'File Asset 3D berhasil dipasangkan ke material', data });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 exports.addModuleMaterial = async (req, res) => {
-  const { data, error } = await supabase.from('module_materials').insert([req.body]).select();
-  if (error) return res.status(400).json({ error: error.message });
-  res.json({ message: 'Material berhasil ditautkan ke module', data: data[0] });
+  try {
+    const data = await prisma.moduleMaterial.create({ data: req.body });
+    res.json({ message: 'Material berhasil ditautkan ke module', data });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 exports.addModuleTool = async (req, res) => {
-  const { data, error } = await supabase.from('module_tools').insert([req.body]).select();
-  if (error) return res.status(400).json({ error: error.message });
-  res.json({ message: 'Peralatan berhasil ditautkan ke module', data: data[0] });
+  try {
+    const data = await prisma.moduleTool.create({ data: req.body });
+    res.json({ message: 'Peralatan berhasil ditautkan ke module', data });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 exports.updateMaterialMeshName = async (req, res) => {
   const { id } = req.params;
   const { mesh_name } = req.body;
-  const { error } = await supabase
-    .from('module_materials')
-    .update({ mesh_name: mesh_name || null })
-    .eq('id', id);
-  if (error) return res.status(400).json({ error: error.message });
-  res.json({ message: 'mesh_name material berhasil diperbarui' });
+  try {
+    await prisma.moduleMaterial.update({
+      where: { id },
+      data: { mesh_name: mesh_name || null },
+    });
+    res.json({ message: 'mesh_name material berhasil diperbarui' });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 exports.updateToolMeshName = async (req, res) => {
   const { id } = req.params;
   const { mesh_name } = req.body;
-  const { error } = await supabase
-    .from('module_tools')
-    .update({ mesh_name: mesh_name || null })
-    .eq('id', id);
-  if (error) return res.status(400).json({ error: error.message });
-  res.json({ message: 'mesh_name tool berhasil diperbarui' });
+  try {
+    await prisma.moduleTool.update({
+      where: { id },
+      data: { mesh_name: mesh_name || null },
+    });
+    res.json({ message: 'mesh_name tool berhasil diperbarui' });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };

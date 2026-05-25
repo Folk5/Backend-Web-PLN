@@ -1,40 +1,42 @@
 /**
  * controllers/helpers/storage.js
- * Shared helper untuk operasi Supabase Storage.
- * Digunakan oleh moduleController, materialController, toolController.
+ * Shared helper untuk operasi Local Storage.
  */
 
-const supabase = require('../../config/supabase');
+const fs = require('fs');
+const path = require('path');
 
 /**
- * Ekstrak path relatif dari public URL Supabase Storage.
- * Mendukung semua bucket (assets-3d, images, dll).
+ * Ekstrak filename dari URL.
  * @param {string} publicUrl - URL publik file
  * @param {string} bucket    - Nama bucket ('assets-3d' | 'images')
  * @returns {string|null}
  */
 function extractStoragePath(publicUrl, bucket) {
   if (!publicUrl || publicUrl === '-') return null;
-  // Format: https://<project>.supabase.co/storage/v1/object/public/<bucket>/<path>
-  const marker = `/object/public/${bucket}/`;
+  const marker = `/uploads/${bucket}/`;
   const idx = publicUrl.indexOf(marker);
   if (idx === -1) return null;
   return decodeURIComponent(publicUrl.substring(idx + marker.length));
 }
 
 /**
- * Hapus satu file dari Supabase Storage.
- * Tidak throw error — hanya log jika gagal.
+ * Hapus satu file dari Local Storage.
  * @param {string} bucket - Nama bucket
  * @param {string} url    - Public URL file yang akan dihapus
  */
 async function deleteFromStorage(bucket, url) {
   if (!url || url === '-') return;
-  const path = extractStoragePath(url, bucket);
-  if (!path) return;
-  const { error } = await supabase.storage.from(bucket).remove([path]);
-  if (error) {
-    console.error(`[Storage] Gagal hapus dari '${bucket}': ${path} →`, error.message);
+  const filename = extractStoragePath(url, bucket);
+  if (!filename) return;
+
+  const filePath = path.join(__dirname, '../../public/uploads', bucket, filename);
+  try {
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+  } catch (error) {
+    console.error(`[Storage] Gagal hapus dari '${bucket}': ${filename} →`, error.message);
   }
 }
 

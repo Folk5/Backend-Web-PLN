@@ -1,0 +1,131 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email         String   @unique
+  password_hash String
+  name          String
+  unit          String?  @default("-")
+  status        String   @default("Offline")
+  created_at    DateTime @default(now())
+
+  @@map("users")
+}
+
+model Category {
+  id         String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name       String
+  value      String     @unique
+  type       String
+  created_at DateTime   @default(now())
+  materials  Material[]
+  tools      Tool[]
+
+  @@map("categories")
+}
+
+model Material {
+  id              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name            String
+  description     String?
+  image           String?
+  category_id     String?           @db.Uuid
+  created_at      DateTime          @default(now())
+  category        Category?         @relation(fields: [category_id], references: [id], onDelete: SetNull)
+  assets          MaterialAsset[]
+  moduleMaterials ModuleMaterial[]
+
+  @@map("materials")
+}
+
+model MaterialAsset {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  material_id String   @db.Uuid
+  name        String?
+  file        String?
+  material    Material @relation(fields: [material_id], references: [id], onDelete: Cascade)
+
+  @@map("material_assets")
+}
+
+model Tool {
+  id          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String
+  description String?
+  image       String?
+  file3d      String?
+  category_id String?      @db.Uuid
+  created_at  DateTime     @default(now())
+  category    Category?    @relation(fields: [category_id], references: [id], onDelete: SetNull)
+  moduleTools ModuleTool[]
+
+  @@map("tools")
+}
+
+model Module {
+  id          String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title       String
+  description String?
+  image       String?
+  status      String           @default("Draft")
+  created_at  DateTime         @default(now())
+  materials   ModuleMaterial[]
+  tools       ModuleTool[]
+  assets      ModuleAsset[]
+  meshConfigs MeshConfig[]
+
+  @@map("modules")
+}
+
+model ModuleMaterial {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  module_id   String   @db.Uuid
+  material_id String   @db.Uuid
+  quantity    Int      @default(1)
+  mesh_name   String?
+  module      Module   @relation(fields: [module_id], references: [id], onDelete: Cascade)
+  material    Material @relation(fields: [material_id], references: [id], onDelete: Cascade)
+
+  @@unique([module_id, material_id])
+  @@map("module_materials")
+}
+
+model ModuleTool {
+  id        String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  module_id String @db.Uuid
+  tool_id   String @db.Uuid
+  mesh_name String?
+  module    Module @relation(fields: [module_id], references: [id], onDelete: Cascade)
+  tool      Tool   @relation(fields: [tool_id], references: [id], onDelete: Cascade)
+
+  @@unique([module_id, tool_id])
+  @@map("module_tools")
+}
+
+model MeshConfig {
+  id                 String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  module_id          String  @db.Uuid
+  mesh_original_name String
+  mesh_display_name  String?
+  is_visible         Boolean @default(true)
+  module             Module  @relation(fields: [module_id], references: [id], onDelete: Cascade)
+
+  @@unique([module_id, mesh_original_name])
+  @@map("mesh_config")
+}
+
+model ModuleAsset {
+  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  module_id String  @db.Uuid
+  name      String?
+  file      String?
+  module    Module  @relation(fields: [module_id], references: [id], onDelete: Cascade)
+
+  @@map("module_assets")
+}

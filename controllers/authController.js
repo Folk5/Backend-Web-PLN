@@ -1,4 +1,4 @@
-const supabase = require('../config/supabase');
+const prisma = require('../config/db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -16,34 +16,34 @@ exports.register = async (req, res) => {
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(password, saltRounds);
 
-    // Simpan ke tabel public.users
-    const { data, error } = await supabase
-      .from('users')
-      .insert([
-        {
-          email,
-          password_hash: passwordHash,
-          name,
-          unit: unit || '-',
-          status: 'Offline',
-        },
-      ])
-      .select('id, email, name, unit, status, created_at')
-      .single();
-
-    if (error) {
-      if (error.code === '23505') {
-        // Unique violation
-        return res.status(400).json({ error: 'Email sudah terdaftar.' });
-      }
-      return res.status(400).json({ error: error.message });
-    }
+    // Simpan ke tabel users
+    const user = await prisma.user.create({
+      data: {
+        email,
+        password_hash: passwordHash,
+        name,
+        unit: unit || '-',
+        status: 'Offline',
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        unit: true,
+        status: true,
+        created_at: true,
+      },
+    });
 
     res.json({
       message: 'Registrasi berhasil.',
-      user: data,
+      user,
     });
   } catch (err) {
+    if (err.code === 'P2002') {
+      // Unique constraint failed on the fields: (`email`)
+      return res.status(400).json({ error: 'Email sudah terdaftar.' });
+    }
     console.error('[authController] register: error tidak terduga:', err.message);
     return res.status(500).json({ error: 'Terjadi kesalahan sistem.' });
   }
@@ -58,13 +58,11 @@ exports.login = async (req, res) => {
 
   try {
     // Ambil user dari database
-    const { data: user, error } = await supabase
-      .from('users')
-      .select('*')
-      .eq('email', email)
-      .single();
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
 
-    if (error || !user) {
+    if (!user) {
       return res.status(401).json({ error: 'Email atau password salah.' });
     }
 
@@ -75,7 +73,10 @@ exports.login = async (req, res) => {
     }
 
     // Set status Online di database
-    await supabase.from('users').update({ status: 'Online' }).eq('id', user.id);
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { status: 'Online' },
+    });
 
     user.status = 'Online';
 
@@ -119,7 +120,10 @@ exports.logout = async (req, res) => {
     }
 
     if (decoded && decoded.id) {
-      await supabase.from('users').update({ status: 'Offline' }).eq('id', decoded.id);
+      await prisma.user.update({
+        where: { id: decoded.id },
+        data: { status: 'Offline' },
+      });
     }
   } catch (err) {
     console.error('Logout error:', err.message);

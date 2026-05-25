@@ -3,21 +3,17 @@
  * CRUD untuk entitas Categories (kategori dinamis).
  */
 
-const supabase = require('../config/supabase');
+const prisma = require('../config/db');
 
 // ── GET ────────────────────────────────────────────────────
 exports.getCategories = async (req, res) => {
   try {
     const { type } = req.query; // Opsional: ?type=material atau ?type=tool
 
-    let query = supabase.from('categories').select('*').order('created_at', { ascending: true });
-
-    if (type) {
-      query = query.eq('type', type);
-    }
-
-    const { data, error } = await query;
-    if (error) return res.status(500).json({ error: error.message });
+    const data = await prisma.category.findMany({
+      where: type ? { type } : undefined,
+      orderBy: { created_at: 'asc' },
+    });
 
     res.json(data);
   } catch (err) {
@@ -36,13 +32,15 @@ exports.createCategory = async (req, res) => {
   // Buat value dari name (huruf kecil, spasi diganti strip)
   const value = name.toLowerCase().replace(/\s+/g, '-');
 
-  const { data, error } = await supabase
-    .from('categories')
-    .insert([{ name, value, type }])
-    .select();
+  try {
+    const category = await prisma.category.create({
+      data: { name, value, type },
+    });
 
-  if (error) return res.status(400).json({ error: error.message });
-  res.json({ message: 'Kategori berhasil ditambahkan', data: data[0] });
+    res.json({ message: 'Kategori berhasil ditambahkan', data: category });
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
 };
 
 // ── PUT ────────────────────────────────────────────────────
@@ -58,8 +56,10 @@ exports.updateCategory = async (req, res) => {
   if (type) updateData.type = type;
 
   try {
-    const { error } = await supabase.from('categories').update(updateData).eq('id', id);
-    if (error) throw error;
+    await prisma.category.update({
+      where: { id },
+      data: updateData,
+    });
 
     res.json({ message: 'Kategori berhasil diperbarui' });
   } catch (err) {
@@ -71,8 +71,9 @@ exports.updateCategory = async (req, res) => {
 exports.deleteCategory = async (req, res) => {
   const { id } = req.params;
   try {
-    const { error } = await supabase.from('categories').delete().eq('id', id);
-    if (error) return res.status(400).json({ error: error.message });
+    await prisma.category.delete({
+      where: { id },
+    });
 
     res.json({ message: 'Kategori berhasil dihapus' });
   } catch (err) {

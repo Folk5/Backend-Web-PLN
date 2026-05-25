@@ -3,48 +3,50 @@
  * CRUD untuk entitas Modul Konstruksi (modules, module_assets, module_materials, module_tools).
  */
 
-const supabase = require('../config/supabase');
-const { extractStoragePath, deleteFromStorage } = require('./helpers/storage');
+const prisma = require('../config/db');
+const { deleteFromStorage } = require('./helpers/storage');
+const { randomUUID } = require('crypto');
 
 // ── GET ────────────────────────────────────────────────────
 
 exports.getModules = async (req, res) => {
   try {
-    // Query param: ?all=true dari admin untuk lihat semua, publik hanya dapat yang Aktif
     const showAll = req.query.all === 'true';
     const sort = req.query.sort || 'newest';
     const search = req.query.search;
 
-    let query = supabase.from('modules').select(`
-                *,
-                assets:module_assets(*),
-                materials:module_materials(count),
-                tools:module_tools(count)
-            `);
-
+    const where = {};
     if (!showAll) {
-      query = query.eq('status', 'Aktif');
+      where.status = 'Aktif';
     }
-
     if (search) {
-      query = query.ilike('title', `%${search}%`);
+      where.title = { contains: search, mode: 'insensitive' };
     }
 
-    if (sort === 'name_asc') {
-      query = query.order('title', { ascending: true });
-    } else if (sort === 'name_desc') {
-      query = query.order('title', { ascending: false });
-    } else {
-      query = query.order('created_at', { ascending: false });
-    }
+    let orderBy = { created_at: 'desc' };
+    if (sort === 'name_asc') orderBy = { title: 'asc' };
+    else if (sort === 'name_desc') orderBy = { title: 'desc' };
 
-    const { data, error } = await query;
-    if (error) return res.status(500).json({ error: error.message });
-    const result = data.map((m) => ({
-      ...m,
-      materialCount: m.materials?.[0]?.count ?? 0,
-      equipmentCount: m.tools?.[0]?.count ?? 0,
-    }));
+    const data = await prisma.module.findMany({
+      where,
+      orderBy,
+      include: {
+        assets: true,
+        _count: {
+          select: { materials: true, tools: true }
+        }
+      }
+    });
+
+    const result = data.map((m) => {
+      const { _count, ...rest } = m;
+      return {
+        ...rest,
+        materialCount: _count.materials,
+        equipmentCount: _count.tools,
+      };
+    });
+
     res.json(result);
   } catch (err) {
     res.status(500).json({ error: 'Gagal mengambil data modul', details: err.message });
@@ -54,32 +56,32 @@ exports.getModules = async (req, res) => {
 exports.getModuleById = async (req, res) => {
   try {
     const { id } = req.params;
-    const { data, error } = await supabase
-      .from('modules')
-      .select(
-        `
-                *,
-                assets:module_assets(*),
-                materials:module_materials(
-                   id,
-                   quantity,
-                   mesh_name,
-                   material:materials(
-                      *,
-                      assets:material_assets(*)
-                   )
-                ),
-                tools:module_tools(
-                   id,
-                   mesh_name,
-                   tool:tools(*)
-                )
-            `
-      )
-      .eq('id', id)
-      .single();
+    const data = await prisma.module.findUnique({
+      where: { id },
+      include: {
+        assets: true,
+        materials: {
+          select: {
+            id: true,
+            quantity: true,
+            mesh_name: true,
+            material: {
+              include: { assets: true }
+            }
+          }
+        },
+        tools: {
+          select: {
+            id: true,
+            mesh_name: true,
+            tool: true
+          }
+        }
+      }
+    });
 
-    if (error) return res.status(500).json({ error: error.message });
+    if (!data) return res.status(404).json({ error: 'Modul tidak ditemukan' });
+
     const result = {
       ...data,
       materialCount: data.materials ? data.materials.length : 0,
@@ -97,43 +99,33 @@ exports.createModule = async (req, res) => {
   const { assets, materials, tools, ...moduleData } = req.body;
 
   if (!moduleData.id) {
-    const { randomUUID } = require('crypto');
     moduleData.id = randomUUID();
   }
 
-  const { data, error } = await supabase.from('modules').insert([moduleData]).select();
-  if (error) return res.status(400).json({ error: error.message });
+  try {
+    const newModule = await prisma.module.create({
+      data: {
+        ...moduleData,
+        materials: materials && materials.length > 0 ? {
+          create: materials.map(m => ({
+            material_id: m.material_id,
+            quantity: m.quantity || 1
+          }))
+        } : undefined,
+        tools: tools && tools.length > 0 ? {
+          create: tools.map(t => ({
+            tool_id: t.tool_id
+          }))
+        } : undefined
+      }
+    });
 
-  const moduleId = data[0].id;
-
-  if (materials && Array.isArray(materials) && materials.length > 0) {
-    const matPayload = materials.map((m) => ({
-      module_id: moduleId,
-      material_id: m.material_id,
-      quantity: m.quantity || 1,
-    }));
-    const { error: matError } = await supabase.from('module_materials').insert(matPayload);
-    if (matError) {
-      await supabase.from('modules').delete().eq('id', moduleId);
-      return res
-        .status(400)
-        .json({ error: 'Gagal menyimpan relasi materials', details: matError.message });
-    }
+    console.log(`[INFO] Modul Konstruksi Baru Ditambahkan: ${newModule.title} (ID: ${newModule.id})`);
+    res.json({ message: 'Module berhasil dibuat', data: newModule });
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json({ error: err.message });
   }
-
-  if (tools && Array.isArray(tools) && tools.length > 0) {
-    const toolPayload = tools.map((t) => ({ module_id: moduleId, tool_id: t.tool_id }));
-    const { error: toolError } = await supabase.from('module_tools').insert(toolPayload);
-    if (toolError) {
-      await supabase.from('modules').delete().eq('id', moduleId);
-      return res
-        .status(400)
-        .json({ error: 'Gagal menyimpan relasi tools', details: toolError.message });
-    }
-  }
-
-  console.log(`[INFO] Modul Konstruksi Baru Ditambahkan: ${data[0].title} (ID: ${data[0].id})`);
-  res.json({ message: 'Module berhasil dibuat', data: data[0] });
 };
 
 // ── PUT ────────────────────────────────────────────────────
@@ -141,30 +133,29 @@ exports.createModule = async (req, res) => {
 exports.updateModule = async (req, res) => {
   const { id } = req.params;
   const { assets, materials, tools, ...moduleData } = req.body;
-  const { randomUUID } = require('crypto');
 
   try {
     // 0. Hapus gambar lama jika image diubah/dihapus
     if ('image' in moduleData) {
-      const { data: oldModule } = await supabase
-        .from('modules')
-        .select('image')
-        .eq('id', id)
-        .single();
+      const oldModule = await prisma.module.findUnique({
+        where: { id },
+        select: { image: true },
+      });
       if (oldModule && oldModule.image && oldModule.image !== moduleData.image) {
         await deleteFromStorage('images', oldModule.image);
       }
     }
 
     // 1. Update data modul
-    const { error: errMod } = await supabase.from('modules').update(moduleData).eq('id', id);
-    if (errMod) throw errMod;
+    await prisma.module.update({
+      where: { id },
+      data: moduleData,
+    });
 
     // 2. Ambil assets lama
-    const { data: oldAssets } = await supabase
-      .from('module_assets')
-      .select('*')
-      .eq('module_id', id);
+    const oldAssets = await prisma.moduleAsset.findMany({
+      where: { module_id: id },
+    });
 
     // 3. Sinkronisasi assets
     if (assets && Array.isArray(assets)) {
@@ -172,19 +163,12 @@ exports.updateModule = async (req, res) => {
       const assetsToDelete = oldAssets.filter((oa) => !newAssetIds.includes(oa.id));
 
       if (assetsToDelete.length > 0) {
-        const pathsToDelete = assetsToDelete
-          .map((a) => extractStoragePath(a.file, 'assets-3d'))
-          .filter(Boolean);
-        if (pathsToDelete.length > 0) {
-          await supabase.storage.from('assets-3d').remove(pathsToDelete);
+        for (const file of assetsToDelete.map(a => a.file).filter(Boolean)) {
+           await deleteFromStorage('assets-3d', file);
         }
-        await supabase
-          .from('module_assets')
-          .delete()
-          .in(
-            'id',
-            assetsToDelete.map((a) => a.id)
-          );
+        await prisma.moduleAsset.deleteMany({
+          where: { id: { in: assetsToDelete.map((a) => a.id) } },
+        });
       }
 
       for (const a of assets) {
@@ -194,45 +178,50 @@ exports.updateModule = async (req, res) => {
             if (existing.file !== a.file && existing.file !== '-') {
               await deleteFromStorage('assets-3d', existing.file);
             }
-            await supabase
-              .from('module_assets')
-              .update({ name: a.name, file: a.file })
-              .eq('id', a.id);
+            await prisma.moduleAsset.update({
+              where: { id: a.id },
+              data: { name: a.name, file: a.file },
+            });
           }
         } else {
           // Varian baru dari edit modal — generate UUID jika tidak ada id
           const newId = a.id || randomUUID();
-          await supabase.from('module_assets').insert([
-            {
+          await prisma.moduleAsset.create({
+            data: {
               id: newId,
               module_id: id,
               name: a.name,
               file: a.file || '-',
             },
-          ]);
+          });
         }
       }
     }
 
     // 4. Sinkronisasi materials
     if (materials && Array.isArray(materials)) {
-      await supabase.from('module_materials').delete().eq('module_id', id);
+      await prisma.moduleMaterial.deleteMany({ where: { module_id: id } });
       if (materials.length > 0) {
-        const matPayload = materials.map((m) => ({
-          module_id: id,
-          material_id: m.material_id,
-          quantity: m.quantity || 1,
-        }));
-        await supabase.from('module_materials').insert(matPayload);
+        await prisma.moduleMaterial.createMany({
+          data: materials.map(m => ({
+            module_id: id,
+            material_id: m.material_id,
+            quantity: m.quantity || 1
+          }))
+        });
       }
     }
 
     // 5. Sinkronisasi tools
     if (tools && Array.isArray(tools)) {
-      await supabase.from('module_tools').delete().eq('module_id', id);
+      await prisma.moduleTool.deleteMany({ where: { module_id: id } });
       if (tools.length > 0) {
-        const toolPayload = tools.map((t) => ({ module_id: id, tool_id: t.tool_id }));
-        await supabase.from('module_tools').insert(toolPayload);
+        await prisma.moduleTool.createMany({
+          data: tools.map(t => ({
+            module_id: id,
+            tool_id: t.tool_id
+          }))
+        });
       }
     }
 
@@ -247,31 +236,29 @@ exports.updateModule = async (req, res) => {
 exports.deleteModule = async (req, res) => {
   const { id } = req.params;
   try {
-    const [{ data: module }, { data: assets }] = await Promise.all([
-      supabase.from('modules').select('image').eq('id', id).single(),
-      supabase.from('module_assets').select('file').eq('module_id', id),
-    ]);
+    const moduleItem = await prisma.module.findUnique({
+      where: { id },
+      select: { image: true },
+    });
+    const assets = await prisma.moduleAsset.findMany({
+      where: { module_id: id },
+      select: { file: true },
+    });
 
     // Hapus file 3D
     if (assets && assets.length > 0) {
-      const paths = assets.map((a) => extractStoragePath(a.file, 'assets-3d')).filter(Boolean);
-      if (paths.length > 0) {
-        const { error: storageErr } = await supabase.storage.from('assets-3d').remove(paths);
-        if (storageErr) console.error('[deleteModule] Storage 3D error:', storageErr.message);
+      for (const a of assets) {
+         await deleteFromStorage('assets-3d', a.file);
       }
     }
 
     // Hapus gambar thumbnail
-    if (module && module.image) {
-      await deleteFromStorage('images', module.image);
+    if (moduleItem && moduleItem.image) {
+      await deleteFromStorage('images', moduleItem.image);
     }
 
-    // Hapus mesh_config (tidak memiliki CASCADE dari modules)
-    await supabase.from('mesh_config').delete().eq('module_id', id);
-
     // Hapus dari database (CASCADE ke module_assets, module_materials, module_tools)
-    const { error: dbError } = await supabase.from('modules').delete().eq('id', id);
-    if (dbError) return res.status(400).json({ error: dbError.message });
+    await prisma.module.delete({ where: { id } });
 
     res.json({ message: 'Module, file 3D, dan gambar berhasil dihapus permanen' });
   } catch (err) {

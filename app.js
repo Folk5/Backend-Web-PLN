@@ -59,9 +59,13 @@ app.use((req, res, next) => {
   });
 });
 app.use(express.json());
-app.use(helmet());
+app.use(helmet({ crossOriginResourcePolicy: false })); // allow cross origin for images/assets
 app.use(morgan('dev'));
 app.use('/api', apiLimiter);
+
+// Serve static files
+const path = require('path');
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 app.use('/api/auth', authRoutes);
 app.use('/api', moduleRoutes);

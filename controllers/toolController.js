@@ -3,7 +3,7 @@
  * CRUD untuk entitas Peralatan/Tools (tools).
  */
 
-const supabase = require('../config/supabase');
+const prisma = require('../config/db');
 const { deleteFromStorage } = require('./helpers/storage');
 
 // ── GET ────────────────────────────────────────────────────
@@ -11,14 +11,16 @@ const { deleteFromStorage } = require('./helpers/storage');
 exports.getTools = async (req, res) => {
   try {
     const search = req.query.search;
-    let query = supabase.from('tools').select('*, category:categories(id, name, value)');
+    
+    const data = await prisma.tool.findMany({
+      where: search ? { name: { contains: search, mode: 'insensitive' } } : undefined,
+      include: {
+        category: {
+          select: { id: true, name: true, value: true }
+        }
+      }
+    });
 
-    if (search) {
-      query = query.ilike('name', `%${search}%`);
-    }
-
-    const { data, error } = await query;
-    if (error) return res.status(500).json({ error: error.message });
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: 'Gagal mengambil data peralatan', details: err.message });
@@ -33,10 +35,14 @@ exports.createTool = async (req, res) => {
     const { randomUUID } = require('crypto');
     toolData.id = randomUUID();
   }
-  const { data, error } = await supabase.from('tools').insert([toolData]).select();
-  if (error) return res.status(400).json({ error: error.message });
-  console.log(`[INFO] Peralatan Baru Ditambahkan: ${data[0].name} (ID: ${data[0].id})`);
-  res.json({ message: 'Peralatan/Tool berhasil ditambahkan', data: data[0] });
+  
+  try {
+    const tool = await prisma.tool.create({ data: toolData });
+    console.log(`[INFO] Peralatan Baru Ditambahkan: ${tool.name} (ID: ${tool.id})`);
+    res.json({ message: 'Peralatan/Tool berhasil ditambahkan', data: tool });
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
 };
 
 // ── PUT ────────────────────────────────────────────────────
@@ -47,11 +53,10 @@ exports.updateTool = async (req, res) => {
 
   try {
     // Ambil data lama (file3d + image) untuk komparasi
-    const { data: oldTool } = await supabase
-      .from('tools')
-      .select('file3d, image')
-      .eq('id', id)
-      .single();
+    const oldTool = await prisma.tool.findUnique({
+      where: { id },
+      select: { file3d: true, image: true },
+    });
 
     if (oldTool) {
       // Hapus file3d lama jika diganti
@@ -64,8 +69,7 @@ exports.updateTool = async (req, res) => {
       }
     }
 
-    const { error } = await supabase.from('tools').update(bodyArgs).eq('id', id);
-    if (error) throw error;
+    await prisma.tool.update({ where: { id }, data: bodyArgs });
 
     res.json({ message: 'Peralatan berhasil diperbarui' });
   } catch (err) {
@@ -78,19 +82,17 @@ exports.updateTool = async (req, res) => {
 exports.deleteTool = async (req, res) => {
   const { id } = req.params;
   try {
-    const { data: tool } = await supabase
-      .from('tools')
-      .select('file3d, image')
-      .eq('id', id)
-      .single();
+    const tool = await prisma.tool.findUnique({
+      where: { id },
+      select: { file3d: true, image: true },
+    });
 
     if (tool) {
       await deleteFromStorage('assets-3d', tool.file3d);
       await deleteFromStorage('images', tool.image);
     }
 
-    const { error } = await supabase.from('tools').delete().eq('id', id);
-    if (error) return res.status(400).json({ error: error.message });
+    await prisma.tool.delete({ where: { id } });
 
     res.json({ message: 'Peralatan, file 3D, dan gambar berhasil dihapus permanen' });
   } catch (err) {

@@ -1,16 +1,12 @@
-const supabase = require('../config/supabase');
+const prisma = require('../config/db');
 const bcrypt = require('bcrypt');
 
 // Ambil semua pengguna
 exports.getAllUsers = async (req, res) => {
   try {
-    const { data: users, error } = await supabase
-      .from('users')
-      .select('id, email, name, unit, status, created_at');
-
-    if (error) {
-      return res.status(400).json({ error: error.message });
-    }
+    const users = await prisma.user.findMany({
+      select: { id: true, email: true, name: true, unit: true, status: true, created_at: true },
+    });
 
     res.json({ users });
   } catch (err) {
@@ -31,30 +27,25 @@ exports.createUser = async (req, res) => {
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(password, saltRounds);
 
-    const { data, error } = await supabase
-      .from('users')
-      .insert([
-        {
-          email,
-          password_hash: passwordHash,
-          name,
-          unit: unit || '-',
-          status: 'Offline',
-        },
-      ])
-      .select('id, email, name, unit, status, created_at')
-      .single();
-
-    if (error) {
-      if (error.code === '23505') return res.status(400).json({ error: 'Email sudah terdaftar.' });
-      return res.status(400).json({ error: error.message });
-    }
+    const user = await prisma.user.create({
+      data: {
+        email,
+        password_hash: passwordHash,
+        name,
+        unit: unit || '-',
+        status: 'Offline',
+      },
+      select: { id: true, email: true, name: true, unit: true, status: true, created_at: true },
+    });
 
     res.status(201).json({
       message: 'Pengguna berhasil dibuat',
-      user: data,
+      user,
     });
   } catch (err) {
+    if (err.code === 'P2002') {
+      return res.status(400).json({ error: 'Email sudah terdaftar.' });
+    }
     console.error('[userController] createUser: error tidak terduga:', err.message);
     return res.status(500).json({ error: 'Terjadi kesalahan sistem.' });
   }
@@ -76,18 +67,15 @@ exports.updateUser = async (req, res) => {
       updatePayload.password_hash = await bcrypt.hash(password, saltRounds);
     }
 
-    const { data, error } = await supabase
-      .from('users')
-      .update(updatePayload)
-      .eq('id', id)
-      .select('id, email, name, unit, status, created_at')
-      .single();
-
-    if (error) return res.status(400).json({ error: error.message });
+    const user = await prisma.user.update({
+      where: { id },
+      data: updatePayload,
+      select: { id: true, email: true, name: true, unit: true, status: true, created_at: true },
+    });
 
     res.json({
       message: 'Pengguna berhasil diperbarui',
-      user: data,
+      user,
     });
   } catch (err) {
     console.error('[userController] updateUser: error tidak terduga:', err.message);
@@ -100,9 +88,9 @@ exports.deleteUser = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const { error } = await supabase.from('users').delete().eq('id', id);
-
-    if (error) return res.status(400).json({ error: error.message });
+    await prisma.user.delete({
+      where: { id },
+    });
 
     res.json({ message: 'Pengguna berhasil dihapus' });
   } catch (err) {
@@ -122,13 +110,12 @@ exports.changePassword = async (req, res) => {
 
   try {
     // 1. Ambil data user beserta password_hash saat ini
-    const { data: user, error: fetchError } = await supabase
-      .from('users')
-      .select('password_hash')
-      .eq('id', userId)
-      .single();
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { password_hash: true },
+    });
 
-    if (fetchError || !user) {
+    if (!user) {
       return res.status(404).json({ error: 'Pengguna tidak ditemukan.' });
     }
 
@@ -143,14 +130,10 @@ exports.changePassword = async (req, res) => {
     const newPasswordHash = await bcrypt.hash(newPassword, saltRounds);
 
     // 4. Update database
-    const { error: updateError } = await supabase
-      .from('users')
-      .update({ password_hash: newPasswordHash })
-      .eq('id', userId);
-
-    if (updateError) {
-      return res.status(400).json({ error: updateError.message });
-    }
+    await prisma.user.update({
+      where: { id: userId },
+      data: { password_hash: newPasswordHash },
+    });
 
     res.json({ message: 'Password berhasil diubah!' });
   } catch (err) {
@@ -169,22 +152,17 @@ exports.updateProfile = async (req, res) => {
   }
 
   try {
-    const { data, error } = await supabase
-      .from('users')
-      .update({ name, email, unit: unit || '-' })
-      .eq('id', userId)
-      .select('id, email, name, unit, status')
-      .single();
+    const user = await prisma.user.update({
+      where: { id: userId },
+      data: { name, email, unit: unit || '-' },
+      select: { id: true, email: true, name: true, unit: true, status: true },
+    });
 
-    if (error) {
-      return res.status(400).json({ error: error.message });
-    }
-
-    // Opsional: Buat token baru jika payload penting berubah (spt email/nama)
-    // Kita abaikan dulu jika tidak perlu merefresh token untuk simplisitas.
-
-    res.json({ message: 'Profil berhasil diperbarui', user: data });
+    res.json({ message: 'Profil berhasil diperbarui', user });
   } catch (err) {
+    if (err.code === 'P2002') {
+      return res.status(400).json({ error: 'Email sudah terdaftar.' });
+    }
     console.error('[userController] updateProfile:', err.message);
     return res.status(500).json({ error: 'Terjadi kesalahan sistem.' });
   }

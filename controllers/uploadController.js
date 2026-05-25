@@ -1,20 +1,31 @@
 /**
  * controllers/uploadController.js
- * Menangani upload file fisik ke Supabase Storage.
+ * Menangani upload file fisik ke Local Storage (public/uploads).
  * - uploadFile  → bucket 'assets-3d' (file .glb / .gltf)
  * - uploadImage → bucket 'images'    (file JPG / PNG / WEBP)
  */
 
-const supabase = require('../config/supabase');
+const fs = require('fs');
+const path = require('path');
 
 const ALLOWED_3D_EXTS = ['glb', 'gltf'];
-// Browser bisa kirim application/octet-stream untuk .glb, jadi keduanya diizinkan
 const ALLOWED_3D_MIMES = ['model/gltf-binary', 'model/gltf+json', 'application/octet-stream'];
 const MAX_3D_SIZE = 50 * 1024 * 1024; // 50 MB
 
 const ALLOWED_IMG_MIMES = ['image/jpeg', 'image/png', 'image/webp'];
 const MIME_TO_EXT = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp' };
 const MAX_IMG_SIZE = 5 * 1024 * 1024; // 5 MB
+
+// ── Helper: Save File ──────────────────────────────────────
+
+const saveFile = (buffer, bucket, fileName) => {
+  const dir = path.join(__dirname, '../../public/uploads', bucket);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  const filePath = path.join(dir, fileName);
+  fs.writeFileSync(filePath, buffer);
+};
 
 // ── Upload File 3D ─────────────────────────────────────────
 
@@ -45,25 +56,15 @@ exports.uploadFile = async (req, res) => {
 
     const fileName = `${Date.now()}_${Math.round(Math.random() * 1e5)}.${ext}`;
 
-    const { error } = await supabase.storage.from('assets-3d').upload(fileName, req.file.buffer, {
-      contentType: req.file.mimetype,
-      upsert: false,
-    });
+    // Save to local filesystem
+    saveFile(req.file.buffer, 'assets-3d', fileName);
 
-    if (error) {
-      console.error('[uploadFile] Supabase storage error:', error.message, error);
-      return res.status(500).json({
-        error: 'Gagal mengunggah file ke Supabase Storage (assets-3d).',
-        details: error.message,
-      });
-    }
-
-    const { data: publicUrlData } = supabase.storage.from('assets-3d').getPublicUrl(fileName);
+    const publicUrl = `${req.protocol}://${req.get('host')}/uploads/assets-3d/${fileName}`;
 
     res.json({
       message: 'File 3D berhasil diunggah!',
       fileName,
-      publicUrl: publicUrlData.publicUrl,
+      publicUrl,
     });
   } catch (err) {
     res.status(500).json({ error: 'Kesalahan server saat upload file', details: err.message });
@@ -88,29 +89,18 @@ exports.uploadImage = async (req, res) => {
       return res.status(400).json({ error: 'Ukuran gambar melebihi batas maksimal 5 MB.' });
     }
 
-    // Ekstensi ditentukan dari MIME type, bukan dari nama file asli (mencegah spoofing)
     const ext = MIME_TO_EXT[req.file.mimetype];
     const fileName = `${Date.now()}_${Math.round(Math.random() * 1e5)}.${ext}`;
 
-    const { error } = await supabase.storage.from('images').upload(fileName, req.file.buffer, {
-      contentType: req.file.mimetype,
-      upsert: false,
-    });
+    // Save to local filesystem
+    saveFile(req.file.buffer, 'images', fileName);
 
-    if (error) {
-      console.error('[uploadImage] Supabase error:', error);
-      return res.status(500).json({
-        error: 'Gagal mengunggah gambar ke Supabase Storage (images).',
-        details: error.message,
-      });
-    }
-
-    const { data: publicUrlData } = supabase.storage.from('images').getPublicUrl(fileName);
+    const publicUrl = `${req.protocol}://${req.get('host')}/uploads/images/${fileName}`;
 
     res.json({
       message: 'Gambar berhasil diunggah!',
       fileName,
-      publicUrl: publicUrlData.publicUrl,
+      publicUrl,
     });
   } catch (err) {
     console.error('[uploadImage] Internal error:', err);
