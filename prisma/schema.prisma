@@ -33,10 +33,13 @@ model Category {
 model Material {
   id              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name            String
+  code            String?
+  bgGradient      String?
   description     String?
   image           String?
   category_id     String?           @db.Uuid
   created_at      DateTime          @default(now())
+  updated_at      DateTime?         @db.Timestamptz(6)
   category        Category?         @relation(fields: [category_id], references: [id], onDelete: SetNull)
   assets          MaterialAsset[]
   moduleMaterials ModuleMaterial[]
@@ -57,11 +60,15 @@ model MaterialAsset {
 model Tool {
   id          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name        String
+  bgGradient  String?
   description String?
+  standard    String?
+  status      String?
   image       String?
   file3d      String?
   category_id String?      @db.Uuid
   created_at  DateTime     @default(now())
+  updated_at  DateTime?    @db.Timestamptz(6)
   category    Category?    @relation(fields: [category_id], references: [id], onDelete: SetNull)
   moduleTools ModuleTool[]
 
@@ -69,16 +76,18 @@ model Tool {
 }
 
 model Module {
-  id          String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title       String
-  description String?
-  image       String?
-  status      String           @default("Draft")
-  created_at  DateTime         @default(now())
-  materials   ModuleMaterial[]
-  tools       ModuleTool[]
-  assets      ModuleAsset[]
-  meshConfigs MeshConfig[]
+  id             String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title          String
+  description    String?
+  image          String?
+  status         String           @default("Draft")
+  layout_svg_url String?
+  created_at     DateTime         @default(now())
+  updated_at     DateTime?        @db.Timestamptz(6)
+  materials      ModuleMaterial[]
+  tools          ModuleTool[]
+  assets         ModuleAsset[]
+  meshConfigs    MeshConfig[]
 
   @@map("modules")
 }
