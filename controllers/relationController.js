@@ -54,15 +54,21 @@ exports.addModuleTool = async (req, res) => {
   }
 };
 
-exports.updateMaterialMeshName = async (req, res) => {
+exports.updateMaterialMeshNames = async (req, res) => {
   const { id } = req.params;
-  const { mesh_name } = req.body;
+  const { mesh_names } = req.body;
+  if (!Array.isArray(mesh_names)) {
+    return res.status(400).json({ error: 'mesh_names harus berupa array' });
+  }
+  const valid = mesh_names.map(n => n.trim()).filter(Boolean);
   try {
-    await prisma.moduleMaterial.update({
-      where: { id },
-      data: { mesh_name: mesh_name || null },
-    });
-    res.json({ message: 'mesh_name material berhasil diperbarui' });
+    await prisma.$transaction([
+      prisma.moduleMaterialMesh.deleteMany({ where: { module_material_id: id } }),
+      ...valid.map(mesh_name =>
+        prisma.moduleMaterialMesh.create({ data: { module_material_id: id, mesh_name } })
+      ),
+    ]);
+    res.json({ message: 'mesh material berhasil diperbarui' });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

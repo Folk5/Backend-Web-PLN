@@ -15,9 +15,9 @@ exports.getMeshConfig = async (req, res) => {
 exports.getMappedMeshes = async (req, res) => {
   const { id } = req.params;
   try {
-    const [matData, toolData] = await Promise.all([
-      prisma.moduleMaterial.findMany({
-        where: { module_id: id, mesh_name: { not: null } },
+    const [matMeshData, toolData] = await Promise.all([
+      prisma.moduleMaterialMesh.findMany({
+        where: { module_material: { module_id: id } },
         select: { mesh_name: true },
       }),
       prisma.moduleTool.findMany({
@@ -26,7 +26,7 @@ exports.getMappedMeshes = async (req, res) => {
       }),
     ]);
     const names = new Set([
-      ...matData.map((r) => r.mesh_name).filter(Boolean),
+      ...matMeshData.map((r) => r.mesh_name).filter(Boolean),
       ...toolData.map((r) => r.mesh_name).filter(Boolean),
     ]);
     res.json([...names]);
