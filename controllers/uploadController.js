@@ -19,7 +19,7 @@ const MAX_IMG_SIZE = 5 * 1024 * 1024; // 5 MB
 // ── Helper: Save File ──────────────────────────────────────
 
 const saveFile = (buffer, bucket, fileName) => {
-  const dir = path.join(__dirname, '../../public/uploads', bucket);
+  const dir = path.join(__dirname, '../public/uploads', bucket);
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
