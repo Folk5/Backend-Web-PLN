@@ -81,7 +81,6 @@ model Module {
   description    String?
   image          String?
   status         String           @default("Draft")
-  layout_svg_url String?
   created_at     DateTime         @default(now())
   updated_at     DateTime?        @db.Timestamptz(6)
   materials      ModuleMaterial[]
