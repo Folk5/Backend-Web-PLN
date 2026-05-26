@@ -31,7 +31,7 @@ router.post('/module-materials', requireAuth, relationController.addModuleMateri
 router.post('/module-tools', requireAuth, relationController.addModuleTool);
 
 // Mesh mapping
-router.patch('/module-materials/:id/mesh-name', requireAuth, relationController.updateMaterialMeshName);
+router.patch('/module-materials/:id/mesh-names', requireAuth, relationController.updateMaterialMeshNames);
 router.patch('/module-tools/:id/mesh-name', requireAuth, relationController.updateToolMeshName);
 
 // Mesh config (display name + visibility)

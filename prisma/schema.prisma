@@ -92,16 +92,25 @@ model Module {
 }
 
 model ModuleMaterial {
-  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  module_id   String   @db.Uuid
-  material_id String   @db.Uuid
-  quantity    Int      @default(1)
-  mesh_name   String?
-  module      Module   @relation(fields: [module_id], references: [id], onDelete: Cascade)
-  material    Material @relation(fields: [material_id], references: [id], onDelete: Cascade)
+  id          String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  module_id   String                 @db.Uuid
+  material_id String                 @db.Uuid
+  quantity    Int                    @default(1)
+  module      Module                 @relation(fields: [module_id], references: [id], onDelete: Cascade)
+  material    Material               @relation(fields: [material_id], references: [id], onDelete: Cascade)
+  meshes      ModuleMaterialMesh[]
 
   @@unique([module_id, material_id])
   @@map("module_materials")
+}
+
+model ModuleMaterialMesh {
+  id                 String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  module_material_id String         @db.Uuid
+  mesh_name          String
+  module_material    ModuleMaterial @relation(fields: [module_material_id], references: [id], onDelete: Cascade)
+
+  @@map("module_material_meshes")
 }
 
 model ModuleTool {
