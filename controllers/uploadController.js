@@ -59,14 +59,18 @@ exports.uploadFile = async (req, res) => {
     // Save to local filesystem
     saveFile(req.file.buffer, 'assets-3d', fileName);
 
-    const publicUrl = `${req.protocol}://${req.get('host')}/uploads/assets-3d/${fileName}`;
+    // Simpan sebagai relative path agar tidak terikat pada IP/hostname saat ini.
+    // Frontend (PLN-WEB) sudah memiliki proxy /uploads → backend, sehingga
+    // path relative ini selalu bisa diakses tanpa perlu tahu IP backend.
+    const relativePath = `/uploads/assets-3d/${fileName}`;
 
     res.json({
       message: 'File 3D berhasil diunggah!',
       fileName,
-      publicUrl,
+      publicUrl: relativePath,
     });
   } catch (err) {
+    console.error('[uploadFile] Internal error:', err);
     res.status(500).json({ error: 'Kesalahan server saat upload file', details: err.message });
   }
 };
@@ -95,12 +99,13 @@ exports.uploadImage = async (req, res) => {
     // Save to local filesystem
     saveFile(req.file.buffer, 'images', fileName);
 
-    const publicUrl = `${req.protocol}://${req.get('host')}/uploads/images/${fileName}`;
+    // Simpan sebagai relative path agar tidak terikat pada IP/hostname saat ini.
+    const relativePath = `/uploads/images/${fileName}`;
 
     res.json({
       message: 'Gambar berhasil diunggah!',
       fileName,
-      publicUrl,
+      publicUrl: relativePath,
     });
   } catch (err) {
     console.error('[uploadImage] Internal error:', err);
