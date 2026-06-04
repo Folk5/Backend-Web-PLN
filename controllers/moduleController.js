@@ -212,28 +212,63 @@ exports.updateModule = async (req, res) => {
 
     // 4. Sinkronisasi materials
     if (materials && Array.isArray(materials)) {
-      await prisma.moduleMaterial.deleteMany({ where: { module_id: id } });
-      if (materials.length > 0) {
-        await prisma.moduleMaterial.createMany({
-          data: materials.map(m => ({
-            module_id: id,
-            material_id: m.material_id,
-            quantity: m.quantity || 1
-          }))
+      const existingMaterials = await prisma.moduleMaterial.findMany({ where: { module_id: id } });
+      const incomingMaterialIds = materials.map(m => m.material_id);
+
+      // Hapus yang tidak ada di payload incoming
+      const toDeleteMaterials = existingMaterials.filter(em => !incomingMaterialIds.includes(em.material_id));
+      if (toDeleteMaterials.length > 0) {
+        await prisma.moduleMaterial.deleteMany({
+          where: { id: { in: toDeleteMaterials.map(d => d.id) } }
         });
+      }
+
+      // Update kuantitas atau buat baru (Pertahankan ID untuk menghindari reset mesh)
+      for (const m of materials) {
+        const existing = existingMaterials.find(em => em.material_id === m.material_id);
+        if (existing) {
+          if (existing.quantity !== (m.quantity || 1)) {
+            await prisma.moduleMaterial.update({
+              where: { id: existing.id },
+              data: { quantity: m.quantity || 1 }
+            });
+          }
+        } else {
+          await prisma.moduleMaterial.create({
+            data: {
+              module_id: id,
+              material_id: m.material_id,
+              quantity: m.quantity || 1
+            }
+          });
+        }
       }
     }
 
     // 5. Sinkronisasi tools
     if (tools && Array.isArray(tools)) {
-      await prisma.moduleTool.deleteMany({ where: { module_id: id } });
-      if (tools.length > 0) {
-        await prisma.moduleTool.createMany({
-          data: tools.map(t => ({
-            module_id: id,
-            tool_id: t.tool_id
-          }))
+      const existingTools = await prisma.moduleTool.findMany({ where: { module_id: id } });
+      const incomingToolIds = tools.map(t => t.tool_id);
+
+      // Hapus yang tidak ada di payload incoming
+      const toDeleteTools = existingTools.filter(et => !incomingToolIds.includes(et.tool_id));
+      if (toDeleteTools.length > 0) {
+        await prisma.moduleTool.deleteMany({
+          where: { id: { in: toDeleteTools.map(d => d.id) } }
         });
+      }
+
+      // Buat baru (jika sudah ada, biarkan untuk mempertahankan mesh_name)
+      for (const t of tools) {
+        const existing = existingTools.find(et => et.tool_id === t.tool_id);
+        if (!existing) {
+          await prisma.moduleTool.create({
+            data: {
+              module_id: id,
+              tool_id: t.tool_id
+            }
+          });
+        }
       }
     }
 
