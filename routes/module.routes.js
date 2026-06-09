@@ -28,6 +28,7 @@ router.delete('/modules/:id', requireAuth, moduleController.deleteModule);
 // Relasi module
 router.post('/module-assets', requireAuth, relationController.addModuleAsset);
 router.post('/module-materials', requireAuth, relationController.addModuleMaterial);
+router.delete('/module-materials/:module_id/:material_id', requireAuth, relationController.removeModuleMaterial);
 router.post('/module-tools', requireAuth, relationController.addModuleTool);
 
 // Mesh mapping

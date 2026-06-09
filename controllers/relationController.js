@@ -38,8 +38,29 @@ exports.addMaterialAsset = async (req, res) => {
 
 exports.addModuleMaterial = async (req, res) => {
   try {
-    const data = await prisma.moduleMaterial.create({ data: req.body });
+    const { module_id, material_id, quantity } = req.body;
+    const data = await prisma.moduleMaterial.upsert({
+      where: {
+        module_id_material_id: { module_id, material_id }
+      },
+      update: { quantity },
+      create: { module_id, material_id, quantity }
+    });
     res.json({ message: 'Material berhasil ditautkan ke module', data });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+exports.removeModuleMaterial = async (req, res) => {
+  try {
+    const { module_id, material_id } = req.params;
+    await prisma.moduleMaterial.delete({
+      where: {
+        module_id_material_id: { module_id, material_id }
+      }
+    });
+    res.json({ message: 'Material berhasil dihapus dari module' });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
