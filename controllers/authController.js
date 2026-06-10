@@ -142,7 +142,18 @@ exports.verify = async (req, res) => {
 
   try {
     const decoded = jwt.verify(token, SECRET);
-    res.json({ valid: true, user: decoded });
+    
+    // Ambil data terbaru dari database agar profil tidak mandek di data token lama
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.id },
+      select: { id: true, email: true, name: true, unit: true, status: true },
+    });
+
+    if (!user) {
+      return res.status(401).json({ error: 'User tidak ditemukan' });
+    }
+
+    res.json({ valid: true, user: user });
   } catch (err) {
     return res.status(401).json({ error: 'Token tidak valid atau sudah kedaluwarsa' });
   }
