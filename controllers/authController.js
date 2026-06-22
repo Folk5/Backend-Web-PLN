@@ -144,8 +144,10 @@ exports.verify = async (req, res) => {
     const decoded = jwt.verify(token, SECRET);
     
     // Ambil data terbaru dari database agar profil tidak mandek di data token lama
-    const user = await prisma.user.findUnique({
+    // Sekaligus perbarui last_active_at agar sistem tahu user masih online
+    const user = await prisma.user.update({
       where: { id: decoded.id },
+      data: { last_active_at: new Date(), status: 'Online' },
       select: { id: true, email: true, name: true, unit: true, status: true },
     });
 

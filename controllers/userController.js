@@ -5,10 +5,35 @@ const bcrypt = require('bcrypt');
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await prisma.user.findMany({
-      select: { id: true, email: true, name: true, unit: true, status: true, created_at: true },
+      select: { id: true, email: true, name: true, unit: true, status: true, created_at: true, last_active_at: true },
     });
 
-    res.json({ users });
+    const THRESHOLD = 30 * 60 * 1000; // 30 menit
+    const now = new Date();
+
+    const updatedUsers = users.map(user => {
+      if (user.status === 'Online' && (now - new Date(user.last_active_at)) > THRESHOLD) {
+        user.status = 'Offline';
+        // Asynchronously update database to keep it consistent
+        prisma.user.update({ where: { id: user.id }, data: { status: 'Offline' } }).catch(() => {});
+      }
+      return user;
+    });
+
+    updatedUsers.sort((a, b) => {
+      // 1. Online di atas Offline
+      if (a.status === 'Online' && b.status !== 'Online') return -1;
+      if (a.status !== 'Online' && b.status === 'Online') return 1;
+      
+      // 2. Jika status sama, urutkan berdasarkan abjad A-Z (name)
+      const nameA = (a.name || '').toLowerCase();
+      const nameB = (b.name || '').toLowerCase();
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
+
+    res.json({ users: updatedUsers });
   } catch (err) {
     console.error('[userController] getAllUsers: error tidak terduga:', err.message);
     return res.status(500).json({ error: 'Terjadi kesalahan sistem.' });

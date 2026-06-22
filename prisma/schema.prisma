@@ -13,6 +13,7 @@ model User {
   name          String
   unit          String?  @default("-")
   status        String   @default("Offline")
+  last_active_at DateTime @default(now())
   created_at    DateTime @default(now())
 
   @@map("users")
