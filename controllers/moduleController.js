@@ -4,7 +4,7 @@
  */
 
 const prisma = require('../config/db');
-const { deleteFromStorage } = require('./helpers/storage');
+const { deleteFromStorage, extractStoragePath } = require('./helpers/storage');
 const { randomUUID } = require('crypto');
 
 // ── GET ────────────────────────────────────────────────────
@@ -187,7 +187,9 @@ exports.updateModule = async (req, res) => {
         const existing = oldAssets.find((oa) => oa.id === a.id);
         if (existing) {
           if (existing.name !== a.name || existing.file !== a.file) {
-            if (existing.file !== a.file && existing.file !== '-') {
+            const oldFilename = extractStoragePath(existing.file, 'assets-3d');
+            const newFilename = extractStoragePath(a.file, 'assets-3d');
+            if (oldFilename !== newFilename && oldFilename) {
               await deleteFromStorage('assets-3d', existing.file);
             }
             await prisma.moduleAsset.update({
