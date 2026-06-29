@@ -4,7 +4,7 @@
  */
 
 const prisma = require('../config/db');
-const { deleteFromStorage } = require('./helpers/storage');
+const { deleteFromStorage, extractStoragePath } = require('./helpers/storage');
 
 // ── GET ────────────────────────────────────────────────────
 
@@ -61,7 +61,11 @@ exports.updateTool = async (req, res) => {
     if (oldTool) {
       // Hapus file3d lama jika diganti
       if (bodyArgs.file3d && oldTool.file3d && oldTool.file3d !== bodyArgs.file3d) {
-        await deleteFromStorage('assets-3d', oldTool.file3d);
+        const oldFilename = extractStoragePath(oldTool.file3d, 'assets-3d');
+        const newFilename = extractStoragePath(bodyArgs.file3d, 'assets-3d');
+        if (oldFilename !== newFilename && oldFilename) {
+          await deleteFromStorage('assets-3d', oldTool.file3d);
+        }
       }
       // Hapus gambar lama jika diganti atau dihapus (image: null)
       if ('image' in bodyArgs && oldTool.image && oldTool.image !== bodyArgs.image) {
