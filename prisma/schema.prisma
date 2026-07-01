@@ -143,6 +143,23 @@ model ModuleAsset {
   name      String?
   file      String?
   module    Module  @relation(fields: [module_id], references: [id], onDelete: Cascade)
-
+ 
   @@map("module_assets")
+}
+
+model Construction {
+  id          String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String
+  slug        String         @unique
+  level       Int            // 1 = root (Distribusi), 2 = sub-kategori (JTM), 3 = detail (SUTM)
+  module_type String         @default("konstruksi") // 'konstruksi' | 'material' | 'peralatan'
+  description String?
+  image       String?
+  parent_id   String?        @db.Uuid
+  parent      Construction?  @relation("ConstructionChildren", fields: [parent_id], references: [id], onDelete: Cascade)
+  children    Construction[] @relation("ConstructionChildren")
+  created_at  DateTime       @default(now())
+  updated_at  DateTime?      @db.Timestamptz(6)
+
+  @@map("constructions")
 }
