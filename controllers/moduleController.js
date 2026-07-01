@@ -37,6 +37,9 @@ exports.getModules = async (req, res) => {
         assets: true,
         _count: {
           select: { materials: true, tools: true }
+        },
+        construction: {
+          select: { id: true, name: true, slug: true, level: true }
         }
       }
     });
@@ -63,6 +66,9 @@ exports.getModuleById = async (req, res) => {
       where: { id },
       include: {
         assets: true,
+        construction: {
+          select: { id: true, name: true, slug: true, level: true }
+        },
         materials: {
           select: {
             id: true,

@@ -80,9 +80,11 @@ model Module {
   title          String
   description    String?
   image          String?
-  status         String           @default("Draft")
-  created_at     DateTime         @default(now())
-  updated_at     DateTime?        @db.Timestamptz(6)
+  status          String           @default("Draft")
+  construction_id String?          @db.Uuid
+  created_at      DateTime         @default(now())
+  updated_at      DateTime?        @db.Timestamptz(6)
+  construction    Construction?    @relation(fields: [construction_id], references: [id], onDelete: SetNull)
   materials      ModuleMaterial[]
   tools          ModuleTool[]
   assets         ModuleAsset[]
@@ -158,6 +160,7 @@ model Construction {
   parent_id   String?        @db.Uuid
   parent      Construction?  @relation("ConstructionChildren", fields: [parent_id], references: [id], onDelete: Cascade)
   children    Construction[] @relation("ConstructionChildren")
+  modules     Module[]
   created_at  DateTime       @default(now())
   updated_at  DateTime?      @db.Timestamptz(6)
 
