@@ -14,6 +14,7 @@ const toolRoutes = require('./routes/tool.routes');
 const uploadRoutes = require('./routes/upload.routes');
 const userRoutes = require('./routes/user.routes');
 const categoryRoutes = require('./routes/categoryRoutes');
+const constructionRoutes = require('./routes/constructions.routes');
 
 const app = express();
 
@@ -74,6 +75,7 @@ app.use('/api', toolRoutes);
 app.use('/api', uploadRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/construction', constructionRoutes);
 
 app.get('/', (req, res) => {
   res.json({

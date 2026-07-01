@@ -1,3 +1,15 @@
+-- AlterTable: Hapus primary key lama (composite) pada module_materials
+ALTER TABLE "module_materials" DROP CONSTRAINT "module_materials_pkey";
+
+-- AlterTable: Tambahkan kolom id dengan tipe UUID dan default value
+ALTER TABLE "module_materials" ADD COLUMN "id" UUID NOT NULL DEFAULT gen_random_uuid();
+
+-- AlterTable: Atur kolom id sebagai primary key baru
+ALTER TABLE "module_materials" ADD CONSTRAINT "module_materials_pkey" PRIMARY KEY ("id");
+
+-- CreateIndex: Tambahkan unique constraint untuk module_id + material_id
+CREATE UNIQUE INDEX "module_materials_module_id_material_id_key" ON "module_materials"("module_id", "material_id");
+
 -- CreateTable
 CREATE TABLE "module_material_meshes" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
