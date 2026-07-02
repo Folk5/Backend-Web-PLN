@@ -15,6 +15,7 @@ exports.getModules = async (req, res) => {
     const sort = req.query.sort || 'newest';
     const search = req.query.search;
     const statusFilter = req.query.status;
+    const categorySlug = req.query.category;
 
     const where = {};
     if (statusFilter) {
@@ -24,6 +25,24 @@ exports.getModules = async (req, res) => {
     }
     if (search) {
       where.title = { contains: search, mode: 'insensitive' };
+    }
+
+    if (categorySlug) {
+      const rootCat = await prisma.construction.findUnique({ where: { slug: categorySlug } });
+      if (rootCat) {
+        let catIds = [rootCat.id];
+        const children = await prisma.construction.findMany({ where: { parent_id: rootCat.id } });
+        if (children.length > 0) {
+          const childIds = children.map(c => c.id);
+          catIds.push(...childIds);
+          const grandchildren = await prisma.construction.findMany({ where: { parent_id: { in: childIds } } });
+          catIds.push(...grandchildren.map(c => c.id));
+        }
+        where.construction_id = { in: catIds };
+      } else {
+        // If category slug is invalid, force empty result
+        where.construction_id = '00000000-0000-0000-0000-000000000000';
+      }
     }
 
     let orderBy = { created_at: 'desc' };
