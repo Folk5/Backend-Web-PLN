@@ -27,6 +27,46 @@ exports.getTools = async (req, res) => {
   }
 };
 
+// ── GET ────────────────────────────────────────────────────
+
+exports.getToolsByConstruction = async (req, res) => {
+  try {
+    const { slug } = req.params;
+    
+    // Cari relasi ModuleTool dimana modul-nya memiliki construction dengan slug tersebut
+    const moduleTools = await prisma.moduleTool.findMany({
+      where: {
+        module: {
+          construction: {
+            slug: slug
+          }
+        }
+      },
+      include: {
+        tool: {
+          include: {
+            category: {
+              select: { id: true, name: true, value: true }
+            }
+          }
+        }
+      }
+    });
+
+    // Ambil tool unik dari modul-modul tersebut
+    const toolsMap = new Map();
+    moduleTools.forEach(mt => {
+      if (mt.tool && !toolsMap.has(mt.tool.id)) {
+        toolsMap.set(mt.tool.id, mt.tool);
+      }
+    });
+
+    res.json(Array.from(toolsMap.values()));
+  } catch (err) {
+    res.status(500).json({ error: 'Gagal mengambil data peralatan berdasarkan konstruksi', details: err.message });
+  }
+};
+
 // ── POST ───────────────────────────────────────────────────
 
 exports.createTool = async (req, res) => {

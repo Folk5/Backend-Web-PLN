@@ -7,6 +7,7 @@ const relationController = require('../controllers/relationController');
 
 // Materials CRUD
 router.get('/materials', materialController.getMaterials);
+router.get('/materials/by-construction/:slug', materialController.getMaterialsByConstruction);
 router.get('/materials/:id', materialController.getMaterialById);
 router.post(
   '/materials',

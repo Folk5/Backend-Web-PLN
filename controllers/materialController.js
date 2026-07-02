@@ -44,7 +44,46 @@ exports.getMaterialById = async (req, res) => {
   }
 };
 
-// ── POST ───────────────────────────────────────────────────
+// ── GET ────────────────────────────────────────────────────
+
+exports.getMaterialsByConstruction = async (req, res) => {
+  try {
+    const { slug } = req.params;
+    
+    // Cari relasi ModuleMaterial dimana modul-nya memiliki construction dengan slug tersebut
+    const moduleMaterials = await prisma.moduleMaterial.findMany({
+      where: {
+        module: {
+          construction: {
+            slug: slug
+          }
+        }
+      },
+      include: {
+        material: {
+          include: {
+            assets: true,
+            category: {
+              select: { id: true, name: true, value: true },
+            },
+          }
+        }
+      }
+    });
+
+    // Ambil material unik dari modul-modul tersebut
+    const materialsMap = new Map();
+    moduleMaterials.forEach(mm => {
+      if (mm.material && !materialsMap.has(mm.material.id)) {
+        materialsMap.set(mm.material.id, mm.material);
+      }
+    });
+
+    res.json(Array.from(materialsMap.values()));
+  } catch (err) {
+    res.status(500).json({ error: 'Gagal mengambil data material berdasarkan konstruksi', details: err.message });
+  }
+};
 
 exports.createMaterial = async (req, res) => {
   const materialData = { ...req.body };
