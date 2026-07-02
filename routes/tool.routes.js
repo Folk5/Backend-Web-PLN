@@ -6,6 +6,7 @@ const toolController = require('../controllers/toolController');
 
 // Tools CRUD
 router.get('/tools', toolController.getTools);
+router.get('/tools/by-construction/:slug', toolController.getToolsByConstruction);
 router.post(
   '/tools',
   requireAuth,
