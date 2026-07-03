@@ -1,171 +1,76 @@
-# Backend API — PLN Pusdiklat
+# Backend Web PLN
 
-Layanan REST API untuk pengelolaan modul konstruksi, material jaringan, alat K3, dan autentikasi admin.
+Ini adalah repositori backend untuk project aplikasi Web PLN. Aplikasi ini dibangun menggunakan Express.js, Prisma ORM, dan PostgreSQL.
 
-> [!CAUTION]
-> **STATUS: UNDER DEVELOPMENT** — Project ini masih dalam tahap pengembangan aktif dan belum merupakan versi final.
+## Persyaratan Sistem (Prerequisites)
 
----
+Sebelum mulai menjalankan proyek ini, pastikan Anda telah menginstal software berikut di komputer Anda:
 
-## Tech Stack
+1. **Node.js** (Sangat disarankan menggunakan **Versi 20.x atau lebih baru**)
+   - Anda dapat mengunduh versi terbaru Node.js dari [nodejs.org](https://nodejs.org/).
+   - Untuk memverifikasi versi instalasi, buka terminal dan jalankan: `node -v`
+2. **PostgreSQL**
+   - Instal PostgreSQL dari [postgresql.org](https://www.postgresql.org/download/).
+   - Pastikan service PostgreSQL sudah berjalan (*running*).
+   - Buat sebuah database baru yang kosong (contoh nama: `pln_db`) menggunakan pgAdmin, DBeaver, atau Command Line.
+3. **Git**
+   - Untuk mengunduh (clone) repositori ke komputer lokal.
 
-- **Runtime**: Node.js + Express.js
-- **Database & Storage**: Supabase (PostgreSQL + Storage)
-- **Auth**: JWT (jsonwebtoken) + bcrypt
-- **Validation**: express-validator
+## Panduan Instalasi dan Menjalankan Proyek
 
----
+### 1. Clone Repositori
 
-## Setup dari Awal
-
-### 1. Prasyarat
-
-Pastikan sudah terinstall:
-- [Node.js](https://nodejs.org/) v18 atau lebih baru
-- Akses ke project Supabase yang sudah dikonfigurasi
-
-### 2. Clone & Install
+Buka terminal (Command Prompt / PowerShell / Git Bash) dan jalankan perintah berikut untuk mengunduh kode backend:
 
 ```bash
-git clone <url-repo>
+git clone <URL_REPO_BACKEND_INI>
 cd Backend-Web-PLN
+```
+
+### 2. Instalasi Dependensi (Package)
+
+Jalankan perintah berikut untuk menginstal seluruh *package* NPM yang dibutuhkan:
+
+```bash
 npm install
 ```
 
-### 3. Konfigurasi `.env`
+### 3. Konfigurasi Environment Variables
 
-Salin file contoh:
+1. Buat sebuah file baru bernama `.env` (tanpa ekstensi apapun di belakangnya) di folder utama (root) `Backend-Web-PLN`.
+2. Isi file `.env` tersebut dengan konfigurasi koneksi ke database Anda. Berikut adalah contohnya:
+
+```env
+# Sesuaikan 'postgres' dengan username postgres Anda, 'password123' dengan password postgres Anda, dan 'pln_db' dengan nama database yang Anda buat sebelumnya.
+DATABASE_URL="postgresql://postgres:password123@localhost:5432/pln_db?schema=public"
+PORT=3000
+```
+
+### 4. Setup Database
+
+Terdapat dua skenario untuk melakukan inisialisasi database:
+
+**Skenario A: Inisialisasi Database Kosong (Hanya membuat struktur/schema tabel)**
+Jika Anda hanya ingin aplikasi bisa dijalankan tanpa peduli isinya kosong:
+```bash
+npx prisma db push
+```
+
+**Skenario B: Menggunakan Data yang Sudah Ada (Backup / Restore)**
+Jika Anda ingin melanjutkan dari database yang sudah berisi data dummy, akun, atau transaksi dari *developer* sebelumnya:
+1. Minta file backup database (contohnya `backup.sql`) dari rekan tim Anda.
+2. Lakukan *Restore/Import* file tersebut ke database PostgreSQL Anda menggunakan aplikasi seperti pgAdmin atau DBeaver.
+3. Setelah restore selesai dan berhasil, jalankan perintah ini agar Prisma client mengenali struktur terbaru:
+```bash
+npx prisma generate
+```
+
+### 5. Menjalankan Server
+
+Setelah semua tahapan di atas berhasil diselesaikan, Anda dapat menjalankan server backend di mode *development* (otomatis me-restart server ketika ada perubahan kode) menggunakan perintah:
 
 ```bash
-cp .env.example .env
-```
-
-Isi nilai di `.env`:
-
-| Variabel | Cara mendapatkan |
-|---|---|
-| `SUPABASE_URL` | Dashboard Supabase → **Integration** → **Data API** → Project URL |
-| `SUPABASE_ANON_KEY` | Dashboard Supabase → **Project Settings** → **API Keys** → `anon public` |
-| `SUPABASE_SERVICE_KEY` | Dashboard Supabase → **Project Settings** → **API Keys** → `service_role` |
-| `JWT_SECRET` | Generate sendiri (lihat langkah di bawah) |
-| `PORT` | Biarkan `4000` atau ubah sesuai kebutuhan |
-| `ALLOWED_ORIGINS` | URL frontend, contoh: `http://localhost:3000` |
-
-**Generate `JWT_SECRET`:**
-
-```bash
-node -e "console.log('JWT_SECRET=' + require('crypto').randomBytes(64).toString('hex'))"
-```
-
-Salin output tersebut ke `.env`. Simpan nilai ini di tempat aman bersama tim — jika berbeda antar mesin, semua sesi login yang aktif akan ikut invalid.
-
-### 4. Setup Database (Supabase)
-
-> [!NOTE]
-> Lakukan langkah ini hanya jika database Supabase belum pernah diinisialisasi.
-
-1. Buka [Supabase](https://app.supabase.com/) → klik **New Project**, isi nama dan password database, tunggu hingga selesai.
-2. Setelah project siap, buka menu **SQL Editor** di sidebar → klik **New Query**.
-3. Buka file `migrations/supabase_schema.sql` dari repo ini, salin seluruh isinya, tempel ke editor, lalu klik **Run**.
-4. Setelah selesai, ulangi langkah yang sama untuk file `migrations/add_mesh_config_table.sql`.
-
-> [!NOTE]
-> File `supabase_schema.sql` sudah mencakup semua tabel utama. File `add_mesh_config_table.sql` perlu dijalankan terpisah karena ditambahkan setelah schema utama dibuat. File migration lainnya di folder `migrations/` tidak perlu dijalankan ulang.
-
-### 5. Buat Akun Admin Pertama
-
-Gunakan Postman, Insomnia, atau `curl`:
-
-```
-POST http://localhost:4000/api/auth/register
-Content-Type: application/json
-
-{
-  "email": "admin@example.com",
-  "password": "password_anda"
-}
-```
-
-Akun ini bisa langsung dipakai untuk login di halaman `/login` pada frontend.
-
-### 6. Jalankan Server
-
-```bash
-# Mode pengembangan (auto-restart saat ada perubahan file)
 npm run dev
-
-# Mode produksi
-npm start
 ```
 
-Server berjalan di `http://localhost:4000` (atau sesuai nilai `PORT` di `.env`).
-
----
-
-## Endpoint API
-
-### Authentication (`/api/auth`)
-
-| Method | Endpoint | Auth | Deskripsi |
-|---|---|---|---|
-| POST | `/register` | — | Daftarkan admin baru |
-| POST | `/login` | — | Login, mengembalikan token |
-| GET | `/logout` | — | Hapus sesi |
-| GET | `/verify` | — | Cek validitas token |
-
-### Modules (`/api/modules`)
-
-| Method | Endpoint | Auth | Deskripsi |
-|---|---|---|---|
-| GET | `/modules` | — | List semua modul |
-| GET | `/modules/:id` | — | Detail satu modul |
-| POST | `/modules` | Ya | Buat modul baru |
-| PUT | `/modules/:id` | Ya | Update modul |
-| DELETE | `/modules/:id` | Ya | Hapus modul permanen |
-| GET | `/modules/:id/mesh-config` | — | Konfigurasi mesh 3D |
-| POST | `/modules/:id/mesh-config` | Ya | Simpan konfigurasi mesh |
-| GET | `/modules/:id/mapped-meshes` | — | Daftar mesh yang sudah dipetakan |
-
-### Materials & Tools (`/api`)
-
-| Method | Endpoint | Auth | Deskripsi |
-|---|---|---|---|
-| GET | `/materials` | — | List material |
-| POST | `/materials` | Ya | Tambah material |
-| PUT | `/materials/:id` | Ya | Update material |
-| DELETE | `/materials/:id` | Ya | Hapus material |
-| GET | `/tools` | — | List alat |
-| POST | `/tools` | Ya | Tambah alat |
-| PUT | `/tools/:id` | Ya | Update alat |
-| DELETE | `/tools/:id` | Ya | Hapus alat |
-
-### Relasi & Upload (`/api`)
-
-| Method | Endpoint | Auth | Deskripsi |
-|---|---|---|---|
-| POST | `/module-assets` | Ya | Tambah aset 3D ke modul |
-| POST | `/module-materials` | Ya | Hubungkan modul dengan material |
-| POST | `/module-tools` | Ya | Hubungkan modul dengan alat |
-| PATCH | `/module-materials/:id/mesh-name` | Ya | Set nama mesh material |
-| PATCH | `/module-tools/:id/mesh-name` | Ya | Set nama mesh alat |
-| POST | `/upload-file` | Ya | Upload file GLB/3D |
-| POST | `/upload-image` | Ya | Upload gambar |
-
----
-
-## Struktur Folder
-
-```
-Backend-Web-PLN/
-├── config/          # Supabase client
-├── controllers/     # Logika bisnis per entitas
-│   └── helpers/     # Utility storage
-├── middleware/      # Auth, validasi request
-├── migrations/      # Skema dan migration SQL
-├── routes/          # Definisi routing
-└── server.js
-```
-
----
-
-Developed for **PLN Pusdiklat**.
+Jika sukses, terminal akan menampilkan log bahwa server sedang berjalan. Pastikan server dibiarkan terbuka selama Anda ingin mengakses aplikasinya.
