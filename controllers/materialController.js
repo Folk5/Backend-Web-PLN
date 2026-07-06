@@ -14,7 +14,7 @@ exports.getMaterials = async (req, res) => {
     const data = await prisma.material.findMany({
       include: {
         assets: true,
-        category: {
+        categories: {
           select: { id: true, name: true, value: true },
         },
       },
@@ -32,7 +32,7 @@ exports.getMaterialById = async (req, res) => {
       where: { id },
       include: {
         assets: true,
-        category: {
+        categories: {
           select: { id: true, name: true, value: true },
         },
       },
@@ -63,7 +63,7 @@ exports.getMaterialsByConstruction = async (req, res) => {
         material: {
           include: {
             assets: true,
-            category: {
+            categories: {
               select: { id: true, name: true, value: true },
             },
           }
@@ -86,13 +86,18 @@ exports.getMaterialsByConstruction = async (req, res) => {
 };
 
 exports.createMaterial = async (req, res) => {
-  const materialData = { ...req.body };
+  const { categories, ...materialData } = req.body;
   if (!materialData.id) {
     materialData.id = randomUUID();
   }
   try {
     const data = await prisma.material.create({
-      data: materialData,
+      data: {
+        ...materialData,
+        categories: categories && categories.length > 0 ? {
+          connect: categories.map(id => ({ id }))
+        } : undefined
+      },
     });
     console.log(`[INFO] Material Baru Ditambahkan: ${data.name} (ID: ${data.id})`);
     res.json({ message: 'Material berhasil ditambahkan', data });
@@ -105,7 +110,7 @@ exports.createMaterial = async (req, res) => {
 
 exports.updateMaterial = async (req, res) => {
   const { id } = req.params;
-  const { assets, ...materialData } = req.body;
+  const { assets, categories, ...materialData } = req.body;
 
   try {
     // 0. Hapus gambar lama jika image diubah/dihapus
@@ -122,7 +127,12 @@ exports.updateMaterial = async (req, res) => {
     // 1. Update data material
     await prisma.material.update({
       where: { id },
-      data: materialData,
+      data: {
+        ...materialData,
+        categories: categories ? {
+          set: categories.map(catId => ({ id: catId }))
+        } : undefined
+      },
     });
 
     // 2. Ambil assets lama
