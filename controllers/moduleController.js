@@ -63,7 +63,7 @@ exports.getModules = async (req, res) => {
       }
     });
 
-    const result = data.map((m) => {
+    let result = data.map((m) => {
       const { _count, ...rest } = m;
       return {
         ...rest,
@@ -71,6 +71,17 @@ exports.getModules = async (req, res) => {
         equipmentCount: _count.tools,
       };
     });
+
+    // Deduplikasi berdasar title agar shadow modules (auto-sync) tidak tampil ganda di view
+    const uniqueModules = [];
+    const seenTitles = new Set();
+    for (const m of result) {
+      if (!seenTitles.has(m.title)) {
+        seenTitles.add(m.title);
+        uniqueModules.push(m);
+      }
+    }
+    result = uniqueModules;
 
     res.json(result);
   } catch (err) {

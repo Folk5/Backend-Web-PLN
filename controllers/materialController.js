@@ -7,6 +7,71 @@ const prisma = require('../config/db');
 const { extractStoragePath, deleteFromStorage } = require('./helpers/storage');
 const { randomUUID } = require('crypto');
 
+async function autoSyncMaterialToConstruction(materialId) {
+  try {
+    const material = await prisma.material.findUnique({
+      where: { id: materialId },
+      include: { categories: true }
+    });
+    if (!material) return;
+
+    const allConstructions = await prisma.construction.findMany();
+    const materialCatNames = material.categories.map(c => c.name.toLowerCase());
+    const matchingConstructions = allConstructions.filter(c => materialCatNames.includes(c.name.toLowerCase()));
+    const matchingConstructionIds = matchingConstructions.map(c => c.id);
+
+    const candidateModules = await prisma.module.findMany({
+      where: { materials: { some: { material_id: material.id } } },
+      include: { materials: true, tools: true }
+    });
+
+    const shadowModules = candidateModules.filter(m => m.materials.length === 1 && m.tools.length === 0);
+
+    for (const shadow of shadowModules) {
+      if (!shadow.construction_id || !matchingConstructionIds.includes(shadow.construction_id)) {
+        await prisma.module.delete({ where: { id: shadow.id } });
+        console.log(`[SYNC] Deleted orphan auto-module '${shadow.title}'`);
+      }
+    }
+
+    for (const construction of matchingConstructions) {
+      let existingMod = shadowModules.find(m => m.construction_id === construction.id);
+
+      if (!existingMod) {
+        const mod = await prisma.module.create({
+          data: {
+            title: material.name,
+            description: material.description || '',
+            image: material.image || null,
+            status: 'Aktif',
+            construction_id: construction.id
+          }
+        });
+        await prisma.moduleMaterial.create({
+          data: {
+            module_id: mod.id,
+            material_id: material.id,
+            quantity: 1
+          }
+        });
+        console.log(`[SYNC] Auto-created module '${mod.title}' for construction '${construction.name}'`);
+      } else {
+        await prisma.module.update({
+          where: { id: existingMod.id },
+          data: { 
+            title: material.name,
+            image: material.image || null,
+            description: material.description || '' 
+          }
+        });
+      }
+    }
+  } catch (err) {
+    console.error('[SYNC ERROR] Failed to auto-sync material:', err);
+  }
+}
+
+
 // ── GET ────────────────────────────────────────────────────
 
 exports.getMaterials = async (req, res) => {
@@ -100,6 +165,10 @@ exports.createMaterial = async (req, res) => {
       },
     });
     console.log(`[INFO] Material Baru Ditambahkan: ${data.name} (ID: ${data.id})`);
+    
+    // Trigger auto-sync
+    await autoSyncMaterialToConstruction(data.id);
+    
     res.json({ message: 'Material berhasil ditambahkan', data });
   } catch (err) {
     return res.status(400).json({ error: err.message });
@@ -181,6 +250,9 @@ exports.updateMaterial = async (req, res) => {
       }
     }
 
+    // Trigger auto-sync
+    await autoSyncMaterialToConstruction(id);
+
     res.json({ message: 'Material berhasil diperbarui' });
   } catch (err) {
     res.status(500).json({ error: 'Gagal update material', details: err.message });
@@ -212,6 +284,17 @@ exports.deleteMaterial = async (req, res) => {
     // Hapus gambar thumbnail
     if (material && material.image) {
       await deleteFromStorage('images', material.image);
+    }
+
+    // Hapus shadow modules sebelum material dihapus
+    const candidateModules = await prisma.module.findMany({
+      where: { materials: { some: { material_id: id } } },
+      include: { materials: true, tools: true }
+    });
+    const shadowModules = candidateModules.filter(m => m.materials.length === 1 && m.tools.length === 0);
+    for (const shadow of shadowModules) {
+      await prisma.module.delete({ where: { id: shadow.id } });
+      console.log(`[SYNC] Deleted auto-module '${shadow.title}' prior to material deletion.`);
     }
 
     // Hapus dari database (CASCADE ke material_assets akan jalan karena relasi prisma/DB onDelete: Cascade)
