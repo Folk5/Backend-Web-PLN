@@ -16,19 +16,7 @@ async function autoSyncMaterialToConstruction(materialId) {
     if (!material) return;
 
     const allConstructions = await prisma.construction.findMany();
-    
-    // Peta khusus untuk nama kategori material -> singkatan nama konstruksi
-    const mapCatToConst = {
-      'gardu cantol': 'gc',
-      'gardu beton': 'gb',
-      'gardu portal': 'gp'
-    };
-    
-    const materialCatNames = material.categories.map(c => {
-      const lower = c.name.toLowerCase();
-      return mapCatToConst[lower] || lower;
-    });
-    
+    const materialCatNames = material.categories.map(c => c.name.toLowerCase());
     const matchingConstructions = allConstructions.filter(c => materialCatNames.includes(c.name.toLowerCase()));
     const matchingConstructionIds = matchingConstructions.map(c => c.id);
 
