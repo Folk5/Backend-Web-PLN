@@ -8,8 +8,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const ALLOWED_3D_EXTS = ['glb', 'gltf'];
-const ALLOWED_3D_MIMES = ['model/gltf-binary', 'model/gltf+json', 'application/octet-stream'];
+const ALLOWED_3D_EXTS = ['glb', 'gltf', 'png', 'jpg', 'jpeg', 'webp'];
+const ALLOWED_3D_MIMES = ['model/gltf-binary', 'model/gltf+json', 'application/octet-stream', 'image/png', 'image/jpeg', 'image/webp'];
 const MAX_3D_SIZE = 50 * 1024 * 1024; // 50 MB
 
 const ALLOWED_IMG_MIMES = ['image/jpeg', 'image/png', 'image/webp'];
@@ -40,13 +40,13 @@ exports.uploadFile = async (req, res) => {
     const ext = req.file.originalname.split('.').pop().toLowerCase();
     if (!ALLOWED_3D_EXTS.includes(ext)) {
       return res.status(400).json({
-        error: 'Format tidak didukung. Hanya file .glb atau .gltf yang diizinkan.',
+        error: 'Format tidak didukung. Hanya file .glb, .gltf, .png, .jpg, atau .webp yang diizinkan.',
       });
     }
 
     if (!ALLOWED_3D_MIMES.includes(req.file.mimetype)) {
       return res.status(400).json({
-        error: `MIME type "${req.file.mimetype}" tidak valid untuk file 3D.`,
+        error: `MIME type "${req.file.mimetype}" tidak valid untuk file media.`,
       });
     }
 
