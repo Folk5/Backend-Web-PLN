@@ -109,7 +109,7 @@ exports.getModuleById = async (req, res) => {
             material: {
               include: {
                 assets: true,
-                category: true
+                categories: true
               }
             }
           }
