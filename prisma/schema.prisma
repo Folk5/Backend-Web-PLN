@@ -216,3 +216,14 @@ model QuizSubmission {
   @@map("quiz_submissions")
 }
 
+model Listrikpedia {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  abbr        String
+  name        String
+  description String?
+  type        String    @default("singkatan") // "singkatan" | "istilah"
+  created_at  DateTime  @default(now())
+  updated_at  DateTime? @db.Timestamptz(6)
+
+  @@map("listrikpedia")
+}
