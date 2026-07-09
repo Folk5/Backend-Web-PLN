@@ -1,0 +1,1 @@
+const { PrismaClient } = require('@prisma/client'); const prisma = new PrismaClient(); async function main() { const m = await prisma.material.findMany(); m.forEach(x => console.log(x.name + ' => ' + x.thumbnail)); } main();
