@@ -8,6 +8,7 @@ const { extractStoragePath, deleteFromStorage } = require('./helpers/storage');
 const { randomUUID } = require('crypto');
 
 async function autoSyncMaterialToConstruction(materialId) {
+  return; // DISABLED: Mencegah material otomatis masuk ke manajemen konstruksi
   try {
     const material = await prisma.material.findUnique({
       where: { id: materialId },
@@ -166,8 +167,8 @@ exports.createMaterial = async (req, res) => {
     });
     console.log(`[INFO] Material Baru Ditambahkan: ${data.name} (ID: ${data.id})`);
     
-    // Trigger auto-sync
-    await autoSyncMaterialToConstruction(data.id);
+    // Trigger auto-sync (Disabled)
+    // await autoSyncMaterialToConstruction(data.id);
     
     res.json({ message: 'Material berhasil ditambahkan', data });
   } catch (err) {
@@ -250,8 +251,8 @@ exports.updateMaterial = async (req, res) => {
       }
     }
 
-    // Trigger auto-sync
-    await autoSyncMaterialToConstruction(id);
+    // Trigger auto-sync (Disabled)
+    // await autoSyncMaterialToConstruction(id);
 
     res.json({ message: 'Material berhasil diperbarui' });
   } catch (err) {
@@ -286,7 +287,8 @@ exports.deleteMaterial = async (req, res) => {
       await deleteFromStorage('images', material.image);
     }
 
-    // Hapus shadow modules sebelum material dihapus
+    // Hapus shadow modules sebelum material dihapus (Disabled)
+    /*
     const candidateModules = await prisma.module.findMany({
       where: { materials: { some: { material_id: id } } },
       include: { materials: true, tools: true }
@@ -296,6 +298,7 @@ exports.deleteMaterial = async (req, res) => {
       await prisma.module.delete({ where: { id: shadow.id } });
       console.log(`[SYNC] Deleted auto-module '${shadow.title}' prior to material deletion.`);
     }
+    */
 
     // Hapus dari database (CASCADE ke material_assets akan jalan karena relasi prisma/DB onDelete: Cascade)
     await prisma.material.delete({ where: { id } });
