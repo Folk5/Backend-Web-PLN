@@ -7,6 +7,12 @@ const prisma = require('../config/db');
 const { deleteFromStorage } = require('./helpers/storage');
 const { randomUUID } = require('crypto');
 
+const parseFloatOrNull = (val) => {
+  if (val === null || val === undefined || val === '') return null;
+  const num = parseFloat(val);
+  return isNaN(num) ? null : num;
+};
+
 // ── GET ────────────────────────────────────────────────────
 
 exports.getModules = async (req, res) => {
@@ -168,6 +174,23 @@ exports.createModule = async (req, res) => {
       }
     });
 
+    if (assets && assets.length > 0) {
+      await prisma.moduleAsset.createMany({
+        data: assets.map(a => ({
+          module_id: newModule.id,
+          name: a.name,
+          file: a.file,
+          cam_pos_x: parseFloatOrNull(a.cam_pos_x),
+          cam_pos_y: parseFloatOrNull(a.cam_pos_y),
+          cam_pos_z: parseFloatOrNull(a.cam_pos_z),
+          target_x: parseFloatOrNull(a.target_x),
+          target_y: parseFloatOrNull(a.target_y),
+          target_z: parseFloatOrNull(a.target_z),
+          animation: a.animation || 'none'
+        }))
+      });
+    }
+
     console.log(`[INFO] Modul Konstruksi Baru Ditambahkan: ${newModule.title} (ID: ${newModule.id})`);
     res.json({ message: 'Module berhasil dibuat', data: newModule });
   } catch (err) {
@@ -221,25 +244,45 @@ exports.updateModule = async (req, res) => {
 
       for (const a of assets) {
         const existing = oldAssets.find((oa) => oa.id === a.id);
+        const assetData = {
+          name: a.name,
+          file: a.file || '-',
+          cam_pos_x: parseFloatOrNull(a.cam_pos_x),
+          cam_pos_y: parseFloatOrNull(a.cam_pos_y),
+          cam_pos_z: parseFloatOrNull(a.cam_pos_z),
+          target_x: parseFloatOrNull(a.target_x),
+          target_y: parseFloatOrNull(a.target_y),
+          target_z: parseFloatOrNull(a.target_z),
+          animation: a.animation || 'none'
+        };
+
         if (existing) {
-          if (existing.name !== a.name || existing.file !== a.file) {
+          if (
+            existing.name !== a.name || 
+            existing.file !== a.file ||
+            existing.cam_pos_x !== assetData.cam_pos_x ||
+            existing.cam_pos_y !== assetData.cam_pos_y ||
+            existing.cam_pos_z !== assetData.cam_pos_z ||
+            existing.target_x !== assetData.target_x ||
+            existing.target_y !== assetData.target_y ||
+            existing.target_z !== assetData.target_z ||
+            existing.animation !== assetData.animation
+          ) {
             if (existing.file !== a.file && existing.file !== '-') {
               await deleteFromStorage('assets-3d', existing.file);
             }
             await prisma.moduleAsset.update({
               where: { id: a.id },
-              data: { name: a.name, file: a.file },
+              data: assetData,
             });
           }
         } else {
           // Varian baru dari edit modal — generate UUID jika tidak ada id
-          const newId = a.id || randomUUID();
           await prisma.moduleAsset.create({
             data: {
-              id: newId,
+              id: a.id || randomUUID(),
               module_id: id,
-              name: a.name,
-              file: a.file || '-',
+              ...assetData
             },
           });
         }
