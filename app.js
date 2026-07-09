@@ -68,6 +68,8 @@ app.use('/api', apiLimiter);
 const path = require('path');
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
+const listrikpediaRoutes = require('./routes/listrikpedia.routes');
+
 app.use('/api/auth', authRoutes);
 app.use('/api', moduleRoutes);
 app.use('/api', materialRoutes);
@@ -76,6 +78,7 @@ app.use('/api', uploadRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/construction', constructionRoutes);
+app.use('/api/listrikpedia', listrikpediaRoutes);
 
 app.get('/', (req, res) => {
   res.json({
