@@ -23,7 +23,7 @@ const loginLimiter = rateLimit({
 // Untuk upload file — cegah abuse storage
 const uploadLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 jam
-  max: 30,
+  max: 500,
   message: { error: 'Batas upload tercapai. Coba lagi dalam 1 jam.' },
   standardHeaders: true,
   legacyHeaders: false,
