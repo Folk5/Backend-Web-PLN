@@ -76,6 +76,7 @@ app.use('/api', uploadRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/construction', constructionRoutes);
+app.use('/api/quiz', require('./routes/quiz.routes'));
 
 app.get('/', (req, res) => {
   res.json({

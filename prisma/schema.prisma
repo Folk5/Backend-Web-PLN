@@ -172,3 +172,47 @@ model Construction {
 
   @@map("constructions")
 }
+
+model Quiz {
+  id          String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title       String
+  code        String           @unique
+  created_at  DateTime         @default(now())
+  questions   Question[]
+  submissions QuizSubmission[]
+
+  @@map("quizzes")
+}
+
+model Question {
+  id       String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  quiz_id  String           @db.Uuid
+  quiz     Quiz             @relation(fields: [quiz_id], references: [id], onDelete: Cascade)
+  type     String           // "PG", "CHECKBOX", "ESSAY"
+  text     String
+  options  QuestionOption[]
+
+  @@map("questions")
+}
+
+model QuestionOption {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  question_id String   @db.Uuid
+  question    Question @relation(fields: [question_id], references: [id], onDelete: Cascade)
+  text        String
+  is_correct  Boolean  @default(false)
+
+  @@map("question_options")
+}
+
+model QuizSubmission {
+  id               String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  quiz_id          String   @db.Uuid
+  quiz             Quiz     @relation(fields: [quiz_id], references: [id], onDelete: Cascade)
+  participant_name String
+  score            Float
+  created_at       DateTime @default(now())
+
+  @@map("quiz_submissions")
+}
+
