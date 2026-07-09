@@ -9,3 +9,10 @@ Thumbs.db
 .supabase_schema.sql
 /generated/prisma
 public/uploads/
+
+# Ignore uploads and temp files
+public/uploads/
+uploads/
+temp.json
+temp2.json
+test_images.html
