@@ -139,12 +139,19 @@ model MeshConfig {
 }
 
 model ModuleAsset {
-  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  module_id String  @db.Uuid
-  name      String?
-  file      String?
-  module    Module  @relation(fields: [module_id], references: [id], onDelete: Cascade)
- 
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  module_id   String   @db.Uuid
+  name        String
+  file        String
+  cam_pos_x   Float?
+  cam_pos_y   Float?
+  cam_pos_z   Float?
+  target_x    Float?
+  target_y    Float?
+  target_z    Float?
+  animation   String   @default("none")
+  module      Module   @relation(fields: [module_id], references: [id], onDelete: Cascade)
+
   @@map("module_assets")
 }
 
