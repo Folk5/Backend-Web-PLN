@@ -10,3 +10,9 @@ Thumbs.db
 /generated/prisma
 public/uploads/
 public/uploads.zip
+# Ignore uploads and temp files
+public/uploads/
+uploads/
+temp.json
+temp2.json
+test_images.html
