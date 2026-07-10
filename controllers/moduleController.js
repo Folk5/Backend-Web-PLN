@@ -106,9 +106,11 @@ exports.getModuleById = async (req, res) => {
           select: { id: true, name: true, slug: true, level: true }
         },
         materials: {
+          orderBy: { sequence: 'asc' },
           select: {
             id: true,
             quantity: true,
+            sequence: true,
             meshes: {
               select: { id: true, mesh_name: true }
             },
@@ -121,9 +123,11 @@ exports.getModuleById = async (req, res) => {
           }
         },
         tools: {
+          orderBy: { sequence: 'asc' },
           select: {
             id: true,
             mesh_name: true,
+            sequence: true,
             tool: {
               include: {
                 category: true
@@ -294,10 +298,11 @@ exports.updateModule = async (req, res) => {
       await prisma.moduleMaterial.deleteMany({ where: { module_id: id } });
       if (materials.length > 0) {
         await prisma.moduleMaterial.createMany({
-          data: materials.map(m => ({
+          data: materials.map((m, i) => ({
             module_id: id,
             material_id: m.material_id,
-            quantity: m.quantity || 1
+            quantity: m.quantity || 1,
+            sequence: i
           }))
         });
       }
@@ -308,9 +313,10 @@ exports.updateModule = async (req, res) => {
       await prisma.moduleTool.deleteMany({ where: { module_id: id } });
       if (tools.length > 0) {
         await prisma.moduleTool.createMany({
-          data: tools.map(t => ({
+          data: tools.map((t, i) => ({
             module_id: id,
-            tool_id: t.tool_id
+            tool_id: t.tool_id,
+            sequence: i
           }))
         });
       }
