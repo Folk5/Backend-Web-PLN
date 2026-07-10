@@ -3,9 +3,10 @@ const prisma = require('../config/db');
 exports.getAllTerms = async (req, res) => {
     try {
         const terms = await prisma.listrikpedia.findMany({
-            orderBy: {
-                abbr: 'asc'
-            }
+            orderBy: [
+                { abbr: 'asc' },
+                { created_at: 'asc' }
+            ]
         });
         res.status(200).json(terms);
     } catch (error) {
