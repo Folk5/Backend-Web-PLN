@@ -13,6 +13,7 @@ model User {
   name          String
   unit          String?  @default("-")
   status        String   @default("Offline")
+  role          String   @default("Peserta")
   created_at    DateTime @default(now())
 
   @@map("users")
@@ -228,4 +229,31 @@ model Listrikpedia {
   updated_at  DateTime? @db.Timestamptz(6)
 
   @@map("listrikpedia")
+}
+
+model KatalogInstruktur {
+  id                  String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  nip                 String             @unique
+  nama_instruktur     String
+  status              String             @default("Instruktur Tetap") // Instruktur Tetap, Instruktur Tidak Tetap, Instruktur External
+  keahlian            String?
+  unit                String?
+  
+  jadwal              JadwalInstruktur[]
+
+  @@map("katalog_instruktur")
+}
+
+model JadwalInstruktur {
+  id                  String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  katalog_id          String            @db.Uuid
+  updl                String            // Padang, Tuntungan, dll.
+  mata_pelajaran      String
+  tanggal_mulai       DateTime          @db.Date
+  tanggal_selesai     DateTime          @db.Date
+  jumlah_jp           Int               @default(0)
+  
+  katalog             KatalogInstruktur @relation(fields: [katalog_id], references: [id], onDelete: Cascade)
+
+  @@map("jadwal_instruktur")
 }
