@@ -82,7 +82,7 @@ exports.login = async (req, res) => {
 
     // Buat JWT (Masa berlaku diperpendek menjadi 2 jam untuk keamanan)
     const token = jwt.sign(
-      { id: user.id, email: user.email, name: user.name, unit: user.unit, status: user.status },
+      { id: user.id, email: user.email, name: user.name, unit: user.unit, status: user.status, role: user.role || 'Peserta' },
       SECRET,
       { expiresIn: '2h' }
     );
