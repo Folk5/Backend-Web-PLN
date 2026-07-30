@@ -55,9 +55,18 @@ exports.createKatalog = async (req, res) => {
     if (!nipValue || !nipValue.trim()) {
       return res.status(400).json({ error: 'NIP tidak boleh kosong' });
     }
+    const trimmedNip = nipValue.trim();
+    
+    if (trimmedNip !== '-') {
+      const existing = await prisma.katalogInstruktur.findFirst({ where: { nip: trimmedNip } });
+      if (existing) {
+        return res.status(400).json({ error: 'NIP sudah terdaftar. Gunakan NIP yang berbeda.' });
+      }
+    }
+
     const data = await prisma.katalogInstruktur.create({
       data: {
-        nip: nipValue.trim(),
+        nip: trimmedNip,
         nama_instruktur: req.body.nama_instruktur,
         status: req.body.status,
         keahlian: req.body.keahlian || null,
@@ -83,10 +92,19 @@ exports.updateKatalog = async (req, res) => {
     if (!nipValue || !nipValue.trim()) {
       return res.status(400).json({ error: 'NIP tidak boleh kosong' });
     }
+    const trimmedNip = nipValue.trim();
+
+    if (trimmedNip !== '-') {
+      const existing = await prisma.katalogInstruktur.findFirst({ where: { nip: trimmedNip } });
+      if (existing && existing.id !== req.params.id) {
+        return res.status(400).json({ error: 'NIP sudah digunakan oleh instruktur lain.' });
+      }
+    }
+
     const data = await prisma.katalogInstruktur.update({
       where: { id: req.params.id },
       data: {
-        nip: nipValue.trim(),
+        nip: trimmedNip,
         nama_instruktur: req.body.nama_instruktur,
         status: req.body.status,
         keahlian: req.body.keahlian || null,

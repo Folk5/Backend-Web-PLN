@@ -233,7 +233,7 @@ model Listrikpedia {
 
 model KatalogInstruktur {
   id                  String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  nip                 String             @unique
+  nip                 String
   nama_instruktur     String
   status              String             @default("Instruktur Tetap") // Instruktur Tetap, Instruktur Tidak Tetap, Instruktur External
   keahlian            String?
@@ -256,4 +256,12 @@ model JadwalInstruktur {
   katalog             KatalogInstruktur @relation(fields: [katalog_id], references: [id], onDelete: Cascade)
 
   @@map("jadwal_instruktur")
+}
+
+model BackgroundImage {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  file       String
+  created_at DateTime @default(now())
+
+  @@map("background_images")
 }
