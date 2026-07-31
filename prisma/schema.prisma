@@ -257,3 +257,12 @@ model JadwalInstruktur {
 
   @@map("jadwal_instruktur")
 }
+
+
+model Background {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  file      String
+  createdAt DateTime @default(now())
+
+  @@map("backgrounds")
+}
