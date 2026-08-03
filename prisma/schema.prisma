@@ -98,6 +98,7 @@ model ModuleMaterial {
   module_id   String                 @db.Uuid
   material_id String                 @db.Uuid
   quantity    Int                    @default(1)
+  unit        String                 @default("PCS")
   sequence    Int                    @default(0)
   module      Module                 @relation(fields: [module_id], references: [id], onDelete: Cascade)
   material    Material               @relation(fields: [material_id], references: [id], onDelete: Cascade)

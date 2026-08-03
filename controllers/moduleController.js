@@ -110,6 +110,7 @@ exports.getModuleById = async (req, res) => {
           select: {
             id: true,
             quantity: true,
+            unit: true,
             sequence: true,
             meshes: {
               select: { id: true, mesh_name: true }
@@ -167,7 +168,8 @@ exports.createModule = async (req, res) => {
         materials: materials && materials.length > 0 ? {
           create: materials.map(m => ({
             material_id: m.material_id,
-            quantity: m.quantity || 1
+            quantity: m.quantity || 1,
+            unit: m.unit || 'PCS'
           }))
         } : undefined,
         tools: tools && tools.length > 0 ? {
@@ -302,6 +304,7 @@ exports.updateModule = async (req, res) => {
             module_id: id,
             material_id: m.material_id,
             quantity: m.quantity || 1,
+            unit: m.unit || 'PCS',
             sequence: i
           }))
         });
