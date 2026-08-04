@@ -99,6 +99,7 @@ model ModuleMaterial {
   material_id String                 @db.Uuid
   quantity    Int                    @default(1)
   unit        String                 @default("PCS")
+  keterangan  String?
   sequence    Int                    @default(0)
   module      Module                 @relation(fields: [module_id], references: [id], onDelete: Cascade)
   material    Material               @relation(fields: [material_id], references: [id], onDelete: Cascade)
@@ -121,6 +122,7 @@ model ModuleTool {
   id        String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   module_id String @db.Uuid
   tool_id   String @db.Uuid
+  keterangan String?
   mesh_name String?
   sequence  Int    @default(0)
   module    Module @relation(fields: [module_id], references: [id], onDelete: Cascade)

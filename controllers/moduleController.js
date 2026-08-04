@@ -111,6 +111,7 @@ exports.getModuleById = async (req, res) => {
             id: true,
             quantity: true,
             unit: true,
+            keterangan: true,
             sequence: true,
             meshes: {
               select: { id: true, mesh_name: true }
@@ -127,6 +128,7 @@ exports.getModuleById = async (req, res) => {
           orderBy: { sequence: 'asc' },
           select: {
             id: true,
+            keterangan: true,
             mesh_name: true,
             sequence: true,
             tool: {
@@ -169,12 +171,14 @@ exports.createModule = async (req, res) => {
           create: materials.map(m => ({
             material_id: m.material_id,
             quantity: m.quantity || 1,
-            unit: m.unit || 'PCS'
+            unit: m.unit || 'PCS',
+            keterangan: m.keterangan || null
           }))
         } : undefined,
         tools: tools && tools.length > 0 ? {
           create: tools.map(t => ({
-            tool_id: t.tool_id
+            tool_id: t.tool_id,
+            keterangan: t.keterangan || null
           }))
         } : undefined
       }
@@ -305,6 +309,7 @@ exports.updateModule = async (req, res) => {
             material_id: m.material_id,
             quantity: m.quantity || 1,
             unit: m.unit || 'PCS',
+            keterangan: m.keterangan || null,
             sequence: i
           }))
         });
@@ -319,6 +324,7 @@ exports.updateModule = async (req, res) => {
           data: tools.map((t, i) => ({
             module_id: id,
             tool_id: t.tool_id,
+            keterangan: t.keterangan || null,
             sequence: i
           }))
         });
