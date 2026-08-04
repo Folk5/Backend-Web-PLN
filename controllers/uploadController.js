@@ -10,7 +10,7 @@ const path = require('path');
 
 const ALLOWED_3D_EXTS = ['glb', 'gltf', 'png', 'jpg', 'jpeg', 'webp'];
 const ALLOWED_3D_MIMES = ['model/gltf-binary', 'model/gltf+json', 'application/octet-stream', 'image/png', 'image/jpeg', 'image/webp'];
-const MAX_3D_SIZE = 50 * 1024 * 1024; // 50 MB
+const MAX_3D_SIZE = 100 * 1024 * 1024; // 100 MB
 
 const ALLOWED_IMG_MIMES = ['image/jpeg', 'image/png', 'image/webp'];
 const MIME_TO_EXT = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp' };
@@ -51,7 +51,7 @@ exports.uploadFile = async (req, res) => {
     }
 
     if (req.file.size > MAX_3D_SIZE) {
-      return res.status(400).json({ error: 'Ukuran file melebihi batas maksimal 50 MB.' });
+      return res.status(400).json({ error: 'Ukuran file melebihi batas maksimal 100 MB.' });
     }
 
     const fileName = `${Date.now()}_${Math.round(Math.random() * 1e5)}.${ext}`;
