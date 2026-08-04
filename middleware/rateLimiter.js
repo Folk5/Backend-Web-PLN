@@ -32,7 +32,7 @@ const uploadLimiter = rateLimit({
 // Untuk seluruh API — batas umum per IP
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 menit
-  max: 200,
+  max: 5000,
   message: { error: 'Terlalu banyak request. Coba lagi dalam 15 menit.' },
   standardHeaders: true,
   legacyHeaders: false,
