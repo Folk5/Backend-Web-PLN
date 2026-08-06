@@ -1,4 +1,5 @@
 require('dotenv').config({ override: true });
+// trigger nodemon restart
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -81,7 +82,7 @@ app.use('/api/construction', constructionRoutes);
 app.use('/api/quiz', require('./routes/quiz.routes'));
 app.use('/api/listrikpedia', listrikpediaRoutes);
 app.use('/api/pembelajaran', require('./routes/pembelajaran.routes'));
-app.use('/api/backgrounds', require('./routes/background.routes'));
+app.use('/api', require('./routes/background.routes'));
 
 app.get('/', (req, res) => {
   res.json({

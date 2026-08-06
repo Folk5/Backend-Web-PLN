@@ -48,16 +48,25 @@ exports.getKatalog = async (req, res) => {
 
 exports.createKatalog = async (req, res) => {
   try {
-    if (req.user.role !== 'UPDL') {
-      return res.status(403).json({ error: 'Akses ditolak. Hanya user UPDL yang dapat menambah data.' });
+    if (!['UPDL', 'Admin', 'admin', 'Superadmin'].includes(req.user.role)) {
+      return res.status(403).json({ error: 'Akses ditolak. Anda tidak memiliki izin untuk menambah data.' });
     }
     const nipValue = req.body.nip;
     if (!nipValue || !nipValue.trim()) {
       return res.status(400).json({ error: 'NIP tidak boleh kosong' });
     }
+    const trimmedNip = nipValue.trim();
+    
+    if (trimmedNip !== '-') {
+      const existing = await prisma.katalogInstruktur.findFirst({ where: { nip: trimmedNip } });
+      if (existing) {
+        return res.status(400).json({ error: 'NIP sudah terdaftar. Gunakan NIP yang berbeda.' });
+      }
+    }
+
     const data = await prisma.katalogInstruktur.create({
       data: {
-        nip: nipValue.trim(),
+        nip: trimmedNip,
         nama_instruktur: req.body.nama_instruktur,
         status: req.body.status,
         keahlian: req.body.keahlian || null,
@@ -76,17 +85,26 @@ exports.createKatalog = async (req, res) => {
 
 exports.updateKatalog = async (req, res) => {
   try {
-    if (req.user.role !== 'UPDL') {
-      return res.status(403).json({ error: 'Akses ditolak. Hanya user UPDL yang dapat mengubah data.' });
+    if (!['UPDL', 'Admin', 'admin', 'Superadmin'].includes(req.user.role)) {
+      return res.status(403).json({ error: 'Akses ditolak. Anda tidak memiliki izin untuk mengubah data.' });
     }
     const nipValue = req.body.nip;
     if (!nipValue || !nipValue.trim()) {
       return res.status(400).json({ error: 'NIP tidak boleh kosong' });
     }
+    const trimmedNip = nipValue.trim();
+
+    if (trimmedNip !== '-') {
+      const existing = await prisma.katalogInstruktur.findFirst({ where: { nip: trimmedNip } });
+      if (existing && existing.id !== req.params.id) {
+        return res.status(400).json({ error: 'NIP sudah digunakan oleh instruktur lain.' });
+      }
+    }
+
     const data = await prisma.katalogInstruktur.update({
       where: { id: req.params.id },
       data: {
-        nip: nipValue.trim(),
+        nip: trimmedNip,
         nama_instruktur: req.body.nama_instruktur,
         status: req.body.status,
         keahlian: req.body.keahlian || null,
@@ -105,8 +123,8 @@ exports.updateKatalog = async (req, res) => {
 
 exports.deleteKatalog = async (req, res) => {
   try {
-    if (req.user.role !== 'UPDL') {
-      return res.status(403).json({ error: 'Akses ditolak. Hanya user UPDL yang dapat menghapus data.' });
+    if (!['UPDL', 'Admin', 'admin', 'Superadmin'].includes(req.user.role)) {
+      return res.status(403).json({ error: 'Akses ditolak. Anda tidak memiliki izin untuk menghapus data.' });
     }
     await prisma.katalogInstruktur.delete({ where: { id: req.params.id } });
     res.json({ success: true });
@@ -130,8 +148,8 @@ exports.getJadwal = async (req, res) => {
 
 exports.createJadwal = async (req, res) => {
   try {
-    if (req.user.role !== 'UPDL') {
-      return res.status(403).json({ error: 'Akses ditolak. Hanya user UPDL yang dapat menambah jadwal.' });
+    if (!['UPDL', 'Admin', 'admin', 'Superadmin'].includes(req.user.role)) {
+      return res.status(403).json({ error: 'Akses ditolak. Anda tidak memiliki izin untuk menambah jadwal.' });
     }
     const data = await prisma.jadwalInstruktur.create({
       data: {
@@ -152,8 +170,8 @@ exports.createJadwal = async (req, res) => {
 
 exports.updateJadwal = async (req, res) => {
   try {
-    if (req.user.role !== 'UPDL') {
-      return res.status(403).json({ error: 'Akses ditolak. Hanya user UPDL yang dapat mengubah jadwal.' });
+    if (!['UPDL', 'Admin', 'admin', 'Superadmin'].includes(req.user.role)) {
+      return res.status(403).json({ error: 'Akses ditolak. Anda tidak memiliki izin untuk mengubah jadwal.' });
     }
     const data = await prisma.jadwalInstruktur.update({
       where: { id: req.params.id },
@@ -175,8 +193,8 @@ exports.updateJadwal = async (req, res) => {
 
 exports.deleteJadwal = async (req, res) => {
   try {
-    if (req.user.role !== 'UPDL') {
-      return res.status(403).json({ error: 'Akses ditolak. Hanya user UPDL yang dapat menghapus jadwal.' });
+    if (!['UPDL', 'Admin', 'admin', 'Superadmin'].includes(req.user.role)) {
+      return res.status(403).json({ error: 'Akses ditolak. Anda tidak memiliki izin untuk menghapus jadwal.' });
     }
     await prisma.jadwalInstruktur.delete({ where: { id: req.params.id } });
     res.json({ success: true });

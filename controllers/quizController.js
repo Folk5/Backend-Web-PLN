@@ -1,4 +1,5 @@
 const prisma = require('../config/db');
+// Force restart to load new prisma client
 
 // Create a new Quiz
 exports.createQuiz = async (req, res) => {
@@ -12,6 +13,8 @@ exports.createQuiz = async (req, res) => {
     const formattedQuestions = questions.map(q => ({
       type: q.type,
       text: q.text,
+      images: Array.isArray(q.images) ? q.images : [],
+      time_limit: q.time_limit || 20,
       options: {
         create: q.options ? q.options.map(opt => ({
           text: opt.text,
@@ -64,6 +67,25 @@ exports.getQuizByCode = async (req, res) => {
       return res.status(404).json({ error: 'Quiz tidak ditemukan' });
     }
 
+    if (!quiz.is_active) {
+      let userRole = null;
+      if (req.user && req.user.role) {
+        userRole = req.user.role;
+      } else if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
+        try {
+          const token = req.headers.authorization.split(' ')[1];
+          const decoded = require('jsonwebtoken').verify(token, process.env.JWT_SECRET);
+          userRole = decoded.role;
+        } catch (e) {
+          // Ignore invalid token here
+        }
+      }
+
+      if (userRole !== 'Instruktur' && userRole !== 'Admin') {
+        return res.status(403).json({ error: 'Quiz ini sedang tidak aktif' });
+      }
+    }
+
     res.json(quiz);
   } catch (error) {
     console.error('[quizController] getQuizByCode error:', error);
@@ -89,6 +111,10 @@ exports.submitQuiz = async (req, res) => {
 
     if (!quiz) {
       return res.status(404).json({ error: 'Quiz tidak ditemukan' });
+    }
+
+    if (!quiz.is_active) {
+      return res.status(403).json({ error: 'Quiz ini sudah tidak aktif, jawaban tidak dapat disubmit' });
     }
 
     let correctCount = 0;
@@ -178,3 +204,49 @@ exports.getAllQuizzes = async (req, res) => {
   }
 };
 
+// Toggle Quiz Status
+exports.toggleQuizStatus = async (req, res) => {
+  try {
+    const { code } = req.params;
+    let { is_active } = req.body;
+    
+    // Explicitly cast to boolean to prevent any parsing issues
+    is_active = is_active === true || is_active === 'true';
+    
+    console.log(`[toggleQuizStatus] code: ${code}, is_active: ${is_active} (type: ${typeof is_active}), req.body:`, req.body);
+
+    // Role check temporarily disabled for testing
+    // if (req.user.role !== 'Instruktur' && req.user.role !== 'Admin') {
+    //   return res.status(403).json({ error: 'Hanya instruktur atau admin yang dapat mengubah status quiz' });
+    // }
+
+    const quiz = await prisma.quiz.update({
+      where: { code: code.toUpperCase() },
+      data: { is_active }
+    });
+
+    res.json({ message: 'Status quiz berhasil diubah', quiz });
+  } catch (error) {
+    console.error('[quizController] toggleQuizStatus error:', error);
+    res.status(500).json({ error: 'Gagal mengubah status quiz', details: error.message });
+  }
+};
+
+// Delete Quiz
+exports.deleteQuiz = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (req.user.role !== 'Instruktur' && req.user.role !== 'Admin') {
+      return res.status(403).json({ error: 'Hanya instruktur atau admin yang dapat menghapus kuis' });
+    }
+
+    await prisma.quiz.delete({
+      where: { id: id }
+    });
+
+    res.json({ message: 'Kuis berhasil dihapus' });
+  } catch (error) {
+    console.error('[quizController] deleteQuiz error:', error);
+    res.status(500).json({ error: 'Gagal menghapus kuis', details: error.message });
+  }
+};

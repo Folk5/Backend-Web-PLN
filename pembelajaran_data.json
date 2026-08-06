@@ -1,26 +1,6 @@
 {
   "users": [
     {
-      "id": "9797b979-0072-4fed-a098-5bb5c579619a",
-      "email": "tester@gmail.com",
-      "password_hash": "$2b$10$y4R1Xr/fU4rluh1CIzPt9.UgG.9seNxroTMAAvOyRobUhEKQvjZly",
-      "name": "Farrell",
-      "unit": "Pusat",
-      "status": "Offline",
-      "role": "Peserta",
-      "created_at": "2026-06-17T08:34:10.789Z"
-    },
-    {
-      "id": "3f2b7493-5e45-40ee-ac57-2d97db05abe3",
-      "email": "admin@gmail.com",
-      "password_hash": "$2b$10$l/A3AClHNHVr4pSGOLcaS.zCI0Dhd1BrjN6gNUTM757A4Rb4A69oG",
-      "name": "Super Admin",
-      "unit": "Pusat",
-      "status": "Online",
-      "role": "Peserta",
-      "created_at": "2026-05-06T10:45:16.072Z"
-    },
-    {
       "id": "993c7fc2-014d-47f3-ab59-da002f7585ef",
       "email": "updl@gmail.com",
       "password_hash": "$2b$10$y4R1Xr/fU4rluh1CIzPt9.UgG.9seNxroTMAAvOyRobUhEKQvjZly",
@@ -43,130 +23,50 @@
   ],
   "katalog": [
     {
-      "id": "36a97a00-1304-4a1f-9c89-f1aca5e0ec99",
-      "nip": "-",
-      "nama_instruktur": "Irsansyah",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Asesment & Diagnosa Jar. Distribusi, Operasi sistem Distribusi, Operasi Gardu Distribusi, Pemeliharaan Gardu Distribusi, Pemeliharaan Jar dist dengan metode PDKB",
-      "unit": "UID RKR"
-    },
-    {
-      "id": "bb450a52-f683-4767-8ba0-92f12f53a70a",
-      "nip": "-",
-      "nama_instruktur": "Yohan Wicaksono",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Operasi & pemeliharaan kubikel 20 kV, Operasi & pemeliharan APP Pengukuran, Setting Koordinasi & Troubleshooting Sistem Proteksi Distribusi, ",
-      "unit": "UID Jatim"
-    },
-    {
-      "id": "118c2c08-baa2-4f09-a687-1e905a9ae623",
-      "nip": "-",
-      "nama_instruktur": "Akbar Patonangi",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Opi Jar Distribusi dengan scada & Non Scada, Perencanaan Op & har Dist Scada & Non Scada, ",
-      "unit": "Dit MKIT"
-    },
-    {
-      "id": "f5352003-b74f-4e68-8fdf-6565e7ab2b63",
-      "nip": "-",
-      "nama_instruktur": "Muhammad Wiko Rialdi",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Pemeliharaan Gardu Distribusi, Penertiban Pemakaian Tenaga Listrik (P2TL), Pengaturan Transaksi Energi Listrik antar unit, Manajemen Distributed Energy Resource TM dan TR, Ren & Har AMI (Advance Metering System)",
-      "unit": "UID S2JB UP3 Muara Bungo"
-    },
-    {
-      "id": "caec589a-c7c3-4456-81f1-99d64d3f2f6a",
-      "nip": "-",
-      "nama_instruktur": "Hamdi Reza",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Manajemen Sistem Distribusi, Perencanaan Pola Operasi Distribusi, Operasi sistem Distribusi, Manajemen Distributed Energy Resource TM dan TR",
-      "unit": "UID Sumbar"
-    },
-    {
       "id": "c0faaea6-a0a2-4e1d-8b9b-d0878035a39e",
       "nip": "92161393ZY",
       "nama_instruktur": "Seno Pandu Ahmad",
       "status": "Instruktur Tetap",
-      "keahlian": "Power Simulation (PSS SINCAL)",
-      "unit": "PLN PUSDIKLAT"
+      "keahlian": null,
+      "unit": null
     },
     {
       "id": "3d8355d8-ae59-437e-8359-b4164e825b50",
       "nip": "8210004Z",
       "nama_instruktur": "Heru Purnomo",
       "status": "Instruktur Tidak Tetap",
-      "keahlian": "Enjineering Jaringan Distribusi, Konstruksi Jaringan Distribusi",
-      "unit": "PLN PUSDIKLAT"
-    },
-    {
-      "id": "bb3f37a3-eb2e-4b6b-9fcf-924ece48b4f5",
-      "nip": "-",
-      "nama_instruktur": "Amad Yuliyanto",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Enjineering Jaringan Distribusi, Konstruksi Jaringan Distribusi, Operasi sistem Distribusi, Operasi Gardu Distribusi, Pemeliharaan Gardu Distribusi",
-      "unit": "UID Lampung UP3 Metro"
-    },
-    {
-      "id": "72889de6-9923-46ca-9496-bb941e49730c",
-      "nip": "-",
-      "nama_instruktur": "Muhammad Aulia",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Evaluasi dan Pengendalian Kinerja Distribusi, Operasi sistem Distribusi, Operasi Gardu Distribusi, Operasi & pemeliharaan kubikel 20 kV, Pemeliharaan Gardu Distribusi",
-      "unit": "UID S2JB UP3 Muara Bungo"
-    },
-    {
-      "id": "b3289dcf-6583-48bb-831b-a6a5196af98e",
-      "nip": "-",
-      "nama_instruktur": "Rahmat Salim",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Enjineering Jaringan Distribusi, Konstruksi Jaringan Distribusi, Operasi sistem Distribusi, Operasi Gardu Distribusi, Pemeliharaan Gardu Distribusi",
-      "unit": "UID SSTB"
+      "keahlian": null,
+      "unit": null
     },
     {
       "id": "5738b914-3dcf-4785-b4e1-04998b561c04",
       "nip": "-",
       "nama_instruktur": "Deno Mitrananda",
-      "status": "Instruktur Tidak Tetap",
+      "status": "Instruktur Tetap",
       "keahlian": "Manajemen Distributed Energy Resource TM dan TR, Ren & Har ADMS (Advance Distribution Management System), Ren & Har AMI (Advance Metering System), Ren OP & Har Sistem Penyimpanan EV charging Station",
       "unit": "UID S2JB UP3 Lubuklinggau"
     },
     {
-      "id": "376df828-5b35-4e83-8500-558641b01b49",
-      "nip": "-",
-      "nama_instruktur": "Hafizh H. K.",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Konstruksi Jaringan Distribusi, Opi Jar Distribusi dengan scada & Non Scada, Ren & Har ADMS (Advance Distribution Management System)",
-      "unit": "UIW MMU"
+      "id": "127e9ec7-4334-4652-9051-0796a1853ac8",
+      "nip": ".",
+      "nama_instruktur": "Buyung Marth",
+      "status": "Instruktur Tetap",
+      "keahlian": "Operasi sistem Distribusi, Operasi Gardu Distribusi, Operasi & pemeliharaan kubikel 20, Pemeliharaan Gardu Distribusi",
+      "unit": "UID Jatim"
     },
     {
       "id": "e19fff23-ddff-41c7-acc8-1198f46fd2b7",
       "nip": "`",
       "nama_instruktur": "Gerry Septian Laba Wuwur",
-      "status": "Instruktur Tidak Tetap",
+      "status": "Instruktur Tetap",
       "keahlian": "Operasi sistem Distribusi, Operasi Gardu Distribusi, Pemeliharaan Gardu Distribusi, Manajemen Distributed Energy Resource TM dan TR",
       "unit": "UP3 Makasar Utara - UID SULSELRABAR"
-    },
-    {
-      "id": "135dbccf-a503-4b78-96cf-02a010fe5a2d",
-      "nip": "-",
-      "nama_instruktur": "Dodi Senantiaka",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Operasi & pemeliharan APP Pengukuran, Penertiban Pemakaian Tenaga Listrik (P2TL)",
-      "unit": "UID Jabar"
-    },
-    {
-      "id": "89491484-0bfc-4f78-ba43-0b87f871dc88",
-      "nip": "-",
-      "nama_instruktur": "Jaya Riadi Noor",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Pemeliharaan Gardu Distribusi, Pemeliharaan Jar dist dengan metode PDKB, ",
-      "unit": "UID KSKT"
     },
     {
       "id": "9c8ad895-fd2c-4b9e-af83-ee33c3de3735",
       "nip": "_",
       "nama_instruktur": "Misbakhul Fajri",
-      "status": "Instruktur Tidak Tetap",
+      "status": "Instruktur Tetap",
       "keahlian": "Operasi sistem Distribusi, Operasi Gardu Distribusi, Asesment & Diagnosa Jar. Distribusi, Evaluasi dan Pengendalian Kinerja Distribusi, Manajemen Sistem Distribusi, Perencanaan Pola Operasi Distribusi",
       "unit": "UID Jabar"
     },
@@ -174,257 +74,38 @@
       "id": "26aa61ad-13ea-49f5-bf0a-2cff6096c560",
       "nip": ",",
       "nama_instruktur": "Windra Jaya",
-      "status": "Instruktur Tidak Tetap",
+      "status": "Instruktur Tetap",
       "keahlian": "Operasi & pemeliharan APP Pengukuran, Penertiban Pemakaian Tenaga Listrik (P2TL)",
       "unit": "UID S2JB"
+    }
+  ],
+  "jadwal": [
+    {
+      "id": "4da4fa7e-6edc-4481-9804-47ff6aed4619",
+      "katalog_id": "3d8355d8-ae59-437e-8359-b4164e825b50",
+      "updl": "Jakarta",
+      "mata_pelajaran": "pembelajaran detail SUTR",
+      "tanggal_mulai": "2026-07-04T00:00:00.000Z",
+      "tanggal_selesai": "2026-07-08T00:00:00.000Z",
+      "jumlah_jp": 2
     },
     {
-      "id": "c168fbf9-da9f-4e6b-b671-494536025020",
-      "nip": "-",
-      "nama_instruktur": "Marjoko",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Evaluasi dan Pengendalian Kinerja Distribusi, Konstruksi Jaringan Distribusi, Operasi Gardu Distribusi, Pemeliharaan Gardu Distribusi",
-      "unit": "PLN ES UP1 Jabar"
+      "id": "be168656-ad41-4fa3-a39c-654af6243718",
+      "katalog_id": "3d8355d8-ae59-437e-8359-b4164e825b50",
+      "updl": "Bogor",
+      "mata_pelajaran": "pembelajaran detail SR",
+      "tanggal_mulai": "2026-07-12T00:00:00.000Z",
+      "tanggal_selesai": "2026-07-25T00:00:00.000Z",
+      "jumlah_jp": 3
     },
     {
-      "id": "81961b68-eaa8-4741-8246-8cee425aa708",
-      "nip": "-",
-      "nama_instruktur": "Roby Finata",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Manajemen Sistem Distribusi, Perencanaan Pola Operasi Distribusi, Operasi sistem Distribusi, Manajemen Distributed Energy Resource TM dan TR",
-      "unit": "UID S2JB - UP3 Muara Bungo"
-    },
-    {
-      "id": "555885dc-6548-4b99-8804-3b8a83a06a7d",
-      "nip": "-",
-      "nama_instruktur": "Djunda Afief Nugroho",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Asesment & Diagnosa Jar. Distribusi, Perencanaan Op & har Dist Scada & Non Scada, Enjineering Jaringan Distribusi, Operasi & pemeliharan APP Pengukuran, Pemeliharaan Gardu Distribusi, Pengaturan Transaksi Energi Listrik antar unit, Manajemen Distributed Energy Resource TM dan TR, Ren & Har ADMS (Advance Distribution Management System)",
-      "unit": "UID Kalbar"
-    },
-    {
-      "id": "cf4790af-95f3-4ffd-8aa6-210e42f22619",
-      "nip": "-",
-      "nama_instruktur": "Asyraf Hamdi",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Operasi sistem Distribusi, Opi Jar Distribusi dengan scada & Non Scada, Operasi & pemeliharaan kubikel 20 kV, Operasi & pemeliharan APP Pengukuran, Setting Koordinasi & Troubleshooting Sistem Proteksi Distribusi, Penertiban Pemakaian Tenaga Listrik (P2TL), Pengaturan Transaksi Energi Listrik antar unit, Manajemen Distributed Energy Resource TM dan TR",
-      "unit": "UID Sumbar"
-    },
-    {
-      "id": "3e6c407d-eeb1-4c56-b727-b08d313ee447",
-      "nip": "-",
-      "nama_instruktur": "Miftakhul Munir",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Evaluasi dan Pengendalian Kinerja Distribusi, Manajemen Sistem Distribusi, Konstruksi Jaringan Distribusi, Pemeliharaan Gardu Distribusi, Manajemen Distributed Energy Resource TM dan TR",
-      "unit": "UIW NTB"
-    },
-    {
-      "id": "127e9ec7-4334-4652-9051-0796a1853ac8",
-      "nip": "-",
-      "nama_instruktur": "Buyung Marth",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Operasi sistem Distribusi, Operasi Gardu Distribusi, Operasi & pemeliharaan kubikel 20, Pemeliharaan Gardu Distribusi",
-      "unit": "UID Jatim"
-    },
-    {
-      "id": "0a25d628-27b6-493a-bd3f-f7fe7079b71d",
-      "nip": "-",
-      "nama_instruktur": "Muhammad Hadi Putra",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Manajemen Distributed Energy Resource TM dan TR, Ren & Har ADMS (Advance Distribution Management System), Ren OP & Har Sistem Penyimpanan EV charging Station, Perencanaan Op & har Dist Scada & Non Scada, Perencanaan Pola Operasi Distribusi, Manajemen Sistem Distribusi",
-      "unit": "UID S2JB"
-    },
-    {
-      "id": "8dd1747a-75fe-4718-a7c4-998f63305101",
-      "nip": "-",
-      "nama_instruktur": "Hikmaturriza",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Konstruksi Jaringan Distribusi, Pemeliharaan Jar dist dengan metode PDKB",
-      "unit": "UID Sumut"
-    },
-    {
-      "id": "0d915e01-7e4c-4293-997b-5113ca69aa96",
-      "nip": "-",
-      "nama_instruktur": "Very Fernando",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Evaluasi dan Pengendalian Kinerja Distribusi, Manajemen Sistem Distribusi, Operasi sistem Distribusi, Pemeliharaan Gardu Distribusi, Manajemen Distributed Energy Resource TM dan TR",
-      "unit": "Kantor Pusat"
-    },
-    {
-      "id": "34c11493-871f-4dc9-a1f6-35a18963c2ac",
-      "nip": "-",
-      "nama_instruktur": "Suti'ah",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Evaluasi dan Pengendalian Kinerja Distribusi, Manajemen Sistem Distribusi, Enjineering Jaringan Distribusi, Operasi sistem Distribusi, Pengaturan Transaksi Energi Listrik antar unit, Manajemen Distributed Energy Resource TM dan TR, Ren & Har ADMS (Advance Distribution Management System), Ren & Har AMI (Advance Metering System), Ren OP & Har Sistem Penyimpanan EV charging Station",
-      "unit": "UID Jateng"
-    },
-    {
-      "id": "041c1478-a974-4a29-b5dd-5b2e77a79133",
-      "nip": "-",
-      "nama_instruktur": "Paris El Hakim",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Evaluasi dan Pengendalian Kinerja Distribusi, Manajemen Sistem Distribusi, Perencanaan Pola Operasi Distribusi, Opi Jar Distribusi dengan scada & Non Scada",
-      "unit": "Kantor Pusat"
-    },
-    {
-      "id": "72d5f2e4-a917-457d-8ba4-0dcf1ab7b13d",
-      "nip": "-",
-      "nama_instruktur": "Singgih Adi Prabowo",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Evaluasi dan Pengendalian Kinerja Distribusi, Konstruksi Jaringan Distribusi",
-      "unit": "UID Banten"
-    },
-    {
-      "id": "5222273a-0204-4969-af3d-14fdd3284d42",
-      "nip": "-",
-      "nama_instruktur": "Dany Wahyu Haryanto",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Evaluasi dan Pengendalian Kinerja Distribusi, Pemeliharaan Jar dist dengan metode PDKB",
-      "unit": "UID Jateng"
-    },
-    {
-      "id": "0b2da4f8-6ba9-43af-9a6a-00cffc3e4135",
-      "nip": "-",
-      "nama_instruktur": "Heru Santoso",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Pemeliharaan Gardu Distribusi, Pemeliharaan Jar dist dengan metode PDKB",
-      "unit": "UID KSKT"
-    },
-    {
-      "id": "21423823-7d4b-4350-a5b7-d8da54ca9b50",
-      "nip": "-",
-      "nama_instruktur": "Dwi Arya Yudha",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Perencanaan Op & har Dist Scada & Non Scada, Operasi sistem Distribusi, Opi Jar Distribusi dengan scada & Non Scada, Operasi & pemeliharaan kubikel 20 kV, Setting Koordinasi & Troubleshooting Sistem Proteksi Distribusi",
-      "unit": "UID Jakarta"
-    },
-    {
-      "id": "576a19b5-43e8-4ea3-bf37-38ff138fee4d",
-      "nip": "-",
-      "nama_instruktur": "Aziz Analukman",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Perencanaan Pola Operasi Distribusi, Enjineering Jaringan Distribusi, Konstruksi Jaringan Distribusi, Operasi sistem Distribusi, Operasi Gardu Distribusi, Operasi & pemeliharaan kubikel 20 kV, Pemeliharaan Gardu Distribusi, Pemeliharaan Jar dist dengan metode PDKB",
-      "unit": "UID Banten"
-    },
-    {
-      "id": "549c1857-a2dc-4a34-b4f5-db987eddd59c",
-      "nip": "-",
-      "nama_instruktur": "Rachmad Husin",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Asesment & Diagnosa Gardu Distribusi, Asesment & Diagnosa Jar. Distribusi, Evaluasi dan Pengendalian Kinerja Distribusi, Manajemen Sistem Distribusi, Perencanaan Pola Operasi Distribusi, Enjineering Jaringan Distribusi, Konstruksi Jaringan Distribusi, Operasi sistem Distribusi, Operasi Gardu Distribusi, Pemeliharaan Gardu Distribusi, Pemeliharaan Jar dist dengan metode PDKB, Penertiban Pemakaian Tenaga Listrik (P2TL)",
-      "unit": "UID S2JB"
-    },
-    {
-      "id": "3da138b6-1c51-4925-8290-9bf03a459840",
-      "nip": "-",
-      "nama_instruktur": "Fahmy Albar",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Evaluasi dan Pengendalian Kinerja Distribusi, Manajemen Sistem Distribusi, Perencanaan Pola Operasi Distribusi, Operasi sistem Distribusi, Opi Jar Distribusi dengan scada & Non Scada",
-      "unit": "UIW Babel"
-    },
-    {
-      "id": "d498d5a2-ba78-4ba1-8b0e-1ae0d55a4cc1",
-      "nip": "-",
-      "nama_instruktur": "Muhammad Fajar Maulana",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Asesment & Diagnosa Gardu Distribusi, Asesment & Diagnosa Jar. Distribusi, Enjineering Jaringan Distribusi, Konstruksi Jaringan Distribusi, Pemeliharaan Gardu Distribusi, Pemeliharaan Jar dist dengan metode PDKB",
-      "unit": "UID KSKT"
-    },
-    {
-      "id": "61a37334-8f9c-470d-bd12-30ed016d4194",
-      "nip": "-",
-      "nama_instruktur": "Anggra Ramadhana",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Operasi sistem Distribusi, Operasi Gardu Distribusi, Operasi & pemeliharaan kubikel 20 kV, Pemeliharaan Gardu Distribusi, Pemeliharaan Jar dist dengan metode PDKB",
-      "unit": "UID S2JB"
-    },
-    {
-      "id": "bbd824ea-7fac-4d5d-b76c-121d165ca16c",
-      "nip": "-",
-      "nama_instruktur": "Rizka S",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Konstruksi Jaringan Distribusi, Opi Jar Distribusi dengan scada & Non Scada, Operasi & pemeliharaan kubikel 20 kV",
-      "unit": "UID Jaya"
-    },
-    {
-      "id": "12b7d2d3-b5f5-4335-9a52-3ce58153d587",
-      "nip": "-",
-      "nama_instruktur": "Nalendra",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Evaluasi dan Pengendalian Kinerja Distribusi, Operasi & pemeliharaan kubikel 20 kV",
-      "unit": "Kantor Pusat"
-    },
-    {
-      "id": "806c242e-5fe5-4b5d-8f1a-a6da485b8dd9",
-      "nip": "-",
-      "nama_instruktur": "Irpan Nudin H",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Operasi Gardu Distribusi, Operasi & pemeliharan APP Pengukuran, Pemeliharaan Gardu Distribusi, Penertiban Pemakaian Tenaga Listrik (P2TL)",
-      "unit": "UID Jabar"
-    },
-    {
-      "id": "b1d19bd5-b398-4340-818d-f10c1b7bfc6a",
-      "nip": "-",
-      "nama_instruktur": "Febi Agus R",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Evaluasi dan Pengendalian Kinerja Distribusi, Manajemen Sistem Distribusi, Operasi sistem Distribusi, Operasi & pemeliharan APP Pengukuran, Ren & Har ADMS (Advance Distribution Management System)",
-      "unit": "UID Jateng"
-    },
-    {
-      "id": "45ced441-c662-4e4e-ac5d-e75ec4590247",
-      "nip": "-",
-      "nama_instruktur": "Wahyu Surya Adi Arto",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Perencanaan Op & har Dist Scada & Non Scada, Operasi sistem Distribusi, Opi Jar Distribusi dengan scada & Non Scada, Operasi & pemeliharaan kubikel 20 kV, Pemeliharaan Gardu Distribusi, Pemeliharaan Jar dist dengan metode PDKB, Penertiban Pemakaian Tenaga Listrik (P2TL)",
-      "unit": "UID Lampung"
-    },
-    {
-      "id": "a5024c2d-24c1-4cd6-a199-4325a4cb9c49",
-      "nip": "-",
-      "nama_instruktur": "I Putu Eka Widarma",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Operasi sistem Distribusi, Operasi Gardu Distribusi, Operasi & pemeliharaan kubikel 20 kV, Pemeliharaan Gardu Distribusi, Pemeliharaan Jar dist dengan metode PDKB, Penertiban Pemakaian Tenaga Listrik (P2TL)",
-      "unit": "UIW NTT"
-    },
-    {
-      "id": "8023519b-9475-40fa-95b2-240b4791a187",
-      "nip": "-",
-      "nama_instruktur": "Novi Aziz Ibrahim",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Perencanaan Pola Operasi Distribusi, Konstruksi Jaringan Distribusi, Operasi sistem Distribusi, Operasi Gardu Distribusi, Operasi & pemeliharaan kubikel 20 kV, Pemeliharaan Gardu Distribusi",
-      "unit": "UID Jabar"
-    },
-    {
-      "id": "c71a97ab-4d3a-4568-b5f7-8a4db11c997a",
-      "nip": "-",
-      "nama_instruktur": "Ide Rahmat Wijayatno",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Asesment & Diagnosa Jar. Distribusi, Evaluasi dan Pengendalian Kinerja Distribusi, Manajemen Sistem Distribusi, Perencanaan Pola Operasi Distribusi, Operasi sistem Distribusi, Operasi Gardu Distribusi",
-      "unit": "UID Jabar"
-    },
-    {
-      "id": "8a52cb59-bf96-4486-9a98-13c1285d16df",
-      "nip": "-",
-      "nama_instruktur": "Anggih Prasetya",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Operasi & pemeliharan APP Pengukuran, Penertiban Pemakaian Tenaga Listrik (P2TL), ",
-      "unit": "UID Sulselrabar"
-    },
-    {
-      "id": "5fa5e961-abb4-4665-b1c1-bfbf709bcf6e",
-      "nip": "-",
-      "nama_instruktur": "M Akbar Rifkie",
-      "status": "Instruktur Tetap",
-      "keahlian": "Evaluasi dan Pengendalian Kinerja Distribusi, Perencanaan Op & har Dist Scada & Non Scada, Enjineering Jaringan Distribusi, Manajemen Distributed Energy Resource TM dan TR, Ren & Har ADMS (Advance Distribution Management System), Ren & Har AMI (Advance Metering System), Ren OP & Har Sistem Penyimpanan EV charging Station",
-      "unit": "UID S2JB"
-    },
-    {
-      "id": "a41b45e6-9838-4386-a998-d37a6d6052a0",
-      "nip": "-",
-      "nama_instruktur": "Dede Sandi",
-      "status": "Instruktur Tidak Tetap",
-      "keahlian": "Enjineering Jaringan Distribusi, Konstruksi Jaringan Distribusi, Operasi sistem Distribusi, Operasi Gardu Distribusi, Operasi & pemeliharaan kubikel 20 kV, Operasi & pemeliharan APP Pengukuran, Pemeliharaan Gardu Distribusi, Penertiban Pemakaian Tenaga Listrik (P2TL)",
-      "unit": "UID Jabar"
+      "id": "88dd0f02-3747-49c6-b1ec-a54fe88b54b0",
+      "katalog_id": "3d8355d8-ae59-437e-8359-b4164e825b50",
+      "updl": "Makassar",
+      "mata_pelajaran": "pembelajaran detail SKUTR",
+      "tanggal_mulai": "2025-10-04T00:00:00.000Z",
+      "tanggal_selesai": "2025-12-24T00:00:00.000Z",
+      "jumlah_jp": 10
     }
   ]
 }

@@ -183,6 +183,7 @@ model Quiz {
   id          String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title       String
   code        String           @unique
+  is_active   Boolean          @default(false)
   created_at  DateTime         @default(now())
   questions   Question[]
   submissions QuizSubmission[]
@@ -191,12 +192,14 @@ model Quiz {
 }
 
 model Question {
-  id       String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  quiz_id  String           @db.Uuid
-  quiz     Quiz             @relation(fields: [quiz_id], references: [id], onDelete: Cascade)
-  type     String           // "PG", "CHECKBOX", "ESSAY"
-  text     String
-  options  QuestionOption[]
+  id         String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  quiz_id    String           @db.Uuid
+  quiz       Quiz             @relation(fields: [quiz_id], references: [id], onDelete: Cascade)
+  type       String           // "PG", "CHECKBOX", "ESSAY"
+  text       String
+  images     String[]         @default([]) // URL banyak gambar pendukung
+  time_limit Int              @default(20) // Durasi dalam detik
+  options    QuestionOption[]
 
   @@map("questions")
 }
@@ -236,7 +239,7 @@ model Listrikpedia {
 
 model KatalogInstruktur {
   id                  String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  nip                 String             @unique
+  nip                 String
   nama_instruktur     String
   status              String             @default("Instruktur Tetap") // Instruktur Tetap, Instruktur Tidak Tetap, Instruktur External
   keahlian            String?
@@ -261,11 +264,10 @@ model JadwalInstruktur {
   @@map("jadwal_instruktur")
 }
 
+model BackgroundImage {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  file       String
+  created_at DateTime @default(now())
 
-model Background {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  file      String
-  createdAt DateTime @default(now())
-
-  @@map("backgrounds")
+  @@map("background_images")
 }
