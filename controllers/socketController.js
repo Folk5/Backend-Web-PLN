@@ -3,6 +3,8 @@ const prisma = require('../config/db');
 
 // In-memory state for active quizzes
 const activeQuizzes = {};
+// In-memory state for active polls (Jajak Pendapat)
+const activePolls = {};
 
 module.exports = (io) => {
   io.on('connection', (socket) => {
@@ -94,6 +96,18 @@ module.exports = (io) => {
       }
     });
 
+    socket.on('host-request-tally', (data) => {
+      const { code } = data;
+      const quizCode = code.toUpperCase();
+      const session = activeQuizzes[quizCode];
+      if (session && session.hostSocketId === socket.id) {
+        io.to(socket.id).emit('answer-tally', {
+           tallies: session.currentQuestionTallies || {},
+           totalAnswers: session.answersReceived || 0
+        });
+      }
+    });
+
     // --- PLAYER EVENTS ---
     socket.on('player-join', (data) => {
       const { code, name } = data;
@@ -126,11 +140,19 @@ module.exports = (io) => {
     });
 
     socket.on('player-score-update', (data) => {
-      const { code, points } = data;
+      const { code, points, chosenOptionIndices } = data;
       const quizCode = code.toUpperCase();
       const session = activeQuizzes[quizCode];
       
       if (session) {
+        if (!session.currentQuestionTallies) {
+           session.currentQuestionTallies = {};
+        }
+        if (chosenOptionIndices && Array.isArray(chosenOptionIndices)) {
+           chosenOptionIndices.forEach(idx => {
+             session.currentQuestionTallies[idx] = (session.currentQuestionTallies[idx] || 0) + 1;
+           });
+        }
         const p = session.participants.find(x => x.socketId === socket.id);
         if (p) {
           p.score += points;
@@ -144,12 +166,88 @@ module.exports = (io) => {
       }
     });
 
+    // --- POLL (JAJAK PENDAPAT) EVENTS ---
+    socket.on('poll-host-create', (data) => {
+      const { code, title, time } = data;
+      const pollCode = code.toUpperCase();
+      
+      socket.join(pollCode);
+      activePolls[pollCode] = {
+        hostSocketId: socket.id,
+        title: title,
+        time: time,
+        state: 'LOBBY',
+        participantsCount: 0,
+        words: []
+      };
+    });
+
+    socket.on('poll-player-join', (data) => {
+      const { code } = data;
+      const pollCode = code.toUpperCase();
+      const session = activePolls[pollCode];
+      
+      if (!session) {
+        socket.emit('poll-join-error', 'Sesi Jajak Pendapat tidak ditemukan.');
+        return;
+      }
+      if (session.state !== 'LOBBY') {
+        socket.emit('poll-join-error', 'Sesi Jajak Pendapat sudah berjalan, tidak bisa bergabung.');
+        return;
+      }
+
+      session.participantsCount++;
+      socket.join(pollCode);
+      io.to(session.hostSocketId).emit('poll-player-joined', session.participantsCount);
+    });
+
+    socket.on('poll-start', (data) => {
+      const { code } = data;
+      const pollCode = code.toUpperCase();
+      const session = activePolls[pollCode];
+      
+      if (session && session.hostSocketId === socket.id) {
+        session.state = 'LIVE';
+        // Memberi tahu semua klien di room (kecuali host) bahwa polling dimulai
+        socket.to(pollCode).emit('poll-started', { title: session.title });
+      }
+    });
+
+    socket.on('poll-submit-answer', (data) => {
+      const { code, words } = data;
+      const pollCode = code.toUpperCase();
+      const session = activePolls[pollCode];
+      
+      if (session && session.state === 'LIVE') {
+        if (Array.isArray(words)) {
+          session.words.push(...words);
+          io.to(pollCode).emit('poll-live-update', { newWords: words });
+        }
+      }
+    });
+
+    socket.on('poll-end', (data) => {
+      const { code } = data;
+      const pollCode = code.toUpperCase();
+      const session = activePolls[pollCode];
+      
+      if (session && session.hostSocketId === socket.id) {
+        session.state = 'FINISHED';
+        io.to(session.hostSocketId).emit('poll-results', {
+          words: session.words,
+          participantsCount: session.participantsCount
+        });
+        socket.to(pollCode).emit('poll-results-shown');
+      }
+    });
+
   });
 
   function sendQuestionToPlayers(quizCode) {
     const session = activeQuizzes[quizCode];
     if(!session) return;
     session.answersReceived = 0;
+    session.currentQuestionTallies = {};
     const q = session.questions[session.currentQuestionIndex];
     io.to(quizCode).emit('new-question', {
       questionIndex: session.currentQuestionIndex,
