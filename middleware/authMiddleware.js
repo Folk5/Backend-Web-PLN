@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const requireAuth = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
+    console.log(`[authMiddleware] URL: ${req.originalUrl} | AuthHeader: ${authHeader}`);
 
     // Cek apakah request memiliki Header Authorization dengan awalan Bearer
     if (!authHeader || !authHeader.startsWith('Bearer ')) {

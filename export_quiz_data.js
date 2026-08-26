@@ -1,3 +1,4 @@
+require('dotenv').config();
 const prisma = require('./config/db');
 const fs = require('fs');
 

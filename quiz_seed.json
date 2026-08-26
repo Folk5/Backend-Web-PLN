@@ -1,9 +1,1415 @@
 [
   {
+    "id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+    "title": "INDONESIA MERDEKA!!!",
+    "code": "P82BZ1",
+    "is_active": true,
+    "created_at": "2026-08-06T08:21:58.555Z",
+    "questions": [
+      {
+        "id": "4e6cfa89-5f88-4e74-a662-6a0df9dc6712",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Siapakah yang membacakan teks Proklamasi Kemerdekaan Indonesia?",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "4ea14a29-4958-43ec-91dd-02ebb64c2966",
+            "question_id": "4e6cfa89-5f88-4e74-a662-6a0df9dc6712",
+            "text": "Mohammad Hatta",
+            "is_correct": false
+          },
+          {
+            "id": "7bcacb6c-9d53-4bcb-9c14-39a9e268cf06",
+            "question_id": "4e6cfa89-5f88-4e74-a662-6a0df9dc6712",
+            "text": "Soekarno",
+            "is_correct": true
+          },
+          {
+            "id": "116831cc-1962-440c-ad12-d70991c15032",
+            "question_id": "4e6cfa89-5f88-4e74-a662-6a0df9dc6712",
+            "text": "Ahmad Soebardjo",
+            "is_correct": false
+          },
+          {
+            "id": "b09d4f08-31b8-4b7b-af1d-a2f1d579f516",
+            "question_id": "4e6cfa89-5f88-4e74-a662-6a0df9dc6712",
+            "text": "Jenderal Sudirman",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "2785e53e-4e89-4923-93ac-d9c0a9b0465b",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "CHECKBOX",
+        "text": "Pilih SEMUA lomba yang identik dengan perayaan 17 Agustus!",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "213ec65f-6823-4812-b058-b6c3835b45b4",
+            "question_id": "2785e53e-4e89-4923-93ac-d9c0a9b0465b",
+            "text": "Balap karung",
+            "is_correct": true
+          },
+          {
+            "id": "180e0000-6a41-4521-b706-2211629a9349",
+            "question_id": "2785e53e-4e89-4923-93ac-d9c0a9b0465b",
+            "text": "Panjat pinang",
+            "is_correct": true
+          },
+          {
+            "id": "6b2d75c8-df03-4d0a-80b5-99583203f93e",
+            "question_id": "2785e53e-4e89-4923-93ac-d9c0a9b0465b",
+            "text": "Makan kerupuk",
+            "is_correct": true
+          },
+          {
+            "id": "05c7f071-7ac0-4adb-a072-0d4aae34eb59",
+            "question_id": "2785e53e-4e89-4923-93ac-d9c0a9b0465b",
+            "text": "Formula 1",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "722ad109-d9f9-4f82-89fa-76a7ed635d3e",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "siapa nama pahlawan peta yang tidak diketahui keberadaannya sampai saat ini",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "7c3c18be-a753-4838-bcf2-7d698d3e1f41",
+            "question_id": "722ad109-d9f9-4f82-89fa-76a7ed635d3e",
+            "text": "Yongky",
+            "is_correct": false
+          },
+          {
+            "id": "ea06c905-11d6-4bec-a24a-9e4c38701024",
+            "question_id": "722ad109-d9f9-4f82-89fa-76a7ed635d3e",
+            "text": "Supriyadi",
+            "is_correct": true
+          },
+          {
+            "id": "a4378d6b-fa9a-478e-aef3-c531a663df0f",
+            "question_id": "722ad109-d9f9-4f82-89fa-76a7ed635d3e",
+            "text": "Supri",
+            "is_correct": false
+          },
+          {
+            "id": "36985d03-62fb-4cf7-bfd3-122703d98c54",
+            "question_id": "722ad109-d9f9-4f82-89fa-76a7ed635d3e",
+            "text": "Kopral Jono",
+            "is_correct": false
+          },
+          {
+            "id": "9061ec3a-2e4e-44c7-8976-36d087e3d1a8",
+            "question_id": "722ad109-d9f9-4f82-89fa-76a7ed635d3e",
+            "text": "Bang Jalu",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "737a78b3-3e44-4ac8-b8a9-4630433ee805",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Kalau ikut lomba balap karung terus jatuh sebelum start, siapa yang menang?",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "e8b14d87-3782-44aa-b293-2c02fc824f24",
+            "question_id": "737a78b3-3e44-4ac8-b8a9-4630433ee805",
+            "text": "Wasit",
+            "is_correct": false
+          },
+          {
+            "id": "811ee477-26ca-4b9a-b473-1911bd82ec6d",
+            "question_id": "737a78b3-3e44-4ac8-b8a9-4630433ee805",
+            "text": "Penonton",
+            "is_correct": false
+          },
+          {
+            "id": "c8a2d4e6-b95b-4ec4-8b2e-9a5b67269b26",
+            "question_id": "737a78b3-3e44-4ac8-b8a9-4630433ee805",
+            "text": "Belum ada yang menang",
+            "is_correct": true
+          },
+          {
+            "id": "0b5403dc-ea13-4a4c-93b1-8b3e6a5316a8",
+            "question_id": "737a78b3-3e44-4ac8-b8a9-4630433ee805",
+            "text": "Karungnya",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "89d3f90c-8b32-421a-8e3c-f67df9654796",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Upacara bendera biasanya dimulai dengan mengibarkan",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "71d70af4-825c-4896-ae89-b195ec20fa0f",
+            "question_id": "89d3f90c-8b32-421a-8e3c-f67df9654796",
+            "text": "Bendera Merah Putih",
+            "is_correct": true
+          },
+          {
+            "id": "b294f7ed-c018-4162-afd0-b6cd6620ef91",
+            "question_id": "89d3f90c-8b32-421a-8e3c-f67df9654796",
+            "text": "Bendera ASEAN",
+            "is_correct": false
+          },
+          {
+            "id": "d810b6db-39c0-465c-825d-5ff0612d2c47",
+            "question_id": "89d3f90c-8b32-421a-8e3c-f67df9654796",
+            "text": "Bendera Pramuka",
+            "is_correct": false
+          },
+          {
+            "id": "4cbd3cb9-db90-4f2a-9fd0-60ce9cd1c06a",
+            "question_id": "89d3f90c-8b32-421a-8e3c-f67df9654796",
+            "text": "Bendera Sekolah",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "f7e81314-9823-49ca-82b2-e8a9f1604ce4",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Apa semboyan negara Indonesia?",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "186892c6-5916-47f1-ba4a-4aad06d8b6a7",
+            "question_id": "f7e81314-9823-49ca-82b2-e8a9f1604ce4",
+            "text": "Tut Wuri Handayani",
+            "is_correct": false
+          },
+          {
+            "id": "5a076910-b7cb-4e53-b809-fe16246410f8",
+            "question_id": "f7e81314-9823-49ca-82b2-e8a9f1604ce4",
+            "text": "Bhinneka Tunggal Ika",
+            "is_correct": true
+          },
+          {
+            "id": "f2a9e7ba-704a-42e3-b4f4-18d00f6e901e",
+            "question_id": "f7e81314-9823-49ca-82b2-e8a9f1604ce4",
+            "text": "Indonesia Raya",
+            "is_correct": false
+          },
+          {
+            "id": "52e4e91e-8910-49c7-ae7a-05dc842c0f7f",
+            "question_id": "f7e81314-9823-49ca-82b2-e8a9f1604ce4",
+            "text": "Garuda Perkasa",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "02f90aea-e0b1-4bff-912b-205dc3e4a84b",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Siapa wakil yang mendampingi Soekarno saat Proklamasi?",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "3d1c6df5-ddd0-47bb-b6ed-b2021c7053de",
+            "question_id": "02f90aea-e0b1-4bff-912b-205dc3e4a84b",
+            "text": "Ki Hajar Dewantara",
+            "is_correct": false
+          },
+          {
+            "id": "245e511d-6ae9-41e8-b605-a4df093617ee",
+            "question_id": "02f90aea-e0b1-4bff-912b-205dc3e4a84b",
+            "text": "Mohammad Hatta",
+            "is_correct": true
+          },
+          {
+            "id": "2d1cb631-a79f-42d4-9ced-d20dbd2d1d22",
+            "question_id": "02f90aea-e0b1-4bff-912b-205dc3e4a84b",
+            "text": "Bung Tomo",
+            "is_correct": false
+          },
+          {
+            "id": "c5cb048b-00d8-461b-afe3-51eeb52668b7",
+            "question_id": "02f90aea-e0b1-4bff-912b-205dc3e4a84b",
+            "text": "Sutan Sjahrir",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "365f2d2a-9de1-4826-971c-fadd569e1a33",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Kalau makan kerupuk pakai sambal saat lomba makan kerupuk, kemungkinan yang terjadi adalah",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "f712817d-13f8-4506-a143-99155bc5dd75",
+            "question_id": "365f2d2a-9de1-4826-971c-fadd569e1a33",
+            "text": "Jadi lebih cepat",
+            "is_correct": false
+          },
+          {
+            "id": "c00b3ee3-1684-4060-889a-129c8bd72642",
+            "question_id": "365f2d2a-9de1-4826-971c-fadd569e1a33",
+            "text": "Susah makan karena kepedesan",
+            "is_correct": true
+          },
+          {
+            "id": "3c1497da-e0f3-428c-8a9c-bfbc0617b96c",
+            "question_id": "365f2d2a-9de1-4826-971c-fadd569e1a33",
+            "text": "Kerupuk berubah jadi nasi",
+            "is_correct": false
+          },
+          {
+            "id": "833a2ce5-cea4-444e-bfae-af8d46ffd3cc",
+            "question_id": "365f2d2a-9de1-4826-971c-fadd569e1a33",
+            "text": "Langsung juara",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "f64bb8f0-86e6-482a-9985-7b06502f635a",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Lagu kebangsaan Indonesia berjudul",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "3094274c-b49e-400d-9b32-1819e9ce1f3b",
+            "question_id": "f64bb8f0-86e6-482a-9985-7b06502f635a",
+            "text": "Indonesia Pusaka",
+            "is_correct": false
+          },
+          {
+            "id": "397f16fe-cba8-44e2-8c6f-9267a211eb29",
+            "question_id": "f64bb8f0-86e6-482a-9985-7b06502f635a",
+            "text": "Garuda Pancasila",
+            "is_correct": false
+          },
+          {
+            "id": "eb9e1d4b-effd-455f-905c-410bcfaf7385",
+            "question_id": "f64bb8f0-86e6-482a-9985-7b06502f635a",
+            "text": "Bangun Pemudi Pemuda",
+            "is_correct": false
+          },
+          {
+            "id": "171b23cd-5c90-47c4-b1f5-220395187d86",
+            "question_id": "f64bb8f0-86e6-482a-9985-7b06502f635a",
+            "text": "Indonesia Raya",
+            "is_correct": true
+          }
+        ]
+      },
+      {
+        "id": "28c01ecf-d90d-41e4-bb43-bbc1cdeb3176",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "CHECKBOX",
+        "text": "Pilih SEMUA yang biasanya ada saat upacara 17 Agustus!",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "fd4bd09f-f238-42f2-b3ac-2fbba5e0e2d0",
+            "question_id": "28c01ecf-d90d-41e4-bb43-bbc1cdeb3176",
+            "text": "Pengibaran bendera",
+            "is_correct": true
+          },
+          {
+            "id": "688cadec-b010-4983-bbfb-4c40633e650d",
+            "question_id": "28c01ecf-d90d-41e4-bb43-bbc1cdeb3176",
+            "text": "Pembacaan teks Pancasila",
+            "is_correct": true
+          },
+          {
+            "id": "1fe9f8d2-2c8d-46bf-aadb-8d499518dda5",
+            "question_id": "28c01ecf-d90d-41e4-bb43-bbc1cdeb3176",
+            "text": "Konser K-Pop",
+            "is_correct": false
+          },
+          {
+            "id": "bf3d8b5a-e187-4f0d-b086-cd27e19cadc3",
+            "question_id": "28c01ecf-d90d-41e4-bb43-bbc1cdeb3176",
+            "text": "Menyanyikan Indonesia Raya",
+            "is_correct": true
+          }
+        ]
+      },
+      {
+        "id": "b081fc29-55eb-49f8-9889-9fdd8b91ef71",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Tahun ini (2026), Indonesia memperingati hari kemerdekaan yang ke",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "a83cd8c6-2849-477d-a8f8-b7363152a3ff",
+            "question_id": "b081fc29-55eb-49f8-9889-9fdd8b91ef71",
+            "text": "79 - 2",
+            "is_correct": false
+          },
+          {
+            "id": "41428c35-c502-44a5-89a3-11ecbd0505eb",
+            "question_id": "b081fc29-55eb-49f8-9889-9fdd8b91ef71",
+            "text": "80 + 3",
+            "is_correct": false
+          },
+          {
+            "id": "f6e973e7-fd64-4d10-91c7-07c8f81f1ad9",
+            "question_id": "b081fc29-55eb-49f8-9889-9fdd8b91ef71",
+            "text": "81 - 0",
+            "is_correct": true
+          },
+          {
+            "id": "842915cf-8fc5-4b33-b7de-9aa4274e8e7d",
+            "question_id": "b081fc29-55eb-49f8-9889-9fdd8b91ef71",
+            "text": "82 x 1",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "786f233f-97f3-40d3-a79d-cef0241c0b7e",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Kalau lomba tarik tambang tapi semua peserta satu tim narik ke arah yang sama, apa yang terjadi?",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "a5fda4a1-671c-4ba5-ab7e-9e387c07814b",
+            "question_id": "786f233f-97f3-40d3-a79d-cef0241c0b7e",
+            "text": "Talinya bingung",
+            "is_correct": false
+          },
+          {
+            "id": "1cb28b57-dd0c-4d3e-9ad7-f6c89c8726bd",
+            "question_id": "786f233f-97f3-40d3-a79d-cef0241c0b7e",
+            "text": "Tidak ada yang menang karena tidak ada lawan",
+            "is_correct": true
+          },
+          {
+            "id": "e827675d-cc75-4710-b931-898f7b65b805",
+            "question_id": "786f233f-97f3-40d3-a79d-cef0241c0b7e",
+            "text": "Tambangnya putus sendiri",
+            "is_correct": false
+          },
+          {
+            "id": "3a53a6d7-7d34-42da-81a4-1970b73c5da9",
+            "question_id": "786f233f-97f3-40d3-a79d-cef0241c0b7e",
+            "text": "Wasit ikut narik",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "6bba37a8-c463-46d1-8824-930df14d62b8",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "CHECKBOX",
+        "text": "Pilih SEMUA jumlah bulu Garuda Pancasila yang benar!",
+        "images": [],
+        "time_limit": 30,
+        "options": [
+          {
+            "id": "d0fbaae5-7248-4a25-b3a9-dba315d9cf55",
+            "question_id": "6bba37a8-c463-46d1-8824-930df14d62b8",
+            "text": "Sayap = 17 helai",
+            "is_correct": true
+          },
+          {
+            "id": "ccc248d8-31a1-43d8-89b1-a9d46ae61e36",
+            "question_id": "6bba37a8-c463-46d1-8824-930df14d62b8",
+            "text": "Kuping = 3",
+            "is_correct": false
+          },
+          {
+            "id": "018d939b-e4c1-473d-89df-8456e713592b",
+            "question_id": "6bba37a8-c463-46d1-8824-930df14d62b8",
+            "text": "Pangkal ekor = 19 helai",
+            "is_correct": true
+          },
+          {
+            "id": "663fa8d2-e64d-4678-82a4-8a02db383817",
+            "question_id": "6bba37a8-c463-46d1-8824-930df14d62b8",
+            "text": "Jari kaki = 10",
+            "is_correct": false
+          },
+          {
+            "id": "0c2d6829-e338-4c7c-b7da-bdb3d282b1aa",
+            "question_id": "6bba37a8-c463-46d1-8824-930df14d62b8",
+            "text": "Ekor = 8 helai",
+            "is_correct": true
+          }
+        ]
+      },
+      {
+        "id": "86634adf-46ad-42c2-a93f-6ccf1cca4d10",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Apa nama BPUPKI dalam bahasa Jepang?",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "4c43434e-7bb1-4895-99d6-febf06bd26f2",
+            "question_id": "86634adf-46ad-42c2-a93f-6ccf1cca4d10",
+            "text": "Arigatou Gozaimasu",
+            "is_correct": false
+          },
+          {
+            "id": "c8c03cf1-4a7f-4e25-93cf-6c94e9815829",
+            "question_id": "86634adf-46ad-42c2-a93f-6ccf1cca4d10",
+            "text": "Salmon Sashimi",
+            "is_correct": false
+          },
+          {
+            "id": "8ba92934-ca82-4165-90e6-1a797895cefb",
+            "question_id": "86634adf-46ad-42c2-a93f-6ccf1cca4d10",
+            "text": "Dokuritsu Junbi Chōsakai",
+            "is_correct": true
+          },
+          {
+            "id": "e3639e42-53f2-4d7c-83a1-21694a49d634",
+            "question_id": "86634adf-46ad-42c2-a93f-6ccf1cca4d10",
+            "text": "Marugame Udon",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "1079ad4d-0989-48fe-8b18-448df5d42926",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "BPUPKI dibentuk oleh pemerintah Jepang pada tahun",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "1d42a225-e78f-4fca-b802-6518d4c85c30",
+            "question_id": "1079ad4d-0989-48fe-8b18-448df5d42926",
+            "text": "1594",
+            "is_correct": false
+          },
+          {
+            "id": "1e968f67-f30f-492c-b44d-d6f2b21dd7ac",
+            "question_id": "1079ad4d-0989-48fe-8b18-448df5d42926",
+            "text": "5419",
+            "is_correct": false
+          },
+          {
+            "id": "1c5670b4-a437-4347-8bdf-96aa9d04c948",
+            "question_id": "1079ad4d-0989-48fe-8b18-448df5d42926",
+            "text": "1954",
+            "is_correct": false
+          },
+          {
+            "id": "7580b9f3-679b-41a5-9e1c-e509fa2c3f97",
+            "question_id": "1079ad4d-0989-48fe-8b18-448df5d42926",
+            "text": "1945",
+            "is_correct": true
+          }
+        ]
+      }
+    ],
+    "submissions": [
+      {
+        "id": "265b9d90-7022-438b-b796-da03c6e183b7",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "test",
+        "score": 7978,
+        "created_at": "2026-08-06T08:24:50.759Z"
+      },
+      {
+        "id": "9d79af1f-01c3-4c31-b954-a4e0737331d6",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "kucing",
+        "score": 2439,
+        "created_at": "2026-08-07T03:26:25.868Z"
+      },
+      {
+        "id": "9003ac81-a903-484b-b4b6-874ceb3283bb",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "fsisifVzksit",
+        "score": 5090,
+        "created_at": "2026-08-07T03:41:43.609Z"
+      },
+      {
+        "id": "643183bb-0145-4eae-9cda-b0dd5d825729",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "okjbfdrtyui",
+        "score": 5180,
+        "created_at": "2026-08-07T03:41:43.609Z"
+      },
+      {
+        "id": "91d72215-f236-4986-a255-531d1f157691",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "tumbal",
+        "score": 653,
+        "created_at": "2026-08-07T03:56:00.302Z"
+      },
+      {
+        "id": "5d7fe5f4-548b-431a-abfc-174aa8227c17",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "a",
+        "score": 1258,
+        "created_at": "2026-08-07T03:56:00.302Z"
+      },
+      {
+        "id": "5f464cdd-2ad8-4f1e-a0f8-bc545939aa45",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "b",
+        "score": 1157,
+        "created_at": "2026-08-07T03:56:00.302Z"
+      },
+      {
+        "id": "9c751cea-cc7a-4853-aa12-41d37bbb1b21",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "c",
+        "score": 1529,
+        "created_at": "2026-08-07T03:56:00.302Z"
+      },
+      {
+        "id": "1b6567db-7f31-489b-9ced-428df1473001",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "tumbal",
+        "score": 487,
+        "created_at": "2026-08-07T04:00:02.826Z"
+      },
+      {
+        "id": "f145bf2d-0784-4f23-8086-bee618b97969",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "qwe",
+        "score": 1124,
+        "created_at": "2026-08-07T04:00:02.826Z"
+      },
+      {
+        "id": "d5474c63-8c95-4890-8fb4-1a4a55abe2be",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "asd",
+        "score": 1004,
+        "created_at": "2026-08-07T04:00:02.826Z"
+      },
+      {
+        "id": "3aed6610-edb4-4c9d-bce8-78e5320e6281",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "zxc",
+        "score": 824,
+        "created_at": "2026-08-07T04:00:02.826Z"
+      },
+      {
+        "id": "cdd0ae1d-201d-49ab-80b4-656cce3e038c",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "sdfghjkl",
+        "score": 1591,
+        "created_at": "2026-08-07T08:57:34.737Z"
+      },
+      {
+        "id": "822f5685-7ef7-4de2-aaed-c0efcf6e6f55",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "bolodw",
+        "score": 2135,
+        "created_at": "2026-08-10T06:29:40.356Z"
+      },
+      {
+        "id": "8455f29d-a2e0-402c-bf2f-9cbe48e038c5",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "hfgbdvs",
+        "score": 36,
+        "created_at": "2026-08-10T09:02:46.414Z"
+      },
+      {
+        "id": "9ec88174-ff57-4ae5-919c-861204e578f8",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "rghfd",
+        "score": 0,
+        "created_at": "2026-08-10T09:02:46.414Z"
+      },
+      {
+        "id": "58c07856-46b7-4994-ae49-d4eff4c62940",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "rhteasdv",
+        "score": 215,
+        "created_at": "2026-08-10T09:02:46.414Z"
+      },
+      {
+        "id": "9e8b4325-2e5e-4d2f-8503-9bf4ef023cc8",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "edc",
+        "score": 1034,
+        "created_at": "2026-08-10T09:02:46.414Z"
+      },
+      {
+        "id": "c23cf6e3-7436-4cb2-95c1-af252901657f",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "esdfs",
+        "score": 629,
+        "created_at": "2026-08-10T09:02:46.414Z"
+      },
+      {
+        "id": "b8ca3b9b-0bd0-4067-8d63-65c685671cca",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "grsfd",
+        "score": 831,
+        "created_at": "2026-08-10T09:02:46.414Z"
+      }
+    ]
+  },
+  {
+    "id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+    "title": "bener salah pg aja",
+    "code": "E8E6G7",
+    "is_active": true,
+    "created_at": "2026-08-07T07:22:15.031Z",
+    "questions": [
+      {
+        "id": "42eded02-2e3c-4f71-9a4a-d7b580df193b",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "type": "PG",
+        "text": ".",
+        "images": [],
+        "time_limit": 30,
+        "options": [
+          {
+            "id": "af3cf9a1-9042-4044-8dfa-1254dfd704e8",
+            "question_id": "42eded02-2e3c-4f71-9a4a-d7b580df193b",
+            "text": "bener",
+            "is_correct": true
+          },
+          {
+            "id": "f9dd056e-762f-44e0-9321-05c96c680030",
+            "question_id": "42eded02-2e3c-4f71-9a4a-d7b580df193b",
+            "text": "salah",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "bfcbdaba-9d81-46e0-af97-c13b44aa705a",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "type": "CHECKBOX",
+        "text": ".",
+        "images": [],
+        "time_limit": 30,
+        "options": [
+          {
+            "id": "ea6d1379-5179-4bfd-abe3-34a613789489",
+            "question_id": "bfcbdaba-9d81-46e0-af97-c13b44aa705a",
+            "text": "bener",
+            "is_correct": true
+          },
+          {
+            "id": "2ed43578-3eaf-4e63-8a80-c20bf1e55793",
+            "question_id": "bfcbdaba-9d81-46e0-af97-c13b44aa705a",
+            "text": "bener",
+            "is_correct": true
+          },
+          {
+            "id": "11f92c3e-5891-45e9-b104-9ff07faa7150",
+            "question_id": "bfcbdaba-9d81-46e0-af97-c13b44aa705a",
+            "text": "salah",
+            "is_correct": false
+          }
+        ]
+      }
+    ],
+    "submissions": [
+      {
+        "id": "ddfb6860-0733-44fa-8f42-982b81fa6181",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "a",
+        "score": 3500,
+        "created_at": "2026-08-07T07:23:44.976Z"
+      },
+      {
+        "id": "65bb50dc-c02e-4f17-bc4c-b6a9544ccd7a",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "b",
+        "score": 3800,
+        "created_at": "2026-08-07T07:23:44.976Z"
+      },
+      {
+        "id": "b9e6d0a1-f727-478b-9c2f-2601b66dc332",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "c",
+        "score": 3950,
+        "created_at": "2026-08-07T07:23:44.976Z"
+      },
+      {
+        "id": "8c91dfce-d1cf-4d13-90c5-4ea75f8467c2",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "d",
+        "score": 4100,
+        "created_at": "2026-08-07T07:23:44.976Z"
+      },
+      {
+        "id": "8f6507a7-475d-467f-b924-677c4cad16a1",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4400,
+        "created_at": "2026-08-07T07:23:44.976Z"
+      },
+      {
+        "id": "043985d2-d969-4fe2-9660-c8fa661b7842",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "a",
+        "score": 4550,
+        "created_at": "2026-08-07T07:40:33.729Z"
+      },
+      {
+        "id": "8c21ff97-9449-4abd-abf5-de5f063d89f8",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "b",
+        "score": 4400,
+        "created_at": "2026-08-07T07:40:33.729Z"
+      },
+      {
+        "id": "457fda82-715a-4701-adaa-557f283548f4",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "c",
+        "score": 4250,
+        "created_at": "2026-08-07T07:40:33.729Z"
+      },
+      {
+        "id": "cf0a1130-aa95-4e55-8b68-4623f5a216e9",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "d",
+        "score": 4100,
+        "created_at": "2026-08-07T07:40:33.729Z"
+      },
+      {
+        "id": "1f29c4e2-7e06-4e22-bb60-2982345cc138",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 3800,
+        "created_at": "2026-08-07T07:40:33.729Z"
+      },
+      {
+        "id": "25c42798-c5b5-4760-8130-978b73976a71",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "a",
+        "score": 4400,
+        "created_at": "2026-08-07T07:45:34.938Z"
+      },
+      {
+        "id": "c6c897ad-feef-4046-a7ca-d4b3a8c7e209",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "b",
+        "score": 4250,
+        "created_at": "2026-08-07T07:45:34.938Z"
+      },
+      {
+        "id": "2287390b-25f5-462b-9baf-5df1efabf96b",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "c",
+        "score": 3800,
+        "created_at": "2026-08-07T07:45:34.938Z"
+      },
+      {
+        "id": "94e09ab3-1245-4ee8-b00f-f7bc26456699",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "d",
+        "score": 3950,
+        "created_at": "2026-08-07T07:45:34.938Z"
+      },
+      {
+        "id": "6b1d37cc-aee6-441f-936b-975cdb9865ec",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4700,
+        "created_at": "2026-08-07T07:45:34.938Z"
+      },
+      {
+        "id": "a216c893-15d3-4eea-b01e-499897573dce",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "a",
+        "score": 4250,
+        "created_at": "2026-08-07T07:46:59.117Z"
+      },
+      {
+        "id": "6deae94c-99d6-4f4b-9c70-ef69fa324f78",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "z",
+        "score": 4700,
+        "created_at": "2026-08-07T07:46:59.117Z"
+      },
+      {
+        "id": "d7e01825-35e2-4564-84e0-0836fb15628f",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4550,
+        "created_at": "2026-08-07T07:46:59.117Z"
+      },
+      {
+        "id": "645a7a23-3a8c-442e-a85e-23a93e799412",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 4400,
+        "created_at": "2026-08-07T07:46:59.117Z"
+      },
+      {
+        "id": "bc92a1e5-aa9a-4aec-ab88-d156709c5de1",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "s",
+        "score": 4850,
+        "created_at": "2026-08-07T07:46:59.117Z"
+      },
+      {
+        "id": "898ae1af-f0a4-4a04-84cf-7d9326923ea0",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "a",
+        "score": 4700,
+        "created_at": "2026-08-07T07:49:03.685Z"
+      },
+      {
+        "id": "26f08ab7-4e1a-4d37-a2c1-4e6c0df7e65a",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "s",
+        "score": 4700,
+        "created_at": "2026-08-07T07:49:03.685Z"
+      },
+      {
+        "id": "31632a37-1f41-4c21-99bd-0d6f97312a1f",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "d",
+        "score": 4550,
+        "created_at": "2026-08-07T07:49:03.685Z"
+      },
+      {
+        "id": "5702c4da-772a-4603-955d-35c66535d120",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "z",
+        "score": 4550,
+        "created_at": "2026-08-07T07:49:03.685Z"
+      },
+      {
+        "id": "f11ed61b-2c8f-4f6c-ba8c-ebd4fbd65ce5",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "x",
+        "score": 4400,
+        "created_at": "2026-08-07T07:49:03.685Z"
+      },
+      {
+        "id": "b6816b37-e3b6-4fc2-b396-81e6d0e4a3b8",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "a",
+        "score": 3650,
+        "created_at": "2026-08-07T07:51:10.033Z"
+      },
+      {
+        "id": "a80ca68d-d551-4e0d-b5ad-b44b4e38cc77",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "z",
+        "score": 3950,
+        "created_at": "2026-08-07T07:51:10.033Z"
+      },
+      {
+        "id": "f3a1cf75-edad-4f89-9e25-a70f610288d5",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4250,
+        "created_at": "2026-08-07T07:51:10.033Z"
+      },
+      {
+        "id": "e0c88838-d1ea-4017-8da7-a79b57c37643",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 4400,
+        "created_at": "2026-08-07T07:51:10.033Z"
+      },
+      {
+        "id": "b967f60f-7bff-4a6e-b02d-ebd742a9e8d1",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4700,
+        "created_at": "2026-08-07T07:51:10.033Z"
+      },
+      {
+        "id": "5e8fc256-5edd-40eb-b5f6-b9ae912eb0bf",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "a",
+        "score": 4550,
+        "created_at": "2026-08-07T08:10:34.007Z"
+      },
+      {
+        "id": "b11ce34f-34a4-4c42-ae6d-e30b28e2ec91",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "b",
+        "score": 4100,
+        "created_at": "2026-08-07T08:10:34.007Z"
+      },
+      {
+        "id": "a37decce-7981-4a67-bd7b-acd01ad1a3eb",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "c",
+        "score": 3800,
+        "created_at": "2026-08-07T08:10:34.007Z"
+      },
+      {
+        "id": "210944fd-1e8b-4fd6-95fe-597002de9401",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "d",
+        "score": 4250,
+        "created_at": "2026-08-07T08:10:34.007Z"
+      },
+      {
+        "id": "25eafa76-8611-47d2-b178-3f0f44985fb8",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4700,
+        "created_at": "2026-08-07T08:10:34.007Z"
+      },
+      {
+        "id": "4d2923b3-2385-4967-9540-70a4d1d5d0cf",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "a",
+        "score": 4400,
+        "created_at": "2026-08-07T08:14:31.764Z"
+      },
+      {
+        "id": "e43e4c19-3a73-48d1-b157-2bf12f70e55b",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4100,
+        "created_at": "2026-08-07T08:14:31.764Z"
+      },
+      {
+        "id": "ab60a331-f292-4b0f-a0c6-ecdf45bf443c",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 3950,
+        "created_at": "2026-08-07T08:14:31.764Z"
+      },
+      {
+        "id": "468a7f27-d229-48e5-8c28-7783127214d5",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4250,
+        "created_at": "2026-08-07T08:14:31.764Z"
+      },
+      {
+        "id": "1aef2497-3f3d-4b5d-aa46-0603c9dc801b",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "r",
+        "score": 4700,
+        "created_at": "2026-08-07T08:14:31.764Z"
+      },
+      {
+        "id": "9ed0e2b9-59be-4c6d-8aea-11509e7d25de",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4700,
+        "created_at": "2026-08-07T08:17:45.465Z"
+      },
+      {
+        "id": "3ac30456-ca1d-4718-8d56-c6502bc4ea71",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 4550,
+        "created_at": "2026-08-07T08:17:45.465Z"
+      },
+      {
+        "id": "2f9fe293-c1ab-4c0f-89a8-ebef1e4da02f",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4550,
+        "created_at": "2026-08-07T08:17:45.465Z"
+      },
+      {
+        "id": "19311966-a157-4264-9d4f-8fb6665423dc",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "r",
+        "score": 4400,
+        "created_at": "2026-08-07T08:17:45.465Z"
+      },
+      {
+        "id": "1549c02c-6da3-45ee-b5ed-a1cd14926377",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "c",
+        "score": 4850,
+        "created_at": "2026-08-07T08:17:45.465Z"
+      },
+      {
+        "id": "b9d8bde6-84e0-4fe5-b9a6-f6598b3189ab",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4550,
+        "created_at": "2026-08-07T08:22:00.266Z"
+      },
+      {
+        "id": "e084c79b-f3b8-49a0-8a51-136d43b75a4a",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 4550,
+        "created_at": "2026-08-07T08:22:00.266Z"
+      },
+      {
+        "id": "b259ff48-9661-4fbd-b246-37896e7860e5",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4700,
+        "created_at": "2026-08-07T08:22:00.266Z"
+      },
+      {
+        "id": "402b7cbe-eb3b-47f5-a38f-edd13fc70f04",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "r",
+        "score": 4550,
+        "created_at": "2026-08-07T08:22:00.266Z"
+      },
+      {
+        "id": "74b6dd17-6fad-43dc-9727-40571d50a603",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "f",
+        "score": 4700,
+        "created_at": "2026-08-07T08:22:00.266Z"
+      },
+      {
+        "id": "62e635ba-612d-4f44-ac9a-9ae451afe967",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4400,
+        "created_at": "2026-08-07T08:27:40.955Z"
+      },
+      {
+        "id": "efe8a615-677e-47a8-8321-8cedb5da5005",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 4550,
+        "created_at": "2026-08-07T08:27:40.955Z"
+      },
+      {
+        "id": "7463e255-8290-4ffa-85c4-c97289ea4892",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4550,
+        "created_at": "2026-08-07T08:27:40.955Z"
+      },
+      {
+        "id": "e17bb61f-94b6-480c-95d9-c17057fa352f",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "r",
+        "score": 4400,
+        "created_at": "2026-08-07T08:27:40.955Z"
+      },
+      {
+        "id": "3ec6529b-f828-42f8-ae1a-4b630399d241",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "f",
+        "score": 4700,
+        "created_at": "2026-08-07T08:27:40.955Z"
+      },
+      {
+        "id": "def08758-37ed-4a9b-8676-d9d3a6e9784b",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4250,
+        "created_at": "2026-08-07T08:31:20.024Z"
+      },
+      {
+        "id": "6d50e961-9cf9-4424-95e1-4e5574317221",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 4250,
+        "created_at": "2026-08-07T08:31:20.024Z"
+      },
+      {
+        "id": "30f4da4b-0731-4ef8-8939-9a8bff92bc66",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4400,
+        "created_at": "2026-08-07T08:31:20.024Z"
+      },
+      {
+        "id": "1731dfad-c9b9-47f5-a1b0-9bad81cacc46",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "r",
+        "score": 4550,
+        "created_at": "2026-08-07T08:31:20.024Z"
+      },
+      {
+        "id": "42960c62-5e37-425b-a59d-4a394bb50230",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "t",
+        "score": 4700,
+        "created_at": "2026-08-07T08:31:20.024Z"
+      },
+      {
+        "id": "4f7a5a1d-1282-4b17-af29-f11980a9196b",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4400,
+        "created_at": "2026-08-07T08:34:31.241Z"
+      },
+      {
+        "id": "89846b42-b3cc-43ee-90fd-edc3eaaff436",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 4550,
+        "created_at": "2026-08-07T08:34:31.241Z"
+      },
+      {
+        "id": "1c87ef41-3f2d-4da2-9505-2510ad0d95a8",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4700,
+        "created_at": "2026-08-07T08:34:31.241Z"
+      },
+      {
+        "id": "180df382-2808-4a4b-9210-efd24c7f00c6",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "r",
+        "score": 4700,
+        "created_at": "2026-08-07T08:34:31.241Z"
+      },
+      {
+        "id": "c88c2fdc-afed-41f2-968f-e0f4e8af97c8",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "t",
+        "score": 4850,
+        "created_at": "2026-08-07T08:34:31.241Z"
+      },
+      {
+        "id": "b3e9e7cb-a351-4fb1-9fd0-2f69b1b79e94",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4400,
+        "created_at": "2026-08-07T08:37:09.049Z"
+      },
+      {
+        "id": "73dc936f-a691-48cb-9dd8-09dfd1c972b5",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 4400,
+        "created_at": "2026-08-07T08:37:09.049Z"
+      },
+      {
+        "id": "5d666291-125a-4f5a-b24e-b0c6bed15f8a",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4550,
+        "created_at": "2026-08-07T08:37:09.049Z"
+      },
+      {
+        "id": "7e9c9034-abba-4159-994d-19e66e0ac6af",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "r",
+        "score": 4550,
+        "created_at": "2026-08-07T08:37:09.049Z"
+      },
+      {
+        "id": "e27ecbbd-33c2-437f-95e3-548c05f4d601",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "v",
+        "score": 4700,
+        "created_at": "2026-08-07T08:37:09.049Z"
+      },
+      {
+        "id": "05e708c5-cadd-46ba-958f-a1d083a881a8",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4400,
+        "created_at": "2026-08-07T08:47:40.033Z"
+      },
+      {
+        "id": "96586746-251d-40aa-ad61-c68ed1105423",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 4550,
+        "created_at": "2026-08-07T08:47:40.033Z"
+      },
+      {
+        "id": "8451762d-581b-419b-b6e4-707731ab70d7",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4550,
+        "created_at": "2026-08-07T08:47:40.033Z"
+      },
+      {
+        "id": "26095fd5-44ca-4487-b0f1-aaa365c67b7f",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "r",
+        "score": 4700,
+        "created_at": "2026-08-07T08:47:40.033Z"
+      },
+      {
+        "id": "e9d6c153-e47e-4274-8b74-87ad1c6f3407",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "v",
+        "score": 4850,
+        "created_at": "2026-08-07T08:47:40.033Z"
+      },
+      {
+        "id": "c8c691dc-4496-477c-a49c-4a39feff4855",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "a",
+        "score": 233,
+        "created_at": "2026-08-10T06:41:42.311Z"
+      },
+      {
+        "id": "d031bb34-f544-468f-97fd-190a4f3671b6",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "b",
+        "score": 2000,
+        "created_at": "2026-08-10T06:41:42.311Z"
+      },
+      {
+        "id": "92e9a7d6-d21f-48e5-a30c-3607e120c098",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "c",
+        "score": 0,
+        "created_at": "2026-08-10T06:41:42.311Z"
+      },
+      {
+        "id": "24de6de0-8dfd-4818-bc27-58c99ff9655d",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "d",
+        "score": 1933,
+        "created_at": "2026-08-10T06:41:42.311Z"
+      },
+      {
+        "id": "6cdd7d96-4f99-4329-a833-e4f6444258a3",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 1750,
+        "created_at": "2026-08-10T06:41:42.311Z"
+      },
+      {
+        "id": "1df5d4cf-1f1d-4930-9feb-418884205695",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "f",
+        "score": 708,
+        "created_at": "2026-08-10T06:41:42.311Z"
+      },
+      {
+        "id": "ac24ee7e-6904-4dd9-9707-95ead9dc3993",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "agsf",
+        "score": 758,
+        "created_at": "2026-08-10T06:54:28.879Z"
+      },
+      {
+        "id": "af58bdd9-66b0-46f0-868b-c2e53c7c9848",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "dsfgh",
+        "score": 8200,
+        "created_at": "2026-08-10T06:54:28.879Z"
+      },
+      {
+        "id": "91de9483-204c-415f-a296-8eeff30b7469",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "agsf",
+        "score": 3033,
+        "created_at": "2026-08-10T06:55:45.600Z"
+      },
+      {
+        "id": "00c17a14-c432-4cd2-82b9-6ef1990c9bce",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "werasthh",
+        "score": 7233,
+        "created_at": "2026-08-10T06:55:45.600Z"
+      },
+      {
+        "id": "0b2c52d2-812f-4cd5-a67c-44204e949e00",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "reatshdjgkh",
+        "score": 5108,
+        "created_at": "2026-08-10T06:55:45.600Z"
+      },
+      {
+        "id": "6f444765-30ee-4b02-97ca-6fc5f19d42f7",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "fsgdhxmnb",
+        "score": 3950,
+        "created_at": "2026-08-10T06:55:45.600Z"
+      },
+      {
+        "id": "fcc90957-075a-4839-9594-6a5ee7cf676d",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "esfadsv",
+        "score": 5058,
+        "created_at": "2026-08-10T06:55:45.600Z"
+      },
+      {
+        "id": "2a86f211-a72e-460d-9186-c6576dbb9912",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "erwthsgnb",
+        "score": 6075,
+        "created_at": "2026-08-10T06:55:45.600Z"
+      },
+      {
+        "id": "daf7c6c0-a7d0-4f8b-9e14-bd750a15c74a",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "werasthh",
+        "score": 4250,
+        "created_at": "2026-08-10T06:57:09.494Z"
+      },
+      {
+        "id": "9ca5ec1f-0c3f-4947-a60e-91e1a2c9992d",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "agsf",
+        "score": 4700,
+        "created_at": "2026-08-10T06:57:09.494Z"
+      },
+      {
+        "id": "d7e4926f-5e39-47ac-9875-26a1edd91d54",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "reatshdjgkh",
+        "score": 0,
+        "created_at": "2026-08-10T06:57:09.494Z"
+      },
+      {
+        "id": "84f97049-260e-4b64-bd92-d0d2b11c3e08",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "fsgdhxmnb",
+        "score": 4400,
+        "created_at": "2026-08-10T06:57:09.494Z"
+      },
+      {
+        "id": "f7aae055-bb41-4a21-8d18-ea641a797cb5",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "esfadsv",
+        "score": 4400,
+        "created_at": "2026-08-10T06:57:09.494Z"
+      },
+      {
+        "id": "91e5a8c9-4819-4b9c-974e-a1212db63f86",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "bsdfvsfa",
+        "score": 4850,
+        "created_at": "2026-08-10T06:57:09.494Z"
+      },
+      {
+        "id": "d5d61ecb-42ac-4622-b516-6fdfa01121c7",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "asfdw",
+        "score": 4850,
+        "created_at": "2026-08-11T02:15:52.018Z"
+      }
+    ]
+  },
+  {
     "id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
     "title": "QUIZ IBUKOTA",
     "code": "UUCU32",
-    "is_active": true,
+    "is_active": false,
     "created_at": "2026-08-04T08:23:46.918Z",
     "questions": [
       {
@@ -778,780 +2184,6 @@
         "participant_name": "oiugc",
         "score": 805,
         "created_at": "2026-08-06T04:40:32.655Z"
-      }
-    ]
-  },
-  {
-    "id": "da55ac19-d7f2-4fad-bf29-ded06cd2a2ce",
-    "title": "Kuis Tanpa Judul",
-    "code": "GGVI9Y",
-    "is_active": false,
-    "created_at": "2026-07-09T07:04:22.674Z",
-    "questions": [
-      {
-        "id": "8f54db23-76e8-4961-af48-aaa268cf9ad2",
-        "quiz_id": "da55ac19-d7f2-4fad-bf29-ded06cd2a2ce",
-        "type": "PG",
-        "text": "1+1",
-        "images": [],
-        "time_limit": 20,
-        "options": [
-          {
-            "id": "7ad702bd-5654-49da-938d-614fcd3d2d1c",
-            "question_id": "8f54db23-76e8-4961-af48-aaa268cf9ad2",
-            "text": "2",
-            "is_correct": true
-          },
-          {
-            "id": "f3896056-c0d6-46b3-b4ef-9e7802423f3d",
-            "question_id": "8f54db23-76e8-4961-af48-aaa268cf9ad2",
-            "text": "9",
-            "is_correct": false
-          }
-        ]
-      }
-    ],
-    "submissions": [
-      {
-        "id": "0601e15c-2004-41dd-9c5f-028771adf8cb",
-        "quiz_id": "da55ac19-d7f2-4fad-bf29-ded06cd2a2ce",
-        "participant_name": "qwer",
-        "score": 100,
-        "created_at": "2026-07-09T07:04:33.906Z"
-      }
-    ]
-  },
-  {
-    "id": "7b46b406-edde-4b26-9cfe-d641ada5bd70",
-    "title": "Kuis Tanpa Judul",
-    "code": "2EB4RB",
-    "is_active": false,
-    "created_at": "2026-07-30T07:43:19.460Z",
-    "questions": [
-      {
-        "id": "ea485f0b-b1b1-4050-a333-bc3fa9de33b3",
-        "quiz_id": "7b46b406-edde-4b26-9cfe-d641ada5bd70",
-        "type": "PG",
-        "text": "55+55",
-        "images": [],
-        "time_limit": 10,
-        "options": [
-          {
-            "id": "2bd642bd-51bd-4fc6-b6f9-efc1ecd9ec77",
-            "question_id": "ea485f0b-b1b1-4050-a333-bc3fa9de33b3",
-            "text": "100",
-            "is_correct": true
-          },
-          {
-            "id": "922dafcd-7af3-4afc-a923-998716dd0743",
-            "question_id": "ea485f0b-b1b1-4050-a333-bc3fa9de33b3",
-            "text": "110",
-            "is_correct": false
-          },
-          {
-            "id": "0d64bfdd-2605-4216-b9ce-2a3d187b0ef0",
-            "question_id": "ea485f0b-b1b1-4050-a333-bc3fa9de33b3",
-            "text": "au ah (jawabannya 110)",
-            "is_correct": false
-          }
-        ]
-      },
-      {
-        "id": "9f41ec6c-ccd6-401d-911b-65a7e18aa8f8",
-        "quiz_id": "7b46b406-edde-4b26-9cfe-d641ada5bd70",
-        "type": "PG",
-        "text": "lalala",
-        "images": [],
-        "time_limit": 10,
-        "options": [
-          {
-            "id": "8c176bb6-4db4-462e-b7e3-27621acd1ff9",
-            "question_id": "9f41ec6c-ccd6-401d-911b-65a7e18aa8f8",
-            "text": "lululu",
-            "is_correct": false
-          },
-          {
-            "id": "787a6bf7-e665-4195-9a4d-30ec831096cf",
-            "question_id": "9f41ec6c-ccd6-401d-911b-65a7e18aa8f8",
-            "text": "hah",
-            "is_correct": false
-          },
-          {
-            "id": "dc804775-eb58-499f-bd13-f3c957065f0d",
-            "question_id": "9f41ec6c-ccd6-401d-911b-65a7e18aa8f8",
-            "text": "semoga ravi cepet sukses",
-            "is_correct": true
-          }
-        ]
-      }
-    ],
-    "submissions": [
-      {
-        "id": "8e79710d-73f4-4aeb-9b78-1acadf4a792d",
-        "quiz_id": "7b46b406-edde-4b26-9cfe-d641ada5bd70",
-        "participant_name": "qwe",
-        "score": 73,
-        "created_at": "2026-07-30T08:16:29.632Z"
-      }
-    ]
-  },
-  {
-    "id": "97b48067-1de4-4438-8b27-74ba39376e0e",
-    "title": "pln sukses",
-    "code": "Q83L6Y",
-    "is_active": false,
-    "created_at": "2026-08-04T01:32:02.094Z",
-    "questions": [
-      {
-        "id": "704dc27a-3feb-4e99-8741-beb613e9a8e0",
-        "quiz_id": "97b48067-1de4-4438-8b27-74ba39376e0e",
-        "type": "PG",
-        "text": "f_za",
-        "images": [],
-        "time_limit": 10,
-        "options": [
-          {
-            "id": "be27a5d2-1656-4c57-847a-1711de8f9d5e",
-            "question_id": "704dc27a-3feb-4e99-8741-beb613e9a8e0",
-            "text": "a",
-            "is_correct": true
-          },
-          {
-            "id": "b79645a7-f52e-44b2-90db-b32ecbbdd1f3",
-            "question_id": "704dc27a-3feb-4e99-8741-beb613e9a8e0",
-            "text": "z",
-            "is_correct": false
-          }
-        ]
-      },
-      {
-        "id": "ba23f097-241b-4c2b-b644-5e91027c1adf",
-        "quiz_id": "97b48067-1de4-4438-8b27-74ba39376e0e",
-        "type": "CHECKBOX",
-        "text": "1+1 = ",
-        "images": [],
-        "time_limit": 20,
-        "options": [
-          {
-            "id": "c46f2a14-e326-47a4-8b52-72c81018d94d",
-            "question_id": "ba23f097-241b-4c2b-b644-5e91027c1adf",
-            "text": "3-1",
-            "is_correct": true
-          },
-          {
-            "id": "a7bab1e1-b575-4d5b-856b-9436f103fe20",
-            "question_id": "ba23f097-241b-4c2b-b644-5e91027c1adf",
-            "text": "2",
-            "is_correct": true
-          },
-          {
-            "id": "4bc66e80-c736-4cfe-8abe-a7be5a8c6d6c",
-            "question_id": "ba23f097-241b-4c2b-b644-5e91027c1adf",
-            "text": "100",
-            "is_correct": false
-          }
-        ]
-      },
-      {
-        "id": "39720cc7-d84c-4951-88a3-4493d0ea5a2c",
-        "quiz_id": "97b48067-1de4-4438-8b27-74ba39376e0e",
-        "type": "PG",
-        "text": "ibukota jawa tengah",
-        "images": [],
-        "time_limit": 20,
-        "options": [
-          {
-            "id": "3932d9c8-6c9a-40aa-b169-5504ff1092da",
-            "question_id": "39720cc7-d84c-4951-88a3-4493d0ea5a2c",
-            "text": "tegal",
-            "is_correct": false
-          },
-          {
-            "id": "1b47f291-45c1-49d8-8997-7654ad19e8f9",
-            "question_id": "39720cc7-d84c-4951-88a3-4493d0ea5a2c",
-            "text": "kudus",
-            "is_correct": false
-          },
-          {
-            "id": "13436787-6eea-4f9d-be09-07e6ca6333be",
-            "question_id": "39720cc7-d84c-4951-88a3-4493d0ea5a2c",
-            "text": "semarang",
-            "is_correct": true
-          },
-          {
-            "id": "71a32854-e79b-4ab9-8cb6-603a644d3758",
-            "question_id": "39720cc7-d84c-4951-88a3-4493d0ea5a2c",
-            "text": "jogjakarta",
-            "is_correct": false
-          }
-        ]
-      },
-      {
-        "id": "b93224b5-32cf-407a-8763-3d0b4e51ac95",
-        "quiz_id": "97b48067-1de4-4438-8b27-74ba39376e0e",
-        "type": "PG",
-        "text": "ibukota jawa timur",
-        "images": [],
-        "time_limit": 20,
-        "options": [
-          {
-            "id": "b8e308da-488e-458a-8f07-a6d07c45b2a8",
-            "question_id": "b93224b5-32cf-407a-8763-3d0b4e51ac95",
-            "text": "malang",
-            "is_correct": false
-          },
-          {
-            "id": "06d67713-afc1-429c-9a97-35fd9a5bcbbe",
-            "question_id": "b93224b5-32cf-407a-8763-3d0b4e51ac95",
-            "text": "lumajang",
-            "is_correct": false
-          },
-          {
-            "id": "81b39e98-dea2-44d0-bf93-be58a1c99219",
-            "question_id": "b93224b5-32cf-407a-8763-3d0b4e51ac95",
-            "text": "kediri",
-            "is_correct": false
-          },
-          {
-            "id": "f9b7883d-e8dc-4659-a93a-f819e85455cc",
-            "question_id": "b93224b5-32cf-407a-8763-3d0b4e51ac95",
-            "text": "surabaya",
-            "is_correct": true
-          }
-        ]
-      },
-      {
-        "id": "1954fc20-2da2-409c-957c-e953bec037ca",
-        "quiz_id": "97b48067-1de4-4438-8b27-74ba39376e0e",
-        "type": "PG",
-        "text": "ibukota jawa barat",
-        "images": [],
-        "time_limit": 20,
-        "options": [
-          {
-            "id": "7b04ba0d-9ac0-4be3-8907-30f508428b11",
-            "question_id": "1954fc20-2da2-409c-957c-e953bec037ca",
-            "text": "purwakarta",
-            "is_correct": false
-          },
-          {
-            "id": "c9623258-8a73-4e54-84fa-8de9ea2a3b00",
-            "question_id": "1954fc20-2da2-409c-957c-e953bec037ca",
-            "text": "bekasi",
-            "is_correct": false
-          },
-          {
-            "id": "a3a957de-4d83-4faa-a951-6adfa65785a3",
-            "question_id": "1954fc20-2da2-409c-957c-e953bec037ca",
-            "text": "bandung",
-            "is_correct": true
-          },
-          {
-            "id": "6666cc02-af15-43d0-b87f-fdc8836ca4fe",
-            "question_id": "1954fc20-2da2-409c-957c-e953bec037ca",
-            "text": "bogor",
-            "is_correct": false
-          },
-          {
-            "id": "01eb054b-60b7-4a0e-a4d0-13364ade8779",
-            "question_id": "1954fc20-2da2-409c-957c-e953bec037ca",
-            "text": "sawangan",
-            "is_correct": false
-          },
-          {
-            "id": "9ca6895c-f01b-43b0-882b-be5b536c45a7",
-            "question_id": "1954fc20-2da2-409c-957c-e953bec037ca",
-            "text": "depok",
-            "is_correct": false
-          }
-        ]
-      }
-    ],
-    "submissions": [
-      {
-        "id": "3533e0b0-eca0-498b-83ca-bfa032c95bf0",
-        "quiz_id": "97b48067-1de4-4438-8b27-74ba39376e0e",
-        "participant_name": "ravi",
-        "score": 210,
-        "created_at": "2026-08-04T01:42:01.470Z"
-      },
-      {
-        "id": "613517d9-d294-45bf-9f19-cfecb32947ed",
-        "quiz_id": "97b48067-1de4-4438-8b27-74ba39376e0e",
-        "participant_name": "ravi 2.0",
-        "score": 0,
-        "created_at": "2026-08-04T01:53:32.946Z"
-      },
-      {
-        "id": "04b673ad-eda9-4594-afee-7f64d6d0ff9e",
-        "quiz_id": "97b48067-1de4-4438-8b27-74ba39376e0e",
-        "participant_name": "bolodw",
-        "score": 307,
-        "created_at": "2026-08-04T01:53:32.946Z"
-      },
-      {
-        "id": "1796463d-3b40-4aa7-a196-a1fe72f0b0f6",
-        "quiz_id": "97b48067-1de4-4438-8b27-74ba39376e0e",
-        "participant_name": "diva",
-        "score": 451,
-        "created_at": "2026-08-04T01:53:32.946Z"
-      },
-      {
-        "id": "1d6b04dc-d360-4ed9-a457-efca1fe92344",
-        "quiz_id": "97b48067-1de4-4438-8b27-74ba39376e0e",
-        "participant_name": "lele",
-        "score": 339,
-        "created_at": "2026-08-04T02:20:50.631Z"
-      },
-      {
-        "id": "2a072e81-6bf0-498e-b478-6d170f94a463",
-        "quiz_id": "97b48067-1de4-4438-8b27-74ba39376e0e",
-        "participant_name": "a",
-        "score": 274,
-        "created_at": "2026-08-04T02:23:08.375Z"
-      }
-    ]
-  },
-  {
-    "id": "703b43c6-3fa7-434c-b8e2-707cdea5aa5b",
-    "title": "tes checkbox",
-    "code": "7AY4B8",
-    "is_active": false,
-    "created_at": "2026-08-04T03:06:10.294Z",
-    "questions": [
-      {
-        "id": "e412919a-3999-4508-be18-1c906a8aaf4a",
-        "quiz_id": "703b43c6-3fa7-434c-b8e2-707cdea5aa5b",
-        "type": "CHECKBOX",
-        "text": "hewan yang punya sayap",
-        "images": [],
-        "time_limit": 20,
-        "options": [
-          {
-            "id": "494b9b9a-c36e-4f5b-a2ec-f5c0bfe8a706",
-            "question_id": "e412919a-3999-4508-be18-1c906a8aaf4a",
-            "text": "ayam",
-            "is_correct": true
-          },
-          {
-            "id": "3e769936-4ecb-4602-a3ac-07a27bf146a9",
-            "question_id": "e412919a-3999-4508-be18-1c906a8aaf4a",
-            "text": "kucing",
-            "is_correct": false
-          },
-          {
-            "id": "300076f2-28ec-4680-a713-92989e00f3ee",
-            "question_id": "e412919a-3999-4508-be18-1c906a8aaf4a",
-            "text": "ular",
-            "is_correct": true
-          },
-          {
-            "id": "69d8b448-0f1f-4d60-a26d-b448afd0d7c8",
-            "question_id": "e412919a-3999-4508-be18-1c906a8aaf4a",
-            "text": "jerapah",
-            "is_correct": false
-          },
-          {
-            "id": "4dc57956-6ab4-4bdb-94d2-9b40be6c1484",
-            "question_id": "e412919a-3999-4508-be18-1c906a8aaf4a",
-            "text": "paus",
-            "is_correct": false
-          },
-          {
-            "id": "2a799d1d-b8c4-4169-b892-c74667d77ba2",
-            "question_id": "e412919a-3999-4508-be18-1c906a8aaf4a",
-            "text": "kukang",
-            "is_correct": false
-          },
-          {
-            "id": "108bfac8-98b3-4a80-a57b-c3183e9e40ed",
-            "question_id": "e412919a-3999-4508-be18-1c906a8aaf4a",
-            "text": "kepiting",
-            "is_correct": true
-          }
-        ]
-      }
-    ],
-    "submissions": [
-      {
-        "id": "a28d1035-8280-413d-bb12-009f7e491752",
-        "quiz_id": "703b43c6-3fa7-434c-b8e2-707cdea5aa5b",
-        "participant_name": "7AY4B8",
-        "score": 0,
-        "created_at": "2026-08-04T03:36:28.394Z"
-      },
-      {
-        "id": "c945f322-3d2c-4825-9f56-d526284c6450",
-        "quiz_id": "703b43c6-3fa7-434c-b8e2-707cdea5aa5b",
-        "participant_name": "asdfg",
-        "score": 24,
-        "created_at": "2026-08-04T04:15:21.802Z"
-      },
-      {
-        "id": "56fa71b2-5fff-45f7-a941-d0c24b346b05",
-        "quiz_id": "703b43c6-3fa7-434c-b8e2-707cdea5aa5b",
-        "participant_name": "qwerty",
-        "score": 23,
-        "created_at": "2026-08-04T04:15:21.802Z"
-      },
-      {
-        "id": "a68e0c7e-6afe-4780-b802-0096fa54ee2d",
-        "quiz_id": "703b43c6-3fa7-434c-b8e2-707cdea5aa5b",
-        "participant_name": "zxcv",
-        "score": 618,
-        "created_at": "2026-08-04T04:22:48.664Z"
-      }
-    ]
-  },
-  {
-    "id": "470e4080-89a4-44f1-b786-5d99bdfb1701",
-    "title": "Kuis Tanpa Judul",
-    "code": "SEFJC1",
-    "is_active": false,
-    "created_at": "2026-07-28T06:33:21.258Z",
-    "questions": [
-      {
-        "id": "ed654140-e07d-49c3-9321-44625aa0e948",
-        "quiz_id": "470e4080-89a4-44f1-b786-5d99bdfb1701",
-        "type": "PG",
-        "text": "r_vi",
-        "images": [],
-        "time_limit": 20,
-        "options": [
-          {
-            "id": "7e0bd30d-8027-40bb-a8b9-2c581ead75c9",
-            "question_id": "ed654140-e07d-49c3-9321-44625aa0e948",
-            "text": "a",
-            "is_correct": true
-          },
-          {
-            "id": "5e2a967d-6d86-4a28-aad4-e0a8d0eac0e4",
-            "question_id": "ed654140-e07d-49c3-9321-44625aa0e948",
-            "text": "b",
-            "is_correct": false
-          },
-          {
-            "id": "ca551395-60c5-461d-a344-516411ccb078",
-            "question_id": "ed654140-e07d-49c3-9321-44625aa0e948",
-            "text": "c",
-            "is_correct": false
-          }
-        ]
-      },
-      {
-        "id": "6a05800c-2ec1-4e59-9382-38a45bc34ea3",
-        "quiz_id": "470e4080-89a4-44f1-b786-5d99bdfb1701",
-        "type": "PG",
-        "text": "cr_wn",
-        "images": [],
-        "time_limit": 20,
-        "options": [
-          {
-            "id": "2567f68c-3860-4a89-9f9b-f5000fb7d8e8",
-            "question_id": "6a05800c-2ec1-4e59-9382-38a45bc34ea3",
-            "text": "o",
-            "is_correct": true
-          },
-          {
-            "id": "8aaf3667-7acc-45db-98d2-140c4e44d98e",
-            "question_id": "6a05800c-2ec1-4e59-9382-38a45bc34ea3",
-            "text": "p",
-            "is_correct": false
-          },
-          {
-            "id": "0bd2ad7b-e705-4b3d-b5fd-1b622e30d26c",
-            "question_id": "6a05800c-2ec1-4e59-9382-38a45bc34ea3",
-            "text": "q",
-            "is_correct": false
-          }
-        ]
-      }
-    ],
-    "submissions": [
-      {
-        "id": "3b6e85de-9323-4669-aadb-f40bcd406c97",
-        "quiz_id": "470e4080-89a4-44f1-b786-5d99bdfb1701",
-        "participant_name": "bukan ravi",
-        "score": 100,
-        "created_at": "2026-07-28T06:34:00.852Z"
-      },
-      {
-        "id": "744b688e-568d-4f3a-a6b2-8572d6e26da2",
-        "quiz_id": "470e4080-89a4-44f1-b786-5d99bdfb1701",
-        "participant_name": "faza",
-        "score": 50,
-        "created_at": "2026-07-28T06:58:27.973Z"
-      },
-      {
-        "id": "8e837964-b47f-4870-9249-6c890df1cf4f",
-        "quiz_id": "470e4080-89a4-44f1-b786-5d99bdfb1701",
-        "participant_name": "ayam",
-        "score": 50,
-        "created_at": "2026-07-28T06:58:48.677Z"
-      },
-      {
-        "id": "961b4f56-2dfb-4d66-b760-aa8bcc280b3f",
-        "quiz_id": "470e4080-89a4-44f1-b786-5d99bdfb1701",
-        "participant_name": "qwerty",
-        "score": 0,
-        "created_at": "2026-07-28T06:59:06.577Z"
-      }
-    ]
-  },
-  {
-    "id": "1779048b-24cf-490f-83bd-5d5f3245f74f",
-    "title": "tes gambar dulu coy",
-    "code": "QKSRUU",
-    "is_active": false,
-    "created_at": "2026-08-04T06:27:35.435Z",
-    "questions": [
-      {
-        "id": "b4d37e0e-4f29-4a2b-81dd-70ce2b936c2a",
-        "quiz_id": "1779048b-24cf-490f-83bd-5d5f3245f74f",
-        "type": "CHECKBOX",
-        "text": "makanan apa yg di kaos",
-        "images": [],
-        "time_limit": 20,
-        "options": [
-          {
-            "id": "936a22b0-f6b6-4031-9367-72d12d823d29",
-            "question_id": "b4d37e0e-4f29-4a2b-81dd-70ce2b936c2a",
-            "text": "kentang goreng",
-            "is_correct": true
-          },
-          {
-            "id": "7f96e0d3-7873-454a-9764-8eae95e8a5a3",
-            "question_id": "b4d37e0e-4f29-4a2b-81dd-70ce2b936c2a",
-            "text": "sambel",
-            "is_correct": true
-          },
-          {
-            "id": "8e8e59c9-2eb5-4059-82ce-8c81d58cd800",
-            "question_id": "b4d37e0e-4f29-4a2b-81dd-70ce2b936c2a",
-            "text": "burger (jawaban ini salah)",
-            "is_correct": false
-          },
-          {
-            "id": "6a74c5d4-a8a0-42e6-b264-3d3d95d78ed1",
-            "question_id": "b4d37e0e-4f29-4a2b-81dd-70ce2b936c2a",
-            "text": "skidipapapskuyy",
-            "is_correct": false
-          }
-        ]
-      }
-    ],
-    "submissions": []
-  },
-  {
-    "id": "4624101f-9ea2-4bc8-a4ee-665f0e182283",
-    "title": "Kuis Tanpa Judul",
-    "code": "V6OHFD",
-    "is_active": false,
-    "created_at": "2026-08-04T06:43:07.037Z",
-    "questions": [
-      {
-        "id": "97f49700-bc17-417c-9b9e-cc50831a5bf9",
-        "quiz_id": "4624101f-9ea2-4bc8-a4ee-665f0e182283",
-        "type": "PG",
-        "text": "ayam atau ikan?",
-        "images": [
-          "/uploads/images/1785825746509_76491.png",
-          "/uploads/images/1785825749829_76550.png"
-        ],
-        "time_limit": 20,
-        "options": [
-          {
-            "id": "e1195d8d-e904-47c2-bd4c-fb0f754f05e6",
-            "question_id": "97f49700-bc17-417c-9b9e-cc50831a5bf9",
-            "text": "ayam",
-            "is_correct": true
-          },
-          {
-            "id": "221a4e29-6e68-46ab-a051-af13202bbc7e",
-            "question_id": "97f49700-bc17-417c-9b9e-cc50831a5bf9",
-            "text": "auah",
-            "is_correct": false
-          }
-        ]
-      }
-    ],
-    "submissions": [
-      {
-        "id": "78d15e9a-5e08-4a9b-8331-6e65145b67ef",
-        "quiz_id": "4624101f-9ea2-4bc8-a4ee-665f0e182283",
-        "participant_name": "badday",
-        "score": 775,
-        "created_at": "2026-08-04T07:19:07.724Z"
-      },
-      {
-        "id": "1f2617bf-25a9-44fc-b7d6-a074b256916c",
-        "quiz_id": "4624101f-9ea2-4bc8-a4ee-665f0e182283",
-        "participant_name": "kucing",
-        "score": 865,
-        "created_at": "2026-08-04T08:28:53.833Z"
-      }
-    ]
-  },
-  {
-    "id": "b4155787-07f2-44be-a5fb-3ba3eb625db1",
-    "title": "Quiz Ibukota",
-    "code": "ZTNM0V",
-    "is_active": false,
-    "created_at": "2026-08-04T07:31:20.707Z",
-    "questions": [
-      {
-        "id": "28fc11e7-cb89-477a-8273-bd82ceb35758",
-        "quiz_id": "b4155787-07f2-44be-a5fb-3ba3eb625db1",
-        "type": "PG",
-        "text": "Ibukota Provinsi Aceh adalah",
-        "images": [],
-        "time_limit": 20,
-        "options": [
-          {
-            "id": "412c4618-0b03-4bdc-910d-e637d46aa0fa",
-            "question_id": "28fc11e7-cb89-477a-8273-bd82ceb35758",
-            "text": "Medan",
-            "is_correct": false
-          },
-          {
-            "id": "376efe5d-9683-4a4a-916e-a3227a4ff20a",
-            "question_id": "28fc11e7-cb89-477a-8273-bd82ceb35758",
-            "text": "Banda Aceh",
-            "is_correct": true
-          },
-          {
-            "id": "87e4b4c8-9797-4e45-8e03-c18f61d9de95",
-            "question_id": "28fc11e7-cb89-477a-8273-bd82ceb35758",
-            "text": "Lhokseumawe",
-            "is_correct": false
-          },
-          {
-            "id": "ff40ec13-034b-4a3b-bc5e-641c06dd37a6",
-            "question_id": "28fc11e7-cb89-477a-8273-bd82ceb35758",
-            "text": "Langsa",
-            "is_correct": false
-          }
-        ]
-      }
-    ],
-    "submissions": []
-  },
-  {
-    "id": "a0369d09-5053-407e-b2d0-890291c973af",
-    "title": "tes ombak",
-    "code": "H7316Z",
-    "is_active": true,
-    "created_at": "2026-08-04T03:44:38.171Z",
-    "questions": [
-      {
-        "id": "dd2f3c09-c91f-4998-80c5-967e43bd858c",
-        "quiz_id": "a0369d09-5053-407e-b2d0-890291c973af",
-        "type": "PG",
-        "text": "1+1",
-        "images": [],
-        "time_limit": 20,
-        "options": [
-          {
-            "id": "f910c830-1f34-498a-9cb2-f8937130bf0f",
-            "question_id": "dd2f3c09-c91f-4998-80c5-967e43bd858c",
-            "text": "1",
-            "is_correct": false
-          },
-          {
-            "id": "958295a1-e139-4ba7-8fd1-01c04d954b85",
-            "question_id": "dd2f3c09-c91f-4998-80c5-967e43bd858c",
-            "text": "2",
-            "is_correct": true
-          }
-        ]
-      },
-      {
-        "id": "2b73b3b2-75f1-4c4c-a97e-318b50bf20a2",
-        "quiz_id": "a0369d09-5053-407e-b2d0-890291c973af",
-        "type": "CHECKBOX",
-        "text": "2+2",
-        "images": [],
-        "time_limit": 20,
-        "options": [
-          {
-            "id": "5c2eef0a-7ce1-40e5-85bc-3ef9e4944106",
-            "question_id": "2b73b3b2-75f1-4c4c-a97e-318b50bf20a2",
-            "text": "4",
-            "is_correct": true
-          },
-          {
-            "id": "f797f4a1-9efa-4ab4-8a8a-4100c7a0836d",
-            "question_id": "2b73b3b2-75f1-4c4c-a97e-318b50bf20a2",
-            "text": "4",
-            "is_correct": true
-          },
-          {
-            "id": "c862bb07-927e-449a-8c2f-6e2c0aad2747",
-            "question_id": "2b73b3b2-75f1-4c4c-a97e-318b50bf20a2",
-            "text": "1234567890",
-            "is_correct": false
-          }
-        ]
-      },
-      {
-        "id": "32c40566-ee30-4961-b2dc-c1296cc9e75a",
-        "quiz_id": "a0369d09-5053-407e-b2d0-890291c973af",
-        "type": "ESSAY",
-        "text": "kita di PLN apa",
-        "images": [],
-        "time_limit": 20,
-        "options": [
-          {
-            "id": "626d8507-bf3e-420c-b1fa-fc9fb8556c13",
-            "question_id": "32c40566-ee30-4961-b2dc-c1296cc9e75a",
-            "text": "pusdiklat",
-            "is_correct": true
-          }
-        ]
-      }
-    ],
-    "submissions": [
-      {
-        "id": "ff9f7e98-d9e6-4032-9e75-b217c474ac26",
-        "quiz_id": "a0369d09-5053-407e-b2d0-890291c973af",
-        "participant_name": "ravi",
-        "score": 238,
-        "created_at": "2026-08-04T03:45:51.462Z"
-      },
-      {
-        "id": "ba6e4431-0c92-4af0-99ca-a2f09ccd3dc1",
-        "quiz_id": "a0369d09-5053-407e-b2d0-890291c973af",
-        "participant_name": "qwerty",
-        "score": 133,
-        "created_at": "2026-08-04T03:48:32.722Z"
-      },
-      {
-        "id": "4e090c35-88e7-4e6a-8d18-008c3452f9c4",
-        "quiz_id": "a0369d09-5053-407e-b2d0-890291c973af",
-        "participant_name": "asdf",
-        "score": 246,
-        "created_at": "2026-08-04T03:51:36.431Z"
-      },
-      {
-        "id": "2aac7323-3878-42c8-9481-0f4beba2557a",
-        "quiz_id": "a0369d09-5053-407e-b2d0-890291c973af",
-        "participant_name": "ravi pro max",
-        "score": 138,
-        "created_at": "2026-08-04T04:11:51.321Z"
-      },
-      {
-        "id": "a1fa409b-db48-49b7-adbb-3b234ab181d1",
-        "quiz_id": "a0369d09-5053-407e-b2d0-890291c973af",
-        "participant_name": "ravi lite",
-        "score": 175,
-        "created_at": "2026-08-04T04:11:51.321Z"
-      },
-      {
-        "id": "0c254afe-be39-41cf-88ee-27d41204dad2",
-        "quiz_id": "a0369d09-5053-407e-b2d0-890291c973af",
-        "participant_name": "qwdc",
-        "score": 5016,
-        "created_at": "2026-08-06T04:43:49.872Z"
       }
     ]
   }

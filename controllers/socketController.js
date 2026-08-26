@@ -5,6 +5,8 @@ const prisma = require('../config/db');
 const activeQuizzes = {};
 // In-memory state for active polls (Jajak Pendapat)
 const activePolls = {};
+// In-memory state for active Whats In The Box games
+const activeBoxes = {};
 
 module.exports = (io) => {
   io.on('connection', (socket) => {
@@ -238,6 +240,183 @@ module.exports = (io) => {
           participantsCount: session.participantsCount
         });
         socket.to(pollCode).emit('poll-results-shown');
+      }
+    });
+
+    // --- WHATS IN THE BOX EVENTS ---
+    socket.on('box-host-create', (data) => {
+      const { code, items } = data;
+      // items = [{ word, clues: [{ text, image }], timeBetweenClues }]
+      const boxCode = code.toUpperCase();
+      
+      socket.join(boxCode);
+      activeBoxes[boxCode] = {
+        hostSocketId: socket.id,
+        items: items || [],
+        currentItemIndex: 0,
+        state: 'LOBBY',
+        currentClueIndex: -1,
+        participants: [], // { socketId, name, totalPoints }
+        currentAnswers: [] // { name, answer, points } for current word
+      };
+    });
+
+    socket.on('box-player-join', (data) => {
+      const { code, name } = data;
+      const boxCode = code.toUpperCase();
+      const session = activeBoxes[boxCode];
+      
+      if (!session) {
+        socket.emit('box-join-error', 'Sesi tidak ditemukan.');
+        return;
+      }
+      if (session.state !== 'LOBBY') {
+        socket.emit('box-join-error', 'Sesi sudah berjalan, tidak bisa bergabung.');
+        return;
+      }
+      const isExists = session.participants.find(p => p.name === name);
+      if (isExists) {
+        socket.emit('box-join-error', 'Nama sudah dipakai.');
+        return;
+      }
+
+      session.participants.push({ socketId: socket.id, name, totalPoints: 0 });
+      socket.join(boxCode);
+      io.to(session.hostSocketId).emit('box-player-joined', session.participants.map(p => p.name));
+      socket.emit('box-joined', { code: boxCode, name });
+    });
+
+    socket.on('box-start', (data) => {
+      const { code } = data;
+      const boxCode = code.toUpperCase();
+      const session = activeBoxes[boxCode];
+      
+      if (session && session.hostSocketId === socket.id) {
+        session.state = 'LIVE';
+        socket.to(boxCode).emit('box-started');
+      }
+    });
+
+    socket.on('box-next-clue', (data) => {
+      const { code } = data;
+      const boxCode = code.toUpperCase();
+      const session = activeBoxes[boxCode];
+      
+      if (session && session.hostSocketId === socket.id) {
+        const currentItem = session.items[session.currentItemIndex];
+        if (!currentItem) return;
+        
+        session.currentClueIndex++;
+        if (session.currentClueIndex < currentItem.clues.length) {
+          session.clueStartTime = Date.now(); // for speed scoring
+          io.to(boxCode).emit('box-clue-revealed', {
+            clueIndex: session.currentClueIndex,
+            clue: currentItem.clues[session.currentClueIndex]
+          });
+        }
+      }
+    });
+
+    socket.on('box-submit-answer', (data) => {
+      const { code, name, answer } = data;
+      const boxCode = code.toUpperCase();
+      const session = activeBoxes[boxCode];
+      
+      if (session && session.state === 'LIVE') {
+        const currentItem = session.items[session.currentItemIndex];
+        if (!currentItem) return;
+
+        // Calculate points
+        let points = 0;
+        const isCorrect = answer.trim().toUpperCase() === currentItem.word.toUpperCase();
+        if (isCorrect) {
+          const maxBase = 1000;
+          const cluePenalty = (session.currentClueIndex / currentItem.clues.length) * 500; 
+          const timeTaken = (Date.now() - session.clueStartTime) / 1000;
+          const timePenalty = Math.min(timeTaken, 10) * 20;
+
+          points = Math.max(0, maxBase - cluePenalty - timePenalty);
+        }
+
+        session.currentAnswers.push({
+          name,
+          answer: answer.trim(),
+          isCorrect,
+          points: Math.round(points)
+        });
+
+        // Add to total participant score
+        const participant = session.participants.find(p => p.name === name);
+        if (participant) {
+          participant.totalPoints += Math.round(points);
+        }
+
+        io.to(session.hostSocketId).emit('box-player-answered', { count: session.currentAnswers.length });
+      }
+    });
+
+    socket.on('box-end-word', (data) => {
+      const { code } = data;
+      const boxCode = code.toUpperCase();
+      const session = activeBoxes[boxCode];
+      
+      if (session && session.hostSocketId === socket.id) {
+        const currentItem = session.items[session.currentItemIndex];
+        if (!currentItem) return;
+
+        const wrongAnswers = session.currentAnswers.filter(a => !a.isCorrect).map(a => a.answer);
+        const uniqueWrongAnswers = [...new Set(wrongAnswers)];
+
+        // Leaderboard for CURRENT word
+        const wordLeaderboard = session.currentAnswers
+          .sort((a, b) => b.points - a.points)
+          .map(a => ({ name: a.name, points: a.points, answer: a.answer }));
+
+        const isLastWord = session.currentItemIndex >= session.items.length - 1;
+
+        io.to(session.hostSocketId).emit('box-word-results', {
+          correctWord: currentItem.word,
+          wrongAnswers: uniqueWrongAnswers,
+          leaderboard: wordLeaderboard,
+          isLastWord: isLastWord
+        });
+        
+        socket.to(boxCode).emit('box-ended'); // tell player to wait
+      }
+    });
+
+    socket.on('box-next-word', (data) => {
+      const { code } = data;
+      const boxCode = code.toUpperCase();
+      const session = activeBoxes[boxCode];
+      
+      if (session && session.hostSocketId === socket.id) {
+        session.currentItemIndex++;
+        session.currentClueIndex = -1;
+        session.currentAnswers = [];
+        
+        if (session.currentItemIndex < session.items.length) {
+          // Tell players a new word is starting
+          socket.to(boxCode).emit('box-started');
+          io.to(session.hostSocketId).emit('box-word-started', { wordIndex: session.currentItemIndex });
+        }
+      }
+    });
+
+    socket.on('box-end-game', (data) => {
+      const { code } = data;
+      const boxCode = code.toUpperCase();
+      const session = activeBoxes[boxCode];
+      
+      if (session && session.hostSocketId === socket.id && session.state !== 'FINISHED') {
+        session.state = 'FINISHED';
+        // Aggregate full game leaderboard
+        const finalLeaderboard = session.participants
+          .sort((a, b) => b.totalPoints - a.totalPoints)
+          .map(p => ({ name: p.name, points: p.totalPoints }));
+          
+        io.to(session.hostSocketId).emit('box-final-results', { leaderboard: finalLeaderboard });
+        socket.to(boxCode).emit('box-ended');
       }
     });
 

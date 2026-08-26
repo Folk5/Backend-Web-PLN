@@ -268,3 +268,12 @@ model BackgroundImage {
 
   @@map("background_images")
 }
+
+model BoxGamePreset {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title       String
+  data        Json
+  created_at  DateTime @default(now())
+
+  @@map("box_game_presets")
+}
