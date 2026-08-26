@@ -1,0 +1,2190 @@
+[
+  {
+    "id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+    "title": "INDONESIA MERDEKA!!!",
+    "code": "P82BZ1",
+    "is_active": true,
+    "created_at": "2026-08-06T08:21:58.555Z",
+    "questions": [
+      {
+        "id": "4e6cfa89-5f88-4e74-a662-6a0df9dc6712",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Siapakah yang membacakan teks Proklamasi Kemerdekaan Indonesia?",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "4ea14a29-4958-43ec-91dd-02ebb64c2966",
+            "question_id": "4e6cfa89-5f88-4e74-a662-6a0df9dc6712",
+            "text": "Mohammad Hatta",
+            "is_correct": false
+          },
+          {
+            "id": "7bcacb6c-9d53-4bcb-9c14-39a9e268cf06",
+            "question_id": "4e6cfa89-5f88-4e74-a662-6a0df9dc6712",
+            "text": "Soekarno",
+            "is_correct": true
+          },
+          {
+            "id": "116831cc-1962-440c-ad12-d70991c15032",
+            "question_id": "4e6cfa89-5f88-4e74-a662-6a0df9dc6712",
+            "text": "Ahmad Soebardjo",
+            "is_correct": false
+          },
+          {
+            "id": "b09d4f08-31b8-4b7b-af1d-a2f1d579f516",
+            "question_id": "4e6cfa89-5f88-4e74-a662-6a0df9dc6712",
+            "text": "Jenderal Sudirman",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "2785e53e-4e89-4923-93ac-d9c0a9b0465b",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "CHECKBOX",
+        "text": "Pilih SEMUA lomba yang identik dengan perayaan 17 Agustus!",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "213ec65f-6823-4812-b058-b6c3835b45b4",
+            "question_id": "2785e53e-4e89-4923-93ac-d9c0a9b0465b",
+            "text": "Balap karung",
+            "is_correct": true
+          },
+          {
+            "id": "180e0000-6a41-4521-b706-2211629a9349",
+            "question_id": "2785e53e-4e89-4923-93ac-d9c0a9b0465b",
+            "text": "Panjat pinang",
+            "is_correct": true
+          },
+          {
+            "id": "6b2d75c8-df03-4d0a-80b5-99583203f93e",
+            "question_id": "2785e53e-4e89-4923-93ac-d9c0a9b0465b",
+            "text": "Makan kerupuk",
+            "is_correct": true
+          },
+          {
+            "id": "05c7f071-7ac0-4adb-a072-0d4aae34eb59",
+            "question_id": "2785e53e-4e89-4923-93ac-d9c0a9b0465b",
+            "text": "Formula 1",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "722ad109-d9f9-4f82-89fa-76a7ed635d3e",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "siapa nama pahlawan peta yang tidak diketahui keberadaannya sampai saat ini",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "7c3c18be-a753-4838-bcf2-7d698d3e1f41",
+            "question_id": "722ad109-d9f9-4f82-89fa-76a7ed635d3e",
+            "text": "Yongky",
+            "is_correct": false
+          },
+          {
+            "id": "ea06c905-11d6-4bec-a24a-9e4c38701024",
+            "question_id": "722ad109-d9f9-4f82-89fa-76a7ed635d3e",
+            "text": "Supriyadi",
+            "is_correct": true
+          },
+          {
+            "id": "a4378d6b-fa9a-478e-aef3-c531a663df0f",
+            "question_id": "722ad109-d9f9-4f82-89fa-76a7ed635d3e",
+            "text": "Supri",
+            "is_correct": false
+          },
+          {
+            "id": "36985d03-62fb-4cf7-bfd3-122703d98c54",
+            "question_id": "722ad109-d9f9-4f82-89fa-76a7ed635d3e",
+            "text": "Kopral Jono",
+            "is_correct": false
+          },
+          {
+            "id": "9061ec3a-2e4e-44c7-8976-36d087e3d1a8",
+            "question_id": "722ad109-d9f9-4f82-89fa-76a7ed635d3e",
+            "text": "Bang Jalu",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "737a78b3-3e44-4ac8-b8a9-4630433ee805",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Kalau ikut lomba balap karung terus jatuh sebelum start, siapa yang menang?",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "e8b14d87-3782-44aa-b293-2c02fc824f24",
+            "question_id": "737a78b3-3e44-4ac8-b8a9-4630433ee805",
+            "text": "Wasit",
+            "is_correct": false
+          },
+          {
+            "id": "811ee477-26ca-4b9a-b473-1911bd82ec6d",
+            "question_id": "737a78b3-3e44-4ac8-b8a9-4630433ee805",
+            "text": "Penonton",
+            "is_correct": false
+          },
+          {
+            "id": "c8a2d4e6-b95b-4ec4-8b2e-9a5b67269b26",
+            "question_id": "737a78b3-3e44-4ac8-b8a9-4630433ee805",
+            "text": "Belum ada yang menang",
+            "is_correct": true
+          },
+          {
+            "id": "0b5403dc-ea13-4a4c-93b1-8b3e6a5316a8",
+            "question_id": "737a78b3-3e44-4ac8-b8a9-4630433ee805",
+            "text": "Karungnya",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "89d3f90c-8b32-421a-8e3c-f67df9654796",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Upacara bendera biasanya dimulai dengan mengibarkan",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "71d70af4-825c-4896-ae89-b195ec20fa0f",
+            "question_id": "89d3f90c-8b32-421a-8e3c-f67df9654796",
+            "text": "Bendera Merah Putih",
+            "is_correct": true
+          },
+          {
+            "id": "b294f7ed-c018-4162-afd0-b6cd6620ef91",
+            "question_id": "89d3f90c-8b32-421a-8e3c-f67df9654796",
+            "text": "Bendera ASEAN",
+            "is_correct": false
+          },
+          {
+            "id": "d810b6db-39c0-465c-825d-5ff0612d2c47",
+            "question_id": "89d3f90c-8b32-421a-8e3c-f67df9654796",
+            "text": "Bendera Pramuka",
+            "is_correct": false
+          },
+          {
+            "id": "4cbd3cb9-db90-4f2a-9fd0-60ce9cd1c06a",
+            "question_id": "89d3f90c-8b32-421a-8e3c-f67df9654796",
+            "text": "Bendera Sekolah",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "f7e81314-9823-49ca-82b2-e8a9f1604ce4",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Apa semboyan negara Indonesia?",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "186892c6-5916-47f1-ba4a-4aad06d8b6a7",
+            "question_id": "f7e81314-9823-49ca-82b2-e8a9f1604ce4",
+            "text": "Tut Wuri Handayani",
+            "is_correct": false
+          },
+          {
+            "id": "5a076910-b7cb-4e53-b809-fe16246410f8",
+            "question_id": "f7e81314-9823-49ca-82b2-e8a9f1604ce4",
+            "text": "Bhinneka Tunggal Ika",
+            "is_correct": true
+          },
+          {
+            "id": "f2a9e7ba-704a-42e3-b4f4-18d00f6e901e",
+            "question_id": "f7e81314-9823-49ca-82b2-e8a9f1604ce4",
+            "text": "Indonesia Raya",
+            "is_correct": false
+          },
+          {
+            "id": "52e4e91e-8910-49c7-ae7a-05dc842c0f7f",
+            "question_id": "f7e81314-9823-49ca-82b2-e8a9f1604ce4",
+            "text": "Garuda Perkasa",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "02f90aea-e0b1-4bff-912b-205dc3e4a84b",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Siapa wakil yang mendampingi Soekarno saat Proklamasi?",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "3d1c6df5-ddd0-47bb-b6ed-b2021c7053de",
+            "question_id": "02f90aea-e0b1-4bff-912b-205dc3e4a84b",
+            "text": "Ki Hajar Dewantara",
+            "is_correct": false
+          },
+          {
+            "id": "245e511d-6ae9-41e8-b605-a4df093617ee",
+            "question_id": "02f90aea-e0b1-4bff-912b-205dc3e4a84b",
+            "text": "Mohammad Hatta",
+            "is_correct": true
+          },
+          {
+            "id": "2d1cb631-a79f-42d4-9ced-d20dbd2d1d22",
+            "question_id": "02f90aea-e0b1-4bff-912b-205dc3e4a84b",
+            "text": "Bung Tomo",
+            "is_correct": false
+          },
+          {
+            "id": "c5cb048b-00d8-461b-afe3-51eeb52668b7",
+            "question_id": "02f90aea-e0b1-4bff-912b-205dc3e4a84b",
+            "text": "Sutan Sjahrir",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "365f2d2a-9de1-4826-971c-fadd569e1a33",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Kalau makan kerupuk pakai sambal saat lomba makan kerupuk, kemungkinan yang terjadi adalah",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "f712817d-13f8-4506-a143-99155bc5dd75",
+            "question_id": "365f2d2a-9de1-4826-971c-fadd569e1a33",
+            "text": "Jadi lebih cepat",
+            "is_correct": false
+          },
+          {
+            "id": "c00b3ee3-1684-4060-889a-129c8bd72642",
+            "question_id": "365f2d2a-9de1-4826-971c-fadd569e1a33",
+            "text": "Susah makan karena kepedesan",
+            "is_correct": true
+          },
+          {
+            "id": "3c1497da-e0f3-428c-8a9c-bfbc0617b96c",
+            "question_id": "365f2d2a-9de1-4826-971c-fadd569e1a33",
+            "text": "Kerupuk berubah jadi nasi",
+            "is_correct": false
+          },
+          {
+            "id": "833a2ce5-cea4-444e-bfae-af8d46ffd3cc",
+            "question_id": "365f2d2a-9de1-4826-971c-fadd569e1a33",
+            "text": "Langsung juara",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "f64bb8f0-86e6-482a-9985-7b06502f635a",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Lagu kebangsaan Indonesia berjudul",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "3094274c-b49e-400d-9b32-1819e9ce1f3b",
+            "question_id": "f64bb8f0-86e6-482a-9985-7b06502f635a",
+            "text": "Indonesia Pusaka",
+            "is_correct": false
+          },
+          {
+            "id": "397f16fe-cba8-44e2-8c6f-9267a211eb29",
+            "question_id": "f64bb8f0-86e6-482a-9985-7b06502f635a",
+            "text": "Garuda Pancasila",
+            "is_correct": false
+          },
+          {
+            "id": "eb9e1d4b-effd-455f-905c-410bcfaf7385",
+            "question_id": "f64bb8f0-86e6-482a-9985-7b06502f635a",
+            "text": "Bangun Pemudi Pemuda",
+            "is_correct": false
+          },
+          {
+            "id": "171b23cd-5c90-47c4-b1f5-220395187d86",
+            "question_id": "f64bb8f0-86e6-482a-9985-7b06502f635a",
+            "text": "Indonesia Raya",
+            "is_correct": true
+          }
+        ]
+      },
+      {
+        "id": "28c01ecf-d90d-41e4-bb43-bbc1cdeb3176",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "CHECKBOX",
+        "text": "Pilih SEMUA yang biasanya ada saat upacara 17 Agustus!",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "fd4bd09f-f238-42f2-b3ac-2fbba5e0e2d0",
+            "question_id": "28c01ecf-d90d-41e4-bb43-bbc1cdeb3176",
+            "text": "Pengibaran bendera",
+            "is_correct": true
+          },
+          {
+            "id": "688cadec-b010-4983-bbfb-4c40633e650d",
+            "question_id": "28c01ecf-d90d-41e4-bb43-bbc1cdeb3176",
+            "text": "Pembacaan teks Pancasila",
+            "is_correct": true
+          },
+          {
+            "id": "1fe9f8d2-2c8d-46bf-aadb-8d499518dda5",
+            "question_id": "28c01ecf-d90d-41e4-bb43-bbc1cdeb3176",
+            "text": "Konser K-Pop",
+            "is_correct": false
+          },
+          {
+            "id": "bf3d8b5a-e187-4f0d-b086-cd27e19cadc3",
+            "question_id": "28c01ecf-d90d-41e4-bb43-bbc1cdeb3176",
+            "text": "Menyanyikan Indonesia Raya",
+            "is_correct": true
+          }
+        ]
+      },
+      {
+        "id": "b081fc29-55eb-49f8-9889-9fdd8b91ef71",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Tahun ini (2026), Indonesia memperingati hari kemerdekaan yang ke",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "a83cd8c6-2849-477d-a8f8-b7363152a3ff",
+            "question_id": "b081fc29-55eb-49f8-9889-9fdd8b91ef71",
+            "text": "79 - 2",
+            "is_correct": false
+          },
+          {
+            "id": "41428c35-c502-44a5-89a3-11ecbd0505eb",
+            "question_id": "b081fc29-55eb-49f8-9889-9fdd8b91ef71",
+            "text": "80 + 3",
+            "is_correct": false
+          },
+          {
+            "id": "f6e973e7-fd64-4d10-91c7-07c8f81f1ad9",
+            "question_id": "b081fc29-55eb-49f8-9889-9fdd8b91ef71",
+            "text": "81 - 0",
+            "is_correct": true
+          },
+          {
+            "id": "842915cf-8fc5-4b33-b7de-9aa4274e8e7d",
+            "question_id": "b081fc29-55eb-49f8-9889-9fdd8b91ef71",
+            "text": "82 x 1",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "786f233f-97f3-40d3-a79d-cef0241c0b7e",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Kalau lomba tarik tambang tapi semua peserta satu tim narik ke arah yang sama, apa yang terjadi?",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "a5fda4a1-671c-4ba5-ab7e-9e387c07814b",
+            "question_id": "786f233f-97f3-40d3-a79d-cef0241c0b7e",
+            "text": "Talinya bingung",
+            "is_correct": false
+          },
+          {
+            "id": "1cb28b57-dd0c-4d3e-9ad7-f6c89c8726bd",
+            "question_id": "786f233f-97f3-40d3-a79d-cef0241c0b7e",
+            "text": "Tidak ada yang menang karena tidak ada lawan",
+            "is_correct": true
+          },
+          {
+            "id": "e827675d-cc75-4710-b931-898f7b65b805",
+            "question_id": "786f233f-97f3-40d3-a79d-cef0241c0b7e",
+            "text": "Tambangnya putus sendiri",
+            "is_correct": false
+          },
+          {
+            "id": "3a53a6d7-7d34-42da-81a4-1970b73c5da9",
+            "question_id": "786f233f-97f3-40d3-a79d-cef0241c0b7e",
+            "text": "Wasit ikut narik",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "6bba37a8-c463-46d1-8824-930df14d62b8",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "CHECKBOX",
+        "text": "Pilih SEMUA jumlah bulu Garuda Pancasila yang benar!",
+        "images": [],
+        "time_limit": 30,
+        "options": [
+          {
+            "id": "d0fbaae5-7248-4a25-b3a9-dba315d9cf55",
+            "question_id": "6bba37a8-c463-46d1-8824-930df14d62b8",
+            "text": "Sayap = 17 helai",
+            "is_correct": true
+          },
+          {
+            "id": "ccc248d8-31a1-43d8-89b1-a9d46ae61e36",
+            "question_id": "6bba37a8-c463-46d1-8824-930df14d62b8",
+            "text": "Kuping = 3",
+            "is_correct": false
+          },
+          {
+            "id": "018d939b-e4c1-473d-89df-8456e713592b",
+            "question_id": "6bba37a8-c463-46d1-8824-930df14d62b8",
+            "text": "Pangkal ekor = 19 helai",
+            "is_correct": true
+          },
+          {
+            "id": "663fa8d2-e64d-4678-82a4-8a02db383817",
+            "question_id": "6bba37a8-c463-46d1-8824-930df14d62b8",
+            "text": "Jari kaki = 10",
+            "is_correct": false
+          },
+          {
+            "id": "0c2d6829-e338-4c7c-b7da-bdb3d282b1aa",
+            "question_id": "6bba37a8-c463-46d1-8824-930df14d62b8",
+            "text": "Ekor = 8 helai",
+            "is_correct": true
+          }
+        ]
+      },
+      {
+        "id": "86634adf-46ad-42c2-a93f-6ccf1cca4d10",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "Apa nama BPUPKI dalam bahasa Jepang?",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "4c43434e-7bb1-4895-99d6-febf06bd26f2",
+            "question_id": "86634adf-46ad-42c2-a93f-6ccf1cca4d10",
+            "text": "Arigatou Gozaimasu",
+            "is_correct": false
+          },
+          {
+            "id": "c8c03cf1-4a7f-4e25-93cf-6c94e9815829",
+            "question_id": "86634adf-46ad-42c2-a93f-6ccf1cca4d10",
+            "text": "Salmon Sashimi",
+            "is_correct": false
+          },
+          {
+            "id": "8ba92934-ca82-4165-90e6-1a797895cefb",
+            "question_id": "86634adf-46ad-42c2-a93f-6ccf1cca4d10",
+            "text": "Dokuritsu Junbi Chōsakai",
+            "is_correct": true
+          },
+          {
+            "id": "e3639e42-53f2-4d7c-83a1-21694a49d634",
+            "question_id": "86634adf-46ad-42c2-a93f-6ccf1cca4d10",
+            "text": "Marugame Udon",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "1079ad4d-0989-48fe-8b18-448df5d42926",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "type": "PG",
+        "text": "BPUPKI dibentuk oleh pemerintah Jepang pada tahun",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "1d42a225-e78f-4fca-b802-6518d4c85c30",
+            "question_id": "1079ad4d-0989-48fe-8b18-448df5d42926",
+            "text": "1594",
+            "is_correct": false
+          },
+          {
+            "id": "1e968f67-f30f-492c-b44d-d6f2b21dd7ac",
+            "question_id": "1079ad4d-0989-48fe-8b18-448df5d42926",
+            "text": "5419",
+            "is_correct": false
+          },
+          {
+            "id": "1c5670b4-a437-4347-8bdf-96aa9d04c948",
+            "question_id": "1079ad4d-0989-48fe-8b18-448df5d42926",
+            "text": "1954",
+            "is_correct": false
+          },
+          {
+            "id": "7580b9f3-679b-41a5-9e1c-e509fa2c3f97",
+            "question_id": "1079ad4d-0989-48fe-8b18-448df5d42926",
+            "text": "1945",
+            "is_correct": true
+          }
+        ]
+      }
+    ],
+    "submissions": [
+      {
+        "id": "265b9d90-7022-438b-b796-da03c6e183b7",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "test",
+        "score": 7978,
+        "created_at": "2026-08-06T08:24:50.759Z"
+      },
+      {
+        "id": "9d79af1f-01c3-4c31-b954-a4e0737331d6",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "kucing",
+        "score": 2439,
+        "created_at": "2026-08-07T03:26:25.868Z"
+      },
+      {
+        "id": "9003ac81-a903-484b-b4b6-874ceb3283bb",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "fsisifVzksit",
+        "score": 5090,
+        "created_at": "2026-08-07T03:41:43.609Z"
+      },
+      {
+        "id": "643183bb-0145-4eae-9cda-b0dd5d825729",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "okjbfdrtyui",
+        "score": 5180,
+        "created_at": "2026-08-07T03:41:43.609Z"
+      },
+      {
+        "id": "91d72215-f236-4986-a255-531d1f157691",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "tumbal",
+        "score": 653,
+        "created_at": "2026-08-07T03:56:00.302Z"
+      },
+      {
+        "id": "5d7fe5f4-548b-431a-abfc-174aa8227c17",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "a",
+        "score": 1258,
+        "created_at": "2026-08-07T03:56:00.302Z"
+      },
+      {
+        "id": "5f464cdd-2ad8-4f1e-a0f8-bc545939aa45",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "b",
+        "score": 1157,
+        "created_at": "2026-08-07T03:56:00.302Z"
+      },
+      {
+        "id": "9c751cea-cc7a-4853-aa12-41d37bbb1b21",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "c",
+        "score": 1529,
+        "created_at": "2026-08-07T03:56:00.302Z"
+      },
+      {
+        "id": "1b6567db-7f31-489b-9ced-428df1473001",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "tumbal",
+        "score": 487,
+        "created_at": "2026-08-07T04:00:02.826Z"
+      },
+      {
+        "id": "f145bf2d-0784-4f23-8086-bee618b97969",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "qwe",
+        "score": 1124,
+        "created_at": "2026-08-07T04:00:02.826Z"
+      },
+      {
+        "id": "d5474c63-8c95-4890-8fb4-1a4a55abe2be",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "asd",
+        "score": 1004,
+        "created_at": "2026-08-07T04:00:02.826Z"
+      },
+      {
+        "id": "3aed6610-edb4-4c9d-bce8-78e5320e6281",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "zxc",
+        "score": 824,
+        "created_at": "2026-08-07T04:00:02.826Z"
+      },
+      {
+        "id": "cdd0ae1d-201d-49ab-80b4-656cce3e038c",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "sdfghjkl",
+        "score": 1591,
+        "created_at": "2026-08-07T08:57:34.737Z"
+      },
+      {
+        "id": "822f5685-7ef7-4de2-aaed-c0efcf6e6f55",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "bolodw",
+        "score": 2135,
+        "created_at": "2026-08-10T06:29:40.356Z"
+      },
+      {
+        "id": "8455f29d-a2e0-402c-bf2f-9cbe48e038c5",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "hfgbdvs",
+        "score": 36,
+        "created_at": "2026-08-10T09:02:46.414Z"
+      },
+      {
+        "id": "9ec88174-ff57-4ae5-919c-861204e578f8",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "rghfd",
+        "score": 0,
+        "created_at": "2026-08-10T09:02:46.414Z"
+      },
+      {
+        "id": "58c07856-46b7-4994-ae49-d4eff4c62940",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "rhteasdv",
+        "score": 215,
+        "created_at": "2026-08-10T09:02:46.414Z"
+      },
+      {
+        "id": "9e8b4325-2e5e-4d2f-8503-9bf4ef023cc8",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "edc",
+        "score": 1034,
+        "created_at": "2026-08-10T09:02:46.414Z"
+      },
+      {
+        "id": "c23cf6e3-7436-4cb2-95c1-af252901657f",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "esdfs",
+        "score": 629,
+        "created_at": "2026-08-10T09:02:46.414Z"
+      },
+      {
+        "id": "b8ca3b9b-0bd0-4067-8d63-65c685671cca",
+        "quiz_id": "e6dbad07-e4e9-4a75-90e0-745609523afd",
+        "participant_name": "grsfd",
+        "score": 831,
+        "created_at": "2026-08-10T09:02:46.414Z"
+      }
+    ]
+  },
+  {
+    "id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+    "title": "bener salah pg aja",
+    "code": "E8E6G7",
+    "is_active": true,
+    "created_at": "2026-08-07T07:22:15.031Z",
+    "questions": [
+      {
+        "id": "42eded02-2e3c-4f71-9a4a-d7b580df193b",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "type": "PG",
+        "text": ".",
+        "images": [],
+        "time_limit": 30,
+        "options": [
+          {
+            "id": "af3cf9a1-9042-4044-8dfa-1254dfd704e8",
+            "question_id": "42eded02-2e3c-4f71-9a4a-d7b580df193b",
+            "text": "bener",
+            "is_correct": true
+          },
+          {
+            "id": "f9dd056e-762f-44e0-9321-05c96c680030",
+            "question_id": "42eded02-2e3c-4f71-9a4a-d7b580df193b",
+            "text": "salah",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "bfcbdaba-9d81-46e0-af97-c13b44aa705a",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "type": "CHECKBOX",
+        "text": ".",
+        "images": [],
+        "time_limit": 30,
+        "options": [
+          {
+            "id": "ea6d1379-5179-4bfd-abe3-34a613789489",
+            "question_id": "bfcbdaba-9d81-46e0-af97-c13b44aa705a",
+            "text": "bener",
+            "is_correct": true
+          },
+          {
+            "id": "2ed43578-3eaf-4e63-8a80-c20bf1e55793",
+            "question_id": "bfcbdaba-9d81-46e0-af97-c13b44aa705a",
+            "text": "bener",
+            "is_correct": true
+          },
+          {
+            "id": "11f92c3e-5891-45e9-b104-9ff07faa7150",
+            "question_id": "bfcbdaba-9d81-46e0-af97-c13b44aa705a",
+            "text": "salah",
+            "is_correct": false
+          }
+        ]
+      }
+    ],
+    "submissions": [
+      {
+        "id": "ddfb6860-0733-44fa-8f42-982b81fa6181",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "a",
+        "score": 3500,
+        "created_at": "2026-08-07T07:23:44.976Z"
+      },
+      {
+        "id": "65bb50dc-c02e-4f17-bc4c-b6a9544ccd7a",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "b",
+        "score": 3800,
+        "created_at": "2026-08-07T07:23:44.976Z"
+      },
+      {
+        "id": "b9e6d0a1-f727-478b-9c2f-2601b66dc332",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "c",
+        "score": 3950,
+        "created_at": "2026-08-07T07:23:44.976Z"
+      },
+      {
+        "id": "8c91dfce-d1cf-4d13-90c5-4ea75f8467c2",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "d",
+        "score": 4100,
+        "created_at": "2026-08-07T07:23:44.976Z"
+      },
+      {
+        "id": "8f6507a7-475d-467f-b924-677c4cad16a1",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4400,
+        "created_at": "2026-08-07T07:23:44.976Z"
+      },
+      {
+        "id": "043985d2-d969-4fe2-9660-c8fa661b7842",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "a",
+        "score": 4550,
+        "created_at": "2026-08-07T07:40:33.729Z"
+      },
+      {
+        "id": "8c21ff97-9449-4abd-abf5-de5f063d89f8",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "b",
+        "score": 4400,
+        "created_at": "2026-08-07T07:40:33.729Z"
+      },
+      {
+        "id": "457fda82-715a-4701-adaa-557f283548f4",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "c",
+        "score": 4250,
+        "created_at": "2026-08-07T07:40:33.729Z"
+      },
+      {
+        "id": "cf0a1130-aa95-4e55-8b68-4623f5a216e9",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "d",
+        "score": 4100,
+        "created_at": "2026-08-07T07:40:33.729Z"
+      },
+      {
+        "id": "1f29c4e2-7e06-4e22-bb60-2982345cc138",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 3800,
+        "created_at": "2026-08-07T07:40:33.729Z"
+      },
+      {
+        "id": "25c42798-c5b5-4760-8130-978b73976a71",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "a",
+        "score": 4400,
+        "created_at": "2026-08-07T07:45:34.938Z"
+      },
+      {
+        "id": "c6c897ad-feef-4046-a7ca-d4b3a8c7e209",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "b",
+        "score": 4250,
+        "created_at": "2026-08-07T07:45:34.938Z"
+      },
+      {
+        "id": "2287390b-25f5-462b-9baf-5df1efabf96b",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "c",
+        "score": 3800,
+        "created_at": "2026-08-07T07:45:34.938Z"
+      },
+      {
+        "id": "94e09ab3-1245-4ee8-b00f-f7bc26456699",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "d",
+        "score": 3950,
+        "created_at": "2026-08-07T07:45:34.938Z"
+      },
+      {
+        "id": "6b1d37cc-aee6-441f-936b-975cdb9865ec",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4700,
+        "created_at": "2026-08-07T07:45:34.938Z"
+      },
+      {
+        "id": "a216c893-15d3-4eea-b01e-499897573dce",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "a",
+        "score": 4250,
+        "created_at": "2026-08-07T07:46:59.117Z"
+      },
+      {
+        "id": "6deae94c-99d6-4f4b-9c70-ef69fa324f78",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "z",
+        "score": 4700,
+        "created_at": "2026-08-07T07:46:59.117Z"
+      },
+      {
+        "id": "d7e01825-35e2-4564-84e0-0836fb15628f",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4550,
+        "created_at": "2026-08-07T07:46:59.117Z"
+      },
+      {
+        "id": "645a7a23-3a8c-442e-a85e-23a93e799412",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 4400,
+        "created_at": "2026-08-07T07:46:59.117Z"
+      },
+      {
+        "id": "bc92a1e5-aa9a-4aec-ab88-d156709c5de1",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "s",
+        "score": 4850,
+        "created_at": "2026-08-07T07:46:59.117Z"
+      },
+      {
+        "id": "898ae1af-f0a4-4a04-84cf-7d9326923ea0",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "a",
+        "score": 4700,
+        "created_at": "2026-08-07T07:49:03.685Z"
+      },
+      {
+        "id": "26f08ab7-4e1a-4d37-a2c1-4e6c0df7e65a",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "s",
+        "score": 4700,
+        "created_at": "2026-08-07T07:49:03.685Z"
+      },
+      {
+        "id": "31632a37-1f41-4c21-99bd-0d6f97312a1f",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "d",
+        "score": 4550,
+        "created_at": "2026-08-07T07:49:03.685Z"
+      },
+      {
+        "id": "5702c4da-772a-4603-955d-35c66535d120",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "z",
+        "score": 4550,
+        "created_at": "2026-08-07T07:49:03.685Z"
+      },
+      {
+        "id": "f11ed61b-2c8f-4f6c-ba8c-ebd4fbd65ce5",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "x",
+        "score": 4400,
+        "created_at": "2026-08-07T07:49:03.685Z"
+      },
+      {
+        "id": "b6816b37-e3b6-4fc2-b396-81e6d0e4a3b8",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "a",
+        "score": 3650,
+        "created_at": "2026-08-07T07:51:10.033Z"
+      },
+      {
+        "id": "a80ca68d-d551-4e0d-b5ad-b44b4e38cc77",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "z",
+        "score": 3950,
+        "created_at": "2026-08-07T07:51:10.033Z"
+      },
+      {
+        "id": "f3a1cf75-edad-4f89-9e25-a70f610288d5",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4250,
+        "created_at": "2026-08-07T07:51:10.033Z"
+      },
+      {
+        "id": "e0c88838-d1ea-4017-8da7-a79b57c37643",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 4400,
+        "created_at": "2026-08-07T07:51:10.033Z"
+      },
+      {
+        "id": "b967f60f-7bff-4a6e-b02d-ebd742a9e8d1",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4700,
+        "created_at": "2026-08-07T07:51:10.033Z"
+      },
+      {
+        "id": "5e8fc256-5edd-40eb-b5f6-b9ae912eb0bf",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "a",
+        "score": 4550,
+        "created_at": "2026-08-07T08:10:34.007Z"
+      },
+      {
+        "id": "b11ce34f-34a4-4c42-ae6d-e30b28e2ec91",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "b",
+        "score": 4100,
+        "created_at": "2026-08-07T08:10:34.007Z"
+      },
+      {
+        "id": "a37decce-7981-4a67-bd7b-acd01ad1a3eb",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "c",
+        "score": 3800,
+        "created_at": "2026-08-07T08:10:34.007Z"
+      },
+      {
+        "id": "210944fd-1e8b-4fd6-95fe-597002de9401",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "d",
+        "score": 4250,
+        "created_at": "2026-08-07T08:10:34.007Z"
+      },
+      {
+        "id": "25eafa76-8611-47d2-b178-3f0f44985fb8",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4700,
+        "created_at": "2026-08-07T08:10:34.007Z"
+      },
+      {
+        "id": "4d2923b3-2385-4967-9540-70a4d1d5d0cf",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "a",
+        "score": 4400,
+        "created_at": "2026-08-07T08:14:31.764Z"
+      },
+      {
+        "id": "e43e4c19-3a73-48d1-b157-2bf12f70e55b",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4100,
+        "created_at": "2026-08-07T08:14:31.764Z"
+      },
+      {
+        "id": "ab60a331-f292-4b0f-a0c6-ecdf45bf443c",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 3950,
+        "created_at": "2026-08-07T08:14:31.764Z"
+      },
+      {
+        "id": "468a7f27-d229-48e5-8c28-7783127214d5",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4250,
+        "created_at": "2026-08-07T08:14:31.764Z"
+      },
+      {
+        "id": "1aef2497-3f3d-4b5d-aa46-0603c9dc801b",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "r",
+        "score": 4700,
+        "created_at": "2026-08-07T08:14:31.764Z"
+      },
+      {
+        "id": "9ed0e2b9-59be-4c6d-8aea-11509e7d25de",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4700,
+        "created_at": "2026-08-07T08:17:45.465Z"
+      },
+      {
+        "id": "3ac30456-ca1d-4718-8d56-c6502bc4ea71",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 4550,
+        "created_at": "2026-08-07T08:17:45.465Z"
+      },
+      {
+        "id": "2f9fe293-c1ab-4c0f-89a8-ebef1e4da02f",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4550,
+        "created_at": "2026-08-07T08:17:45.465Z"
+      },
+      {
+        "id": "19311966-a157-4264-9d4f-8fb6665423dc",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "r",
+        "score": 4400,
+        "created_at": "2026-08-07T08:17:45.465Z"
+      },
+      {
+        "id": "1549c02c-6da3-45ee-b5ed-a1cd14926377",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "c",
+        "score": 4850,
+        "created_at": "2026-08-07T08:17:45.465Z"
+      },
+      {
+        "id": "b9d8bde6-84e0-4fe5-b9a6-f6598b3189ab",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4550,
+        "created_at": "2026-08-07T08:22:00.266Z"
+      },
+      {
+        "id": "e084c79b-f3b8-49a0-8a51-136d43b75a4a",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 4550,
+        "created_at": "2026-08-07T08:22:00.266Z"
+      },
+      {
+        "id": "b259ff48-9661-4fbd-b246-37896e7860e5",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4700,
+        "created_at": "2026-08-07T08:22:00.266Z"
+      },
+      {
+        "id": "402b7cbe-eb3b-47f5-a38f-edd13fc70f04",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "r",
+        "score": 4550,
+        "created_at": "2026-08-07T08:22:00.266Z"
+      },
+      {
+        "id": "74b6dd17-6fad-43dc-9727-40571d50a603",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "f",
+        "score": 4700,
+        "created_at": "2026-08-07T08:22:00.266Z"
+      },
+      {
+        "id": "62e635ba-612d-4f44-ac9a-9ae451afe967",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4400,
+        "created_at": "2026-08-07T08:27:40.955Z"
+      },
+      {
+        "id": "efe8a615-677e-47a8-8321-8cedb5da5005",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 4550,
+        "created_at": "2026-08-07T08:27:40.955Z"
+      },
+      {
+        "id": "7463e255-8290-4ffa-85c4-c97289ea4892",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4550,
+        "created_at": "2026-08-07T08:27:40.955Z"
+      },
+      {
+        "id": "e17bb61f-94b6-480c-95d9-c17057fa352f",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "r",
+        "score": 4400,
+        "created_at": "2026-08-07T08:27:40.955Z"
+      },
+      {
+        "id": "3ec6529b-f828-42f8-ae1a-4b630399d241",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "f",
+        "score": 4700,
+        "created_at": "2026-08-07T08:27:40.955Z"
+      },
+      {
+        "id": "def08758-37ed-4a9b-8676-d9d3a6e9784b",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4250,
+        "created_at": "2026-08-07T08:31:20.024Z"
+      },
+      {
+        "id": "6d50e961-9cf9-4424-95e1-4e5574317221",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 4250,
+        "created_at": "2026-08-07T08:31:20.024Z"
+      },
+      {
+        "id": "30f4da4b-0731-4ef8-8939-9a8bff92bc66",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4400,
+        "created_at": "2026-08-07T08:31:20.024Z"
+      },
+      {
+        "id": "1731dfad-c9b9-47f5-a1b0-9bad81cacc46",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "r",
+        "score": 4550,
+        "created_at": "2026-08-07T08:31:20.024Z"
+      },
+      {
+        "id": "42960c62-5e37-425b-a59d-4a394bb50230",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "t",
+        "score": 4700,
+        "created_at": "2026-08-07T08:31:20.024Z"
+      },
+      {
+        "id": "4f7a5a1d-1282-4b17-af29-f11980a9196b",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4400,
+        "created_at": "2026-08-07T08:34:31.241Z"
+      },
+      {
+        "id": "89846b42-b3cc-43ee-90fd-edc3eaaff436",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 4550,
+        "created_at": "2026-08-07T08:34:31.241Z"
+      },
+      {
+        "id": "1c87ef41-3f2d-4da2-9505-2510ad0d95a8",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4700,
+        "created_at": "2026-08-07T08:34:31.241Z"
+      },
+      {
+        "id": "180df382-2808-4a4b-9210-efd24c7f00c6",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "r",
+        "score": 4700,
+        "created_at": "2026-08-07T08:34:31.241Z"
+      },
+      {
+        "id": "c88c2fdc-afed-41f2-968f-e0f4e8af97c8",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "t",
+        "score": 4850,
+        "created_at": "2026-08-07T08:34:31.241Z"
+      },
+      {
+        "id": "b3e9e7cb-a351-4fb1-9fd0-2f69b1b79e94",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4400,
+        "created_at": "2026-08-07T08:37:09.049Z"
+      },
+      {
+        "id": "73dc936f-a691-48cb-9dd8-09dfd1c972b5",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 4400,
+        "created_at": "2026-08-07T08:37:09.049Z"
+      },
+      {
+        "id": "5d666291-125a-4f5a-b24e-b0c6bed15f8a",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4550,
+        "created_at": "2026-08-07T08:37:09.049Z"
+      },
+      {
+        "id": "7e9c9034-abba-4159-994d-19e66e0ac6af",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "r",
+        "score": 4550,
+        "created_at": "2026-08-07T08:37:09.049Z"
+      },
+      {
+        "id": "e27ecbbd-33c2-437f-95e3-548c05f4d601",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "v",
+        "score": 4700,
+        "created_at": "2026-08-07T08:37:09.049Z"
+      },
+      {
+        "id": "05e708c5-cadd-46ba-958f-a1d083a881a8",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "q",
+        "score": 4400,
+        "created_at": "2026-08-07T08:47:40.033Z"
+      },
+      {
+        "id": "96586746-251d-40aa-ad61-c68ed1105423",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "w",
+        "score": 4550,
+        "created_at": "2026-08-07T08:47:40.033Z"
+      },
+      {
+        "id": "8451762d-581b-419b-b6e4-707731ab70d7",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 4550,
+        "created_at": "2026-08-07T08:47:40.033Z"
+      },
+      {
+        "id": "26095fd5-44ca-4487-b0f1-aaa365c67b7f",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "r",
+        "score": 4700,
+        "created_at": "2026-08-07T08:47:40.033Z"
+      },
+      {
+        "id": "e9d6c153-e47e-4274-8b74-87ad1c6f3407",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "v",
+        "score": 4850,
+        "created_at": "2026-08-07T08:47:40.033Z"
+      },
+      {
+        "id": "c8c691dc-4496-477c-a49c-4a39feff4855",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "a",
+        "score": 233,
+        "created_at": "2026-08-10T06:41:42.311Z"
+      },
+      {
+        "id": "d031bb34-f544-468f-97fd-190a4f3671b6",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "b",
+        "score": 2000,
+        "created_at": "2026-08-10T06:41:42.311Z"
+      },
+      {
+        "id": "92e9a7d6-d21f-48e5-a30c-3607e120c098",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "c",
+        "score": 0,
+        "created_at": "2026-08-10T06:41:42.311Z"
+      },
+      {
+        "id": "24de6de0-8dfd-4818-bc27-58c99ff9655d",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "d",
+        "score": 1933,
+        "created_at": "2026-08-10T06:41:42.311Z"
+      },
+      {
+        "id": "6cdd7d96-4f99-4329-a833-e4f6444258a3",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "e",
+        "score": 1750,
+        "created_at": "2026-08-10T06:41:42.311Z"
+      },
+      {
+        "id": "1df5d4cf-1f1d-4930-9feb-418884205695",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "f",
+        "score": 708,
+        "created_at": "2026-08-10T06:41:42.311Z"
+      },
+      {
+        "id": "ac24ee7e-6904-4dd9-9707-95ead9dc3993",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "agsf",
+        "score": 758,
+        "created_at": "2026-08-10T06:54:28.879Z"
+      },
+      {
+        "id": "af58bdd9-66b0-46f0-868b-c2e53c7c9848",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "dsfgh",
+        "score": 8200,
+        "created_at": "2026-08-10T06:54:28.879Z"
+      },
+      {
+        "id": "91de9483-204c-415f-a296-8eeff30b7469",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "agsf",
+        "score": 3033,
+        "created_at": "2026-08-10T06:55:45.600Z"
+      },
+      {
+        "id": "00c17a14-c432-4cd2-82b9-6ef1990c9bce",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "werasthh",
+        "score": 7233,
+        "created_at": "2026-08-10T06:55:45.600Z"
+      },
+      {
+        "id": "0b2c52d2-812f-4cd5-a67c-44204e949e00",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "reatshdjgkh",
+        "score": 5108,
+        "created_at": "2026-08-10T06:55:45.600Z"
+      },
+      {
+        "id": "6f444765-30ee-4b02-97ca-6fc5f19d42f7",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "fsgdhxmnb",
+        "score": 3950,
+        "created_at": "2026-08-10T06:55:45.600Z"
+      },
+      {
+        "id": "fcc90957-075a-4839-9594-6a5ee7cf676d",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "esfadsv",
+        "score": 5058,
+        "created_at": "2026-08-10T06:55:45.600Z"
+      },
+      {
+        "id": "2a86f211-a72e-460d-9186-c6576dbb9912",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "erwthsgnb",
+        "score": 6075,
+        "created_at": "2026-08-10T06:55:45.600Z"
+      },
+      {
+        "id": "daf7c6c0-a7d0-4f8b-9e14-bd750a15c74a",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "werasthh",
+        "score": 4250,
+        "created_at": "2026-08-10T06:57:09.494Z"
+      },
+      {
+        "id": "9ca5ec1f-0c3f-4947-a60e-91e1a2c9992d",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "agsf",
+        "score": 4700,
+        "created_at": "2026-08-10T06:57:09.494Z"
+      },
+      {
+        "id": "d7e4926f-5e39-47ac-9875-26a1edd91d54",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "reatshdjgkh",
+        "score": 0,
+        "created_at": "2026-08-10T06:57:09.494Z"
+      },
+      {
+        "id": "84f97049-260e-4b64-bd92-d0d2b11c3e08",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "fsgdhxmnb",
+        "score": 4400,
+        "created_at": "2026-08-10T06:57:09.494Z"
+      },
+      {
+        "id": "f7aae055-bb41-4a21-8d18-ea641a797cb5",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "esfadsv",
+        "score": 4400,
+        "created_at": "2026-08-10T06:57:09.494Z"
+      },
+      {
+        "id": "91e5a8c9-4819-4b9c-974e-a1212db63f86",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "bsdfvsfa",
+        "score": 4850,
+        "created_at": "2026-08-10T06:57:09.494Z"
+      },
+      {
+        "id": "d5d61ecb-42ac-4622-b516-6fdfa01121c7",
+        "quiz_id": "b73cbd5d-982a-4968-a0bf-f799866837a5",
+        "participant_name": "asfdw",
+        "score": 4850,
+        "created_at": "2026-08-11T02:15:52.018Z"
+      }
+    ]
+  },
+  {
+    "id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+    "title": "QUIZ IBUKOTA",
+    "code": "UUCU32",
+    "is_active": false,
+    "created_at": "2026-08-04T08:23:46.918Z",
+    "questions": [
+      {
+        "id": "475d68ef-f1bb-461a-af2b-d72e92637927",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "PG",
+        "text": "Ibukota Provinsi Aceh adalah...",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "4aaa22ed-bdb0-4d93-b6b0-b4ba2632ba2a",
+            "question_id": "475d68ef-f1bb-461a-af2b-d72e92637927",
+            "text": "Masjid Darussalam",
+            "is_correct": false
+          },
+          {
+            "id": "d519c037-f4ed-4929-aa13-11a257ab5bcc",
+            "question_id": "475d68ef-f1bb-461a-af2b-d72e92637927",
+            "text": "Banda Aceh",
+            "is_correct": true
+          },
+          {
+            "id": "7b79f7ea-e1f4-4580-a2ae-7e24d3ea6f80",
+            "question_id": "475d68ef-f1bb-461a-af2b-d72e92637927",
+            "text": "Lhokseumawe",
+            "is_correct": false
+          },
+          {
+            "id": "3aa0c082-a315-4b34-bf35-73c1280cb34a",
+            "question_id": "475d68ef-f1bb-461a-af2b-d72e92637927",
+            "text": "Langsa",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "0df5c40e-fba8-4646-a045-a8f2e209ded9",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "PG",
+        "text": "bapak Rizky Mochamad diamanahkan menjabat sebagai GM di provinsi ini per 1 Agustus 2026, ibukota dari provinsi ini adalah...",
+        "images": [
+          "/uploads/images/1785831664168_24302.jpg"
+        ],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "6ce3c828-b438-42c3-8472-e5913e93d45d",
+            "question_id": "0df5c40e-fba8-4646-a045-a8f2e209ded9",
+            "text": "Binjai",
+            "is_correct": false
+          },
+          {
+            "id": "ca141aee-674f-45b3-9fba-ce32644c6ffd",
+            "question_id": "0df5c40e-fba8-4646-a045-a8f2e209ded9",
+            "text": "Medan",
+            "is_correct": true
+          },
+          {
+            "id": "97bf6c4a-a2f7-49bc-a717-4125a8a7b333",
+            "question_id": "0df5c40e-fba8-4646-a045-a8f2e209ded9",
+            "text": "Sibolga",
+            "is_correct": false
+          },
+          {
+            "id": "66a23a95-73b1-46df-b793-d4c4c0cb4efe",
+            "question_id": "0df5c40e-fba8-4646-a045-a8f2e209ded9",
+            "text": "Pematangsiantar",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "09d30b6e-8da5-4c6b-80b5-a10fd28fd133",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "PG",
+        "text": "Ibukota Provinsi Sumatera Barat adalah",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "eb456f4a-1422-4754-b2ab-50eb5d4f5f9f",
+            "question_id": "09d30b6e-8da5-4c6b-80b5-a10fd28fd133",
+            "text": "Bukittinggi",
+            "is_correct": false
+          },
+          {
+            "id": "a98ee07b-bd79-4937-a0cf-2c79509767ad",
+            "question_id": "09d30b6e-8da5-4c6b-80b5-a10fd28fd133",
+            "text": "Solok",
+            "is_correct": false
+          },
+          {
+            "id": "6252b75c-233c-4d00-a698-d1a31fc44873",
+            "question_id": "09d30b6e-8da5-4c6b-80b5-a10fd28fd133",
+            "text": "Padang",
+            "is_correct": true
+          },
+          {
+            "id": "f43d0b5e-459d-4fc2-b4ad-3ca8a6f65928",
+            "question_id": "09d30b6e-8da5-4c6b-80b5-a10fd28fd133",
+            "text": "Payakumbuh",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "76a51e47-71fe-4f97-bf90-675c4db6f31f",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "PG",
+        "text": "Ibukota Provinsi Riau adalah",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "9627d589-5139-48d4-8b2a-830a08db80a0",
+            "question_id": "76a51e47-71fe-4f97-bf90-675c4db6f31f",
+            "text": "Dumai",
+            "is_correct": false
+          },
+          {
+            "id": "cd835294-3c45-4f9b-96c4-b2e14a21146e",
+            "question_id": "76a51e47-71fe-4f97-bf90-675c4db6f31f",
+            "text": "Pekanbaru",
+            "is_correct": true
+          },
+          {
+            "id": "1f51d043-8703-4051-9610-2fdc3926a763",
+            "question_id": "76a51e47-71fe-4f97-bf90-675c4db6f31f",
+            "text": "Bengkalis",
+            "is_correct": false
+          },
+          {
+            "id": "c11892c0-f785-40f0-a847-45097e834c56",
+            "question_id": "76a51e47-71fe-4f97-bf90-675c4db6f31f",
+            "text": "Siak",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "105c51b4-f32a-43f8-b8f8-3e305d5b30a6",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "PG",
+        "text": "Ibukota Provinsi Kepulauan Riau adalah",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "b3649157-2de0-498f-865c-9b1ad55cb803",
+            "question_id": "105c51b4-f32a-43f8-b8f8-3e305d5b30a6",
+            "text": "Batam",
+            "is_correct": false
+          },
+          {
+            "id": "7d4dc5e4-9beb-48f1-839e-0795317f112a",
+            "question_id": "105c51b4-f32a-43f8-b8f8-3e305d5b30a6",
+            "text": "Tanjungpinang",
+            "is_correct": true
+          },
+          {
+            "id": "5627fbe1-36a9-42ae-8b34-89b1ca69f1e7",
+            "question_id": "105c51b4-f32a-43f8-b8f8-3e305d5b30a6",
+            "text": "Karimun",
+            "is_correct": false
+          },
+          {
+            "id": "52bd378f-2327-4666-97a0-442a27360cbf",
+            "question_id": "105c51b4-f32a-43f8-b8f8-3e305d5b30a6",
+            "text": "Natuna",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "38510c77-0d3f-4a72-ae7e-8da258e4ff20",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "PG",
+        "text": "Ibukota Provinsi Jambi adalah",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "05266f8a-02c5-466c-a9c5-6e6fcccaa68a",
+            "question_id": "38510c77-0d3f-4a72-ae7e-8da258e4ff20",
+            "text": "Muara Bungo",
+            "is_correct": false
+          },
+          {
+            "id": "a40ff645-c187-4735-97f1-1140a3c1afb3",
+            "question_id": "38510c77-0d3f-4a72-ae7e-8da258e4ff20",
+            "text": "Sungai Penuh",
+            "is_correct": false
+          },
+          {
+            "id": "559b0f90-e603-49ca-98ba-d0d286811982",
+            "question_id": "38510c77-0d3f-4a72-ae7e-8da258e4ff20",
+            "text": "Jambi",
+            "is_correct": true
+          },
+          {
+            "id": "019999a5-db97-4436-9550-0c57c739ede8",
+            "question_id": "38510c77-0d3f-4a72-ae7e-8da258e4ff20",
+            "text": "Kuala Tungkal",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "d62ccd5c-a776-469c-ab82-577d944b3d54",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "PG",
+        "text": "Ibukota Provinsi Bengkulu adalah",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "51036479-1125-4058-99b0-3e8b3c3953d6",
+            "question_id": "d62ccd5c-a776-469c-ab82-577d944b3d54",
+            "text": "Curup",
+            "is_correct": false
+          },
+          {
+            "id": "fb4a86f1-d610-4ab7-ae5e-4b3154bdcb67",
+            "question_id": "d62ccd5c-a776-469c-ab82-577d944b3d54",
+            "text": "Manna",
+            "is_correct": false
+          },
+          {
+            "id": "06f42d47-86b9-47ae-91c0-216ebc6b6f98",
+            "question_id": "d62ccd5c-a776-469c-ab82-577d944b3d54",
+            "text": "Bengkulu",
+            "is_correct": true
+          },
+          {
+            "id": "f323887f-c5c0-4c4a-9475-748a7096c9bb",
+            "question_id": "d62ccd5c-a776-469c-ab82-577d944b3d54",
+            "text": "Mukomuko",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "e3006c4c-d58a-4176-9452-1aeed1a66c4f",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "PG",
+        "text": "Pempek, Burgo, Mie Celor, Celimpungan adalah makanan khas dari",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "58fa2d01-71f6-4378-bcdd-ef8dfdf4e486",
+            "question_id": "e3006c4c-d58a-4176-9452-1aeed1a66c4f",
+            "text": "Lubuklinggau",
+            "is_correct": false
+          },
+          {
+            "id": "275957a9-b778-40ce-8fe2-bcae64dd477b",
+            "question_id": "e3006c4c-d58a-4176-9452-1aeed1a66c4f",
+            "text": "Palembang",
+            "is_correct": true
+          },
+          {
+            "id": "70033f87-c2c8-4cdb-a472-6774dc01bd88",
+            "question_id": "e3006c4c-d58a-4176-9452-1aeed1a66c4f",
+            "text": "Prabumulih",
+            "is_correct": false
+          },
+          {
+            "id": "5dee8ec0-01d1-4cda-ac4f-5ab548353758",
+            "question_id": "e3006c4c-d58a-4176-9452-1aeed1a66c4f",
+            "text": "Pagar Alam",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "64653134-0fc9-4a64-bcd0-a1e959d02533",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "PG",
+        "text": "Ibukota Provinsi Kepulauan Bangka Belitung adalah",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "a7fcdde2-efcf-4a2d-9113-0a2717dcaffa",
+            "question_id": "64653134-0fc9-4a64-bcd0-a1e959d02533",
+            "text": "Sungailiat",
+            "is_correct": false
+          },
+          {
+            "id": "f781c601-0fbe-40c4-b8b9-f5a0f6cd5752",
+            "question_id": "64653134-0fc9-4a64-bcd0-a1e959d02533",
+            "text": "Pangkalpinang",
+            "is_correct": true
+          },
+          {
+            "id": "5460409a-46bd-4c2e-a40c-d41e8748af6b",
+            "question_id": "64653134-0fc9-4a64-bcd0-a1e959d02533",
+            "text": "Tanjung Pandan",
+            "is_correct": false
+          },
+          {
+            "id": "0c2f5a75-fc5c-4bfc-b928-a74db43e4a03",
+            "question_id": "64653134-0fc9-4a64-bcd0-a1e959d02533",
+            "text": "Muntok",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "afe9bd8f-5a92-4f0c-a262-23982e8ef6f5",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "PG",
+        "text": "Ibukota Provinsi Lampung adalah",
+        "images": [],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "f16be1f7-80e6-44b7-bbc8-37e3b2aa27b8",
+            "question_id": "afe9bd8f-5a92-4f0c-a262-23982e8ef6f5",
+            "text": "Metro",
+            "is_correct": false
+          },
+          {
+            "id": "8a2b2b42-97c3-4f60-bba7-117c297cb4e6",
+            "question_id": "afe9bd8f-5a92-4f0c-a262-23982e8ef6f5",
+            "text": "Bandar Lampung",
+            "is_correct": true
+          },
+          {
+            "id": "e55b838d-a383-428e-93d6-cd6a9237ac08",
+            "question_id": "afe9bd8f-5a92-4f0c-a262-23982e8ef6f5",
+            "text": "Kalianda",
+            "is_correct": false
+          },
+          {
+            "id": "f70269b4-f1bd-4b72-872f-903d330f9b56",
+            "question_id": "afe9bd8f-5a92-4f0c-a262-23982e8ef6f5",
+            "text": "Kotabumi",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "3a217162-d16d-46fa-8c43-e293ccb99a2a",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "ESSAY",
+        "text": "sebutkan provinsi pada bagian nomor 1",
+        "images": [
+          "/uploads/images/1785829866877_60222.png"
+        ],
+        "time_limit": 30,
+        "options": [
+          {
+            "id": "b23bc22d-3776-448e-947d-7af818920a13",
+            "question_id": "3a217162-d16d-46fa-8c43-e293ccb99a2a",
+            "text": "Banten",
+            "is_correct": true
+          }
+        ]
+      },
+      {
+        "id": "67378a65-8319-4a8d-9a50-ccabce3dcd87",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "ESSAY",
+        "text": "sebutkan ibukota pada nomor 4",
+        "images": [
+          "/uploads/images/1785829900933_21655.png"
+        ],
+        "time_limit": 30,
+        "options": [
+          {
+            "id": "40303305-198e-44e2-a667-c67dc5a669e9",
+            "question_id": "67378a65-8319-4a8d-9a50-ccabce3dcd87",
+            "text": "Semarang",
+            "is_correct": true
+          }
+        ]
+      },
+      {
+        "id": "0a007584-b736-40b0-913a-b1709b10ce72",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "ESSAY",
+        "text": "sebutkan ibukota pada nomor 5",
+        "images": [
+          "/uploads/images/1785829917277_65185.png"
+        ],
+        "time_limit": 30,
+        "options": [
+          {
+            "id": "4597c546-a579-4b61-a8ca-1873d68887d3",
+            "question_id": "0a007584-b736-40b0-913a-b1709b10ce72",
+            "text": "Yogyakarta",
+            "is_correct": true
+          }
+        ]
+      },
+      {
+        "id": "3c5f7c2d-e27b-4878-96e0-622a358adbdb",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "CHECKBOX",
+        "text": "Manakah yang merupakan ibu kota provinsi di Sulawesi?",
+        "images": [],
+        "time_limit": 30,
+        "options": [
+          {
+            "id": "b3c8e648-56bb-4770-8e44-41c227ee6650",
+            "question_id": "3c5f7c2d-e27b-4878-96e0-622a358adbdb",
+            "text": "Palu",
+            "is_correct": true
+          },
+          {
+            "id": "92b4557a-4343-48fb-abf1-64331215aea0",
+            "question_id": "3c5f7c2d-e27b-4878-96e0-622a358adbdb",
+            "text": "Gorontalo",
+            "is_correct": true
+          },
+          {
+            "id": "99555d7f-68c6-46ba-b175-36e19f8f868d",
+            "question_id": "3c5f7c2d-e27b-4878-96e0-622a358adbdb",
+            "text": "Kendari",
+            "is_correct": true
+          },
+          {
+            "id": "a31e7231-efa8-49dc-80e6-f96902bd017a",
+            "question_id": "3c5f7c2d-e27b-4878-96e0-622a358adbdb",
+            "text": "Parepare",
+            "is_correct": false
+          },
+          {
+            "id": "ada6d133-7265-4f13-81e3-ecf467966d18",
+            "question_id": "3c5f7c2d-e27b-4878-96e0-622a358adbdb",
+            "text": "Bitung",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "f266da8d-65ff-44c3-9e6b-93032cb3387a",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "CHECKBOX",
+        "text": "Manakah yang merupakan ibu kota provinsi di Kalimantan?",
+        "images": [],
+        "time_limit": 30,
+        "options": [
+          {
+            "id": "b666803a-b16e-4f3a-aa2b-89f91ebef9bd",
+            "question_id": "f266da8d-65ff-44c3-9e6b-93032cb3387a",
+            "text": "Samarinda",
+            "is_correct": true
+          },
+          {
+            "id": "95abf220-e07a-43dd-ad09-780b36f4a9ad",
+            "question_id": "f266da8d-65ff-44c3-9e6b-93032cb3387a",
+            "text": "Banjarbaru",
+            "is_correct": true
+          },
+          {
+            "id": "c471e88b-ef6b-451f-8240-7df5e0b044d7",
+            "question_id": "f266da8d-65ff-44c3-9e6b-93032cb3387a",
+            "text": "Pontianak",
+            "is_correct": true
+          },
+          {
+            "id": "7cbd0fdd-d8bd-4a18-acc1-2f640cfb05b6",
+            "question_id": "f266da8d-65ff-44c3-9e6b-93032cb3387a",
+            "text": "Balikpapan",
+            "is_correct": false
+          },
+          {
+            "id": "f9e02d20-e507-4e8e-8b57-f076a2c8dd99",
+            "question_id": "f266da8d-65ff-44c3-9e6b-93032cb3387a",
+            "text": "Tarakan",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "d243265a-fe89-45fa-827f-cfa650a8292c",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "CHECKBOX",
+        "text": "Manakah yang BUKAN ibu kota provinsi? (clue pada gambar)",
+        "images": [
+          "/uploads/images/1785830425777_26043.jpg"
+        ],
+        "time_limit": 30,
+        "options": [
+          {
+            "id": "b94b2df9-f924-4e2b-9a9c-7fb1eb5b7e18",
+            "question_id": "d243265a-fe89-45fa-827f-cfa650a8292c",
+            "text": "Denpasar",
+            "is_correct": false
+          },
+          {
+            "id": "c1d364c0-bf52-4d36-a220-793f54675226",
+            "question_id": "d243265a-fe89-45fa-827f-cfa650a8292c",
+            "text": "Manado",
+            "is_correct": false
+          },
+          {
+            "id": "453df437-a341-4a35-8ef6-4de205cd8eba",
+            "question_id": "d243265a-fe89-45fa-827f-cfa650a8292c",
+            "text": "Singaraja",
+            "is_correct": true
+          },
+          {
+            "id": "9d22c307-82d0-4733-9c76-4cc43f3651d9",
+            "question_id": "d243265a-fe89-45fa-827f-cfa650a8292c",
+            "text": "Ambon",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "1e5a7320-ba24-456d-b025-09b6a1c89de0",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "CHECKBOX",
+        "text": "Provinsi apa saja yang ada di pulau ini?",
+        "images": [
+          "/uploads/images/1785830635580_12582.png"
+        ],
+        "time_limit": 45,
+        "options": [
+          {
+            "id": "437371a8-b9b7-47bb-9124-a48a807e4380",
+            "question_id": "1e5a7320-ba24-456d-b025-09b6a1c89de0",
+            "text": "Sulawesi Utara",
+            "is_correct": true
+          },
+          {
+            "id": "bdc56fa0-a292-4098-9631-29fbe7d502a1",
+            "question_id": "1e5a7320-ba24-456d-b025-09b6a1c89de0",
+            "text": "Mataram",
+            "is_correct": false
+          },
+          {
+            "id": "5b7d8e89-e3e3-4a82-92ef-dfefb4cb181f",
+            "question_id": "1e5a7320-ba24-456d-b025-09b6a1c89de0",
+            "text": "Gorontalo",
+            "is_correct": true
+          },
+          {
+            "id": "2270d9c4-e87b-4a2f-bfc7-034432aaecbd",
+            "question_id": "1e5a7320-ba24-456d-b025-09b6a1c89de0",
+            "text": "Tanjungpinang",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "2d109ef1-2e4d-4b6e-8d4e-e7a7ee9e8268",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "CHECKBOX",
+        "text": "sebutkan kota yang tidak ada di pulau ini",
+        "images": [
+          "/uploads/images/1785830846182_74350.webp"
+        ],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "d57dfd50-e787-44ed-bf69-1439b558c85e",
+            "question_id": "2d109ef1-2e4d-4b6e-8d4e-e7a7ee9e8268",
+            "text": "Samarinda",
+            "is_correct": false
+          },
+          {
+            "id": "f24b971f-b317-4444-8cb2-efcf912f6e99",
+            "question_id": "2d109ef1-2e4d-4b6e-8d4e-e7a7ee9e8268",
+            "text": "Palangka Raya",
+            "is_correct": false
+          },
+          {
+            "id": "bf4c28af-e933-48d1-a097-dbe9f88ad3b4",
+            "question_id": "2d109ef1-2e4d-4b6e-8d4e-e7a7ee9e8268",
+            "text": "Banjarbaru",
+            "is_correct": false
+          },
+          {
+            "id": "eb0f794d-5136-41d6-afe2-da537bfbccbd",
+            "question_id": "2d109ef1-2e4d-4b6e-8d4e-e7a7ee9e8268",
+            "text": "Kupang",
+            "is_correct": true
+          },
+          {
+            "id": "130171b2-62c9-41db-8371-3668689e5d3e",
+            "question_id": "2d109ef1-2e4d-4b6e-8d4e-e7a7ee9e8268",
+            "text": "Pontianak",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "ced33449-6045-4bf1-9cd3-fa770bf12264",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "CHECKBOX",
+        "text": "Ada berapa ibu kota provinsi di pulau ini?",
+        "images": [
+          "/uploads/images/1785831039079_85658.png"
+        ],
+        "time_limit": 45,
+        "options": [
+          {
+            "id": "7f8f740e-dedf-48c4-9499-70a52f04f468",
+            "question_id": "ced33449-6045-4bf1-9cd3-fa770bf12264",
+            "text": "7",
+            "is_correct": false
+          },
+          {
+            "id": "536cd8ae-c204-4659-bd82-080b39a5bf47",
+            "question_id": "ced33449-6045-4bf1-9cd3-fa770bf12264",
+            "text": "4",
+            "is_correct": false
+          },
+          {
+            "id": "e261c2ce-ba98-4e28-a85c-ab1bd5fc39e2",
+            "question_id": "ced33449-6045-4bf1-9cd3-fa770bf12264",
+            "text": "5",
+            "is_correct": false
+          },
+          {
+            "id": "ef9decbd-49b3-4f06-be94-3acdbd911afd",
+            "question_id": "ced33449-6045-4bf1-9cd3-fa770bf12264",
+            "text": "3+3",
+            "is_correct": true
+          },
+          {
+            "id": "3b018194-4d36-41b6-ac13-be35985fdb6e",
+            "question_id": "ced33449-6045-4bf1-9cd3-fa770bf12264",
+            "text": "10-5",
+            "is_correct": false
+          }
+        ]
+      },
+      {
+        "id": "23444100-f5f2-433b-baf9-563eb022b981",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "type": "CHECKBOX",
+        "text": "Ada ibu kota apa saja di pulau ini?",
+        "images": [
+          "/uploads/images/1785831191101_87303.jpg"
+        ],
+        "time_limit": 20,
+        "options": [
+          {
+            "id": "3984b29f-7be3-4f85-b6b9-da1d5138a963",
+            "question_id": "23444100-f5f2-433b-baf9-563eb022b981",
+            "text": "Banda Aceh",
+            "is_correct": true
+          },
+          {
+            "id": "4546c64b-10d0-45c3-89fa-f84690a78c88",
+            "question_id": "23444100-f5f2-433b-baf9-563eb022b981",
+            "text": "Gorontalo",
+            "is_correct": false
+          },
+          {
+            "id": "e1a3b036-53e4-4e44-ba3c-bb0927be9822",
+            "question_id": "23444100-f5f2-433b-baf9-563eb022b981",
+            "text": "Bengkulu",
+            "is_correct": true
+          },
+          {
+            "id": "7148e2a6-2cd2-4e86-a5f9-b10d458afb34",
+            "question_id": "23444100-f5f2-433b-baf9-563eb022b981",
+            "text": "Bandar Lampung",
+            "is_correct": true
+          },
+          {
+            "id": "72ad3438-8ebf-410f-b121-4b2c308276f5",
+            "question_id": "23444100-f5f2-433b-baf9-563eb022b981",
+            "text": "Manokwari",
+            "is_correct": false
+          },
+          {
+            "id": "14c81ddd-b0d2-4f3d-a6a0-da391ab08b48",
+            "question_id": "23444100-f5f2-433b-baf9-563eb022b981",
+            "text": "Sorong",
+            "is_correct": false
+          }
+        ]
+      }
+    ],
+    "submissions": [
+      {
+        "id": "c4478870-2c1c-4542-af68-5f176f9c18f4",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "participant_name": "tes 2",
+        "score": 198,
+        "created_at": "2026-08-05T03:41:51.815Z"
+      },
+      {
+        "id": "520a4db3-95a1-44b8-a7f8-e0ad33a2470d",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "participant_name": "tes 1",
+        "score": 451,
+        "created_at": "2026-08-05T03:41:51.815Z"
+      },
+      {
+        "id": "80d9c39e-1bb4-41ec-9516-bbacd2c70aa7",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "participant_name": "tes 3",
+        "score": 575,
+        "created_at": "2026-08-05T03:41:51.815Z"
+      },
+      {
+        "id": "1802fb5b-fbb0-4d7b-a55e-aa9f787ef410",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "participant_name": "Budi S",
+        "score": 685,
+        "created_at": "2026-08-05T09:48:48.941Z"
+      },
+      {
+        "id": "e0b1abce-d67f-4dfb-aaea-f316c0d7efc2",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "participant_name": "Septiankw",
+        "score": 639,
+        "created_at": "2026-08-05T09:48:48.941Z"
+      },
+      {
+        "id": "cc0b8c0e-17f0-4df8-a0f1-a6a85e76d476",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "participant_name": "Jalu Jal",
+        "score": 663,
+        "created_at": "2026-08-05T09:48:48.941Z"
+      },
+      {
+        "id": "bfc55042-c239-4e5a-9b72-9d2d99b88b75",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "participant_name": "corpu lover",
+        "score": 792,
+        "created_at": "2026-08-05T09:48:48.941Z"
+      },
+      {
+        "id": "09f11131-de98-4371-8b67-ad7c28dd45f1",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "participant_name": "Pangen KG8",
+        "score": 684,
+        "created_at": "2026-08-05T09:48:48.941Z"
+      },
+      {
+        "id": "33d73ce3-30e3-4c58-b954-81502d0ed040",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "participant_name": "temenFaisol",
+        "score": 582,
+        "created_at": "2026-08-05T09:48:48.941Z"
+      },
+      {
+        "id": "601f3204-1809-46af-af59-5dfc0c24ff0d",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "participant_name": "Adi Slebew",
+        "score": 706,
+        "created_at": "2026-08-05T09:48:48.941Z"
+      },
+      {
+        "id": "578c260f-f067-4977-816d-ab19b681909d",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "participant_name": "Hamba Allah",
+        "score": 556,
+        "created_at": "2026-08-05T09:48:48.941Z"
+      },
+      {
+        "id": "5722d0a7-e538-4e76-a243-568158462e64",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "participant_name": "DYP",
+        "score": 548,
+        "created_at": "2026-08-05T09:48:48.941Z"
+      },
+      {
+        "id": "42888127-3c88-4173-ba6f-f3269b742baa",
+        "quiz_id": "89ed5ac8-9cba-4faa-a82c-94682aec9b0c",
+        "participant_name": "oiugc",
+        "score": 805,
+        "created_at": "2026-08-06T04:40:32.655Z"
+      }
+    ]
+  }
+]

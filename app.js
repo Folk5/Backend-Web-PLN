@@ -83,6 +83,7 @@ app.use('/api/quiz', require('./routes/quiz.routes'));
 app.use('/api/listrikpedia', listrikpediaRoutes);
 app.use('/api/pembelajaran', require('./routes/pembelajaran.routes'));
 app.use('/api', require('./routes/background.routes'));
+app.use('/api/box', require('./routes/box.routes'));
 
 app.get('/', (req, res) => {
   res.json({
