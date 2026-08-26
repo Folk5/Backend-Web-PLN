@@ -301,33 +301,81 @@ exports.updateModule = async (req, res) => {
 
     // 4. Sinkronisasi materials
     if (materials && Array.isArray(materials)) {
-      await prisma.moduleMaterial.deleteMany({ where: { module_id: id } });
-      if (materials.length > 0) {
-        await prisma.moduleMaterial.createMany({
-          data: materials.map((m, i) => ({
-            module_id: id,
-            material_id: m.material_id,
-            quantity: m.quantity || 1,
-            unit: m.unit || 'PCS',
-            keterangan: m.keterangan || null,
-            sequence: i
-          }))
+      const oldMaterials = await prisma.moduleMaterial.findMany({ where: { module_id: id } });
+      const newMaterialIds = materials.map(m => m.material_id);
+      
+      const materialsToDelete = oldMaterials.filter(om => !newMaterialIds.includes(om.material_id));
+      if (materialsToDelete.length > 0) {
+        await prisma.moduleMaterial.deleteMany({
+          where: { id: { in: materialsToDelete.map(om => om.id) } }
         });
+      }
+
+      for (let i = 0; i < materials.length; i++) {
+        const m = materials[i];
+        const existing = oldMaterials.find(om => om.material_id === m.material_id);
+        if (existing) {
+          await prisma.moduleMaterial.update({
+            where: { id: existing.id },
+            data: {
+              quantity: m.quantity || 1,
+              unit: m.unit || 'PCS',
+              keterangan: m.keterangan || null,
+              sequence: i
+            }
+          });
+        } else {
+          await prisma.moduleMaterial.create({
+            data: {
+              module_id: id,
+              material_id: m.material_id,
+              quantity: m.quantity || 1,
+              unit: m.unit || 'PCS',
+              keterangan: m.keterangan || null,
+              sequence: i
+            }
+          });
+        }
       }
     }
 
     // 5. Sinkronisasi tools
     if (tools && Array.isArray(tools)) {
-      await prisma.moduleTool.deleteMany({ where: { module_id: id } });
-      if (tools.length > 0) {
-        await prisma.moduleTool.createMany({
-          data: tools.map((t, i) => ({
-            module_id: id,
-            tool_id: t.tool_id,
-            keterangan: t.keterangan || null,
-            sequence: i
-          }))
+      const oldTools = await prisma.moduleTool.findMany({ where: { module_id: id } });
+      const newToolIds = tools.map(t => t.tool_id);
+      
+      const toolsToDelete = oldTools.filter(ot => !newToolIds.includes(ot.tool_id));
+      if (toolsToDelete.length > 0) {
+        await prisma.moduleTool.deleteMany({
+          where: { id: { in: toolsToDelete.map(ot => ot.id) } }
         });
+      }
+
+      for (let i = 0; i < tools.length; i++) {
+        const t = tools[i];
+        const existing = oldTools.find(ot => ot.tool_id === t.tool_id);
+        if (existing) {
+          await prisma.moduleTool.update({
+            where: { id: existing.id },
+            data: {
+              quantity: t.quantity || 1,
+              unit: t.unit || 'SET',
+              keterangan: t.keterangan || null,
+              sequence: i
+            }
+          });
+        } else {
+          await prisma.moduleTool.create({
+            data: {
+              module_id: id,
+              tool_id: t.tool_id,
+              quantity: t.quantity || 1,
+              unit: t.unit || 'SET',
+              keterangan: t.keterangan || null,
+              sequence: i
+            }
+          });
+        }
       }
     }
 

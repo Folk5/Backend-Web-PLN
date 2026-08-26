@@ -18,6 +18,20 @@ exports.getAllTerms = async (req, res) => {
 exports.createTerm = async (req, res) => {
     try {
         const { abbr, name, description, type } = req.body;
+
+        const existing = await prisma.listrikpedia.findFirst({
+            where: {
+                abbr: {
+                    equals: abbr,
+                    mode: 'insensitive'
+                }
+            }
+        });
+
+        if (existing) {
+            return res.status(400).json({ error: `Singkatan atau istilah "${abbr}" sudah pernah diisi!` });
+        }
+
         const newTerm = await prisma.listrikpedia.create({
             data: {
                 abbr,
@@ -37,6 +51,23 @@ exports.updateTerm = async (req, res) => {
     try {
         const { id } = req.params;
         const { abbr, name, description, type } = req.body;
+
+        const existing = await prisma.listrikpedia.findFirst({
+            where: {
+                abbr: {
+                    equals: abbr,
+                    mode: 'insensitive'
+                },
+                id: {
+                    not: id
+                }
+            }
+        });
+
+        if (existing) {
+            return res.status(400).json({ error: `Singkatan atau istilah "${abbr}" sudah pernah diisi oleh data lain!` });
+        }
+
         const updatedTerm = await prisma.listrikpedia.update({
             where: { id },
             data: {
